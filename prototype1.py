@@ -90,7 +90,7 @@ def test_reading_overview():
 	if debug:
 		print('sky = ' + sky_coords)
 	
-	comments = overview_sheet(comments_coords).value
+	comments = overview_sheet[comments_coords].value
 	if debug:
 		print('comments = '	 + comments)
 # end_def
