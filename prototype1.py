@@ -20,7 +20,7 @@ to_st_coords = 'B9'
 to_st_dir_coords = 'B10'
 temp_coords = 'B11'
 sky_coords = 'B12'
-comments_coords = 'A12'
+comments_coords = 'A15'
 
 input_fn = './xlsx/sample-spreadsheet1.xlsx'
 
@@ -84,11 +84,11 @@ def test_reading_overview():
 	
 	temp = overview_sheet[temp_coords].value
 	if debug:
-		print('temperature = ' + temp)
+		print('temperature = ' + str(temp))
 	
 	sky = overview_sheet[sky_coords].value
 	if debug:
-		print('sky = ' + sky_coords)
+		print('sky = ' + sky)
 	
 	comments = overview_sheet[comments_coords].value
 	if debug:
