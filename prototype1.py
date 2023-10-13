@@ -48,49 +48,49 @@ def test_reading_overview():
 	global overview_sheet, debug
 	date_raw = overview_sheet[date_coords].value
 	if debug:
-		print('date ' + date_raw)
+		print('date ' + str(date_raw))
 	
-	muni = overview_sheet[muni_coords]
+	muni = overview_sheet[muni_coords].value
 	if debug:
 		print('municipality = ' + muni)
 	
-	loc_type = overview_sheet[loc_type_coords]
+	loc_type = overview_sheet[loc_type_coords].value
 	if debug:
 		print('location type = ' + loc_type)
 	
-	loc_desc = overview_sheet[loc_desc_coords]
+	loc_desc = overview_sheet[loc_desc_coords].value
 	if debug:
 		print('location description = ' + loc_desc)
 	
-	fac_name = overview_sheet[fac_name_coords]
+	fac_name = overview_sheet[fac_name_coords].value
 	if debug:
 		print('facility name = ' + fac_name)
 	
-	from_st = overview_sheet(from_st_coords)
+	from_st = overview_sheetfrom_st_coords].value
 	if debug:
 		print('from street = ' + from_st)
 	
-	from_st_dir = overview_sheet[from_st_dir_coords]
+	from_st_dir = overview_sheet[from_st_dir_coords].value
 	if debug:
 		print('from street direction = ' + from_st_dir)
 	
-	to_st = overview_sheet(to_st_coords)
+	to_st = overview_sheet[to_st_coords].value
 	if debug:
 		print('from street = ' + to_st)
 	
-	to_st_dir = overview_sheet[to_st_dir_coords]
+	to_st_dir = overview_sheet[to_st_dir_coords].value
 	if debug:
 		print('from street direction = ' + to_st_dir)
 	
-	temp = overview_sheet[temp_coords]
+	temp = overview_sheet[temp_coords].value
 	if debug:
 		print('temperature = ' + temp)
 	
-	sky = overview_sheet[sky_coords]
+	sky = overview_sheet[sky_coords].value
 	if debug:
 		print('sky = ' + sky_coords)
 	
-	comments = overview_sheet(comments_coords)
+	comments = overview_sheet(comments_coords).value
 	if debug:
 		print('comments = '	 + comments)
 # end_def
