@@ -66,7 +66,7 @@ def test_reading_overview():
 	if debug:
 		print('facility name = ' + fac_name)
 	
-	from_st = overview_sheetfrom_st_coords].value
+	from_st = overview_sheet[from_st_coords].value
 	if debug:
 		print('from street = ' + from_st)
 	
