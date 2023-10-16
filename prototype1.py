@@ -266,18 +266,18 @@ def read_count_sheets():
 	s3_data = read_count_sheet(count_sheet_3, sheet_3_rows)
 	s4_data = read_count_sheet(count_sheet_4, sheet_4_rows)
 	s5_data = read_count_sheet(count_sheet_5, sheet_5_rows)
-    assemble_all_count_data(s1_data, s2_data, s3_data, s4_data, s5_data)
+	assemble_all_count_data(s1_data, s2_data, s3_data, s4_data, s5_data)
 # end_def: read_count_sheets
 
 def assemble_all_count_data(s1, s2, s3, s4, s5):
-    global bike_data, ped_data, child_data, jogger_data, skater_data, wheelchair_data, other_data
-    bike_data = s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike']
-    ped_data = s1['ped ']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped']
-    child_data = s1['child ']+ s2['child'] + s3['child'] + s4['child'] + s5['child']
-    jogger_data = s1['jogger ']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger']
-    skater_data = s1['skater ']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
-    wheelchair_data = s1['skater ']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
-    other_data = s1['other ']+ s2['other'] + s3['other'] + s4['other'] + s5['other']
+	global bike_data, ped_data, child_data, jogger_data, skater_data, wheelchair_data, other_data
+	bike_data = s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike']
+	ped_data = s1['ped']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped']
+	child_data = s1['child']+ s2['child'] + s3['child'] + s4['child'] + s5['child']
+	jogger_data = s1['jogger']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger']
+	skater_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
+	wheelchair_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
+	other_data = s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other']
 # end_def: assemble_all_count_data
 
 # Test uber-driver routine:
