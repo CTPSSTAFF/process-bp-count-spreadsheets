@@ -124,7 +124,6 @@ def read_overview_tab():
 #
 def read_count_sheet(count_sheet, rows):
 	global debug
-	global bike_data, ped_data, child_data, jogger_data, skater_data, wheelchair_data, other_data
 	
 	bike_temp = []
 	for row in rows:
@@ -252,16 +251,34 @@ def read_count_sheet(count_sheet, rows):
 		#
 	#
 	
-	# TBD: Next step(s)
+	# Assemble return value: dict of list of each count type
+	retval = { 'bike' : bike_temp, 'ped': ped_temp, 'child' : child_temp,
+			   'jogger' : jogger_temp, 'skater' : skater_temp, 'wheelchair' : wheelchair_temp, 'other' : other_temp }
+	return retval
 # end_def: read_count sheet
 
 # Driver routine: read data from all count sheets.
 def read_count_sheets():
 	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5
 	global sheet_1_rows, sheet_2_rows, sheet_3_rows, sheet_4_rows, sheet_5_rows
-	pass
-	read_count_sheet(count_sheet_1, sheet_1_rows)
+	s1_data = read_count_sheet(count_sheet_1, sheet_1_rows)
+	s2_data = read_count_sheet(count_sheet_2, sheet_2_rows)
+	s3_data = read_count_sheet(count_sheet_3, sheet_3_rows)
+	s4_data = read_count_sheet(count_sheet_4, sheet_4_rows)
+	s5_data = read_count_sheet(count_sheet_5, sheet_5_rows)
+    assemble_all_count_data(s1_data, s2_data, s3_data, s4_data, s5_data)
 # end_def: read_count_sheets
+
+def assemble_all_count_data(s1, s2, s3, s4, s5):
+    global bike_data, ped_data, child_data, jogger_data, skater_data, wheelchair_data, other_data
+    bike_data = s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike']
+    ped_data = s1['ped ']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped']
+    child_data = s1['child ']+ s2['child'] + s3['child'] + s4['child'] + s5['child']
+    jogger_data = s1['jogger ']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger']
+    skater_data = s1['skater ']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
+    wheelchair_data = s1['skater ']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
+    other_data = s1['other ']+ s2['other'] + s3['other'] + s4['other'] + s5['other']
+# end_def: assemble_all_count_data
 
 # Test uber-driver routine:
 def test_driver():
