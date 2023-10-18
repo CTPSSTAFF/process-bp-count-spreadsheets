@@ -9,18 +9,25 @@ import psycopg
 debug = True
 
 # Pseudo-constants for coordinates of various fields in 'Overview' sheet.
-date_coords = 'B2'
-muni_coords = 'B3'
-loc_type_coords = 'B4'
-loc_desc_coords = 'B5'
-fac_name_coords = 'B6'
-from_st_coords = 'B7'
-from_st_dir_coords = 'B8'
-to_st_coords = 'B9'
-to_st_dir_coords = 'B10'
-temp_coords = 'B11'
-sky_coords = 'B12'
-comments_coords = 'A15'
+date_coords = 'C2'
+temperature_coords = 'C3'
+sky_coords = 'C4'
+
+# loc_id_coords = 'TBD'
+loc_type_coords = 'D10'
+loc_desc_coords = 'D6'
+loc_desc_other_coords = 'F6'
+
+fac_name_coords = 'D7'
+fac_name_other_coords = 'F7'
+
+street_1_coords = 'D12'
+street_2_coords = 'D13'
+street_1_dir_coords = 'D8'
+street_2_dir_coords = 'D9'
+
+comments_coords = 'I4'
+
 
 # Pseudo-constants for 'indices' of count-types in the count sheets.
 bike_col = 'B'
@@ -30,15 +37,6 @@ jogger_col = 'E'
 skater_col = 'F'
 wheelchair_col = 'G'
 other_col = 'H'
-
-# Lists into which count data from the count sheets in the workbook will be accumulated
-bike_data = []
-ped_data = []
-child_data = []
-jogger_data = []
-skater_data	 = []
-wheelchair_data = []
-other_data = []
 
 # Lists for ranges or row numbers with data in the count sheets.
 # Note that count sheet 1 has fewer rows than the other four count sheets.
@@ -68,63 +66,30 @@ def initialize(input_fn):
 
 def read_overview_sheet():
 	global overview_sheet, debug
+    
 	date_raw = overview_sheet[date_coords].value
-	if debug:
-		print('date ' + str(date_raw))
-	
-	muni = overview_sheet[muni_coords].value
-	if debug:
-		print('municipality = ' + muni)
-	
 	loc_type = overview_sheet[loc_type_coords].value
-	if debug:
-		print('location type = ' + loc_type)
-	
 	loc_desc = overview_sheet[loc_desc_coords].value
-	if debug:
-		print('location description = ' + loc_desc)
-	
 	fac_name = overview_sheet[fac_name_coords].value
-	if debug:
-		print('facility name = ' + fac_name)
-	
-	from_st = overview_sheet[from_st_coords].value
-	if debug:
-		print('from street = ' + from_st)
-	
-	from_st_dir = overview_sheet[from_st_dir_coords].value
-	if debug:
-		print('from street direction = ' + from_st_dir)
-	
-	to_st = overview_sheet[to_st_coords].value
-	if debug:
-		print('from street = ' + to_st)
-	
-	to_st_dir = overview_sheet[to_st_dir_coords].value
-	if debug:
-		print('from street direction = ' + to_st_dir)
-	
-	temperature = overview_sheet[temp_coords].value
-	if debug:
-		print('temperature = ' + str(temperature))
-	
+	street_1 = overview_sheet[street_1_coords].value
+	street_1_dir = overview_sheet[street_1_dir_coords].value:
+	street_2 = overview_sheet[street_2_coords].value
+	street_2_dir = overview_sheet[street_2_dir_coords].value
+
+	temperature = overview_sheet[temperature_coords].value
 	sky = overview_sheet[sky_coords].value
-	if debug:
-		print('sky = ' + sky)
-	
 	comments = overview_sheet[comments_coords].value
-	if debug:
-		print('comments = '	 + comments)
-        
+		 
     # *** TODO: Collect count location ID
     bp_loc_id = 42
     # *** TODO: Clean up raw date
     date_cooked = date_raw
+    
     # Assemble return value: dict of information harvested from overview table
     retval = { 'bp_loc_id' : bp_loc_id, 'date' : date_cooked, 
+               'street_1' : street_1, 'street_1_dir' : street_1_dir,
+               'street_2' : street_2, 'street_2_dir' : street_2_dir,   
                'temperature' : temperature, 'sky' : sky,
-               'from_st' : from_st, 'from_st_dir' : from_st_dir,
-               'to_st' : to_st, 'to_st_dir' : to_st_dir,
                'comments' : comments }
     return retval
 # end_def: read_overview_sheet
