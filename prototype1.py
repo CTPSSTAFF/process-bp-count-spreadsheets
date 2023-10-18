@@ -66,7 +66,7 @@ def initialize(input_fn):
 # end_def
 
 
-def read_overview_tab():
+def read_overview_sheet():
 	global overview_sheet, debug
 	date_raw = overview_sheet[date_coords].value
 	if debug:
@@ -104,9 +104,9 @@ def read_overview_tab():
 	if debug:
 		print('from street direction = ' + to_st_dir)
 	
-	temp = overview_sheet[temp_coords].value
+	temperature = overview_sheet[temp_coords].value
 	if debug:
-		print('temperature = ' + str(temp))
+		print('temperature = ' + str(temperature))
 	
 	sky = overview_sheet[sky_coords].value
 	if debug:
@@ -115,7 +115,19 @@ def read_overview_tab():
 	comments = overview_sheet[comments_coords].value
 	if debug:
 		print('comments = '	 + comments)
-# end_def: read_overview_tab
+        
+    # *** TODO: Collect count location ID
+    bp_loc_id = 42
+    # *** TODO: Clean up raw date
+    date_cooked = date_raw
+    # Assemble return value: dict of information harvested from overview table
+    retval = { 'bp_loc_id' : bp_loc_id, 'date' : date_cooked, 
+               'temperature' : temperature, 'sky' : sky,
+               'from_st' : from_st, 'from_st_dir' : from_st_dir,
+               'to_st' : to_st, 'to_st_dir' : to_st_dir,
+               'comments' : comments }
+    return retval
+# end_def: read_overview_sheet
 
 # Read data from one count sheet.
 # Parameters:
@@ -253,12 +265,13 @@ def read_count_sheet(count_sheet, rows):
 	
 	# Assemble return value: dict of list of each count type
 	retval = { 'bike' : bike_temp, 'ped': ped_temp, 'child' : child_temp,
-			   'jogger' : jogger_temp, 'skater' : skater_temp, 'wheelchair' : wheelchair_temp, 'other' : other_temp }
+			   'jogger' : jogger_temp, 'skater' : skater_temp,
+               'wheelchair' : wheelchair_temp, 'other' : other_temp }
 	return retval
 # end_def: read_count sheet
 
 # Driver routine: read data from all count sheets.
-def read_count_sheets():
+def read_count_tabs():
 	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5
 	global sheet_1_rows, sheet_2_rows, sheet_3_rows, sheet_4_rows, sheet_5_rows
 	s1_data = read_count_sheet(count_sheet_1, sheet_1_rows)
@@ -266,22 +279,25 @@ def read_count_sheets():
 	s3_data = read_count_sheet(count_sheet_3, sheet_3_rows)
 	s4_data = read_count_sheet(count_sheet_4, sheet_4_rows)
 	s5_data = read_count_sheet(count_sheet_5, sheet_5_rows)
-	assemble_all_count_data(s1_data, s2_data, s3_data, s4_data, s5_data)
-# end_def: read_count_sheets
-
-def assemble_all_count_data(s1, s2, s3, s4, s5):
-	global bike_data, ped_data, child_data, jogger_data, skater_data, wheelchair_data, other_data
+    # Assemble count data from all sheets
 	bike_data = s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike']
 	ped_data = s1['ped']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped']
 	child_data = s1['child']+ s2['child'] + s3['child'] + s4['child'] + s5['child']
 	jogger_data = s1['jogger']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger']
 	skater_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
 	wheelchair_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
-	other_data = s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other']
-# end_def: assemble_all_count_data
+	other_data = s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other']  
+     # Assemble return value
+    retval = { 'bike' : bike_data, 'ped' : ped_data, 'child' : child_data,
+               'jogger' : jogger_data, 'skater' : skater_data,
+               'wheelchair' : wheelchair_data, 'other' : other_data }
+    return retval   
+# end_def: read_count_tabs
 
 # Test uber-driver routine:
 def test_driver():
 	initialize(input_xlsx_fn)
-	read_count_sheets()
+    overview_data = read_overview_tab()
+	count_data = read_count_sheets()
+    # Here: Have all info needed to assemble and run SQL INSERT query
 # end_def: test_driver
