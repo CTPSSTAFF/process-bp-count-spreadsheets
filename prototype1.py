@@ -12,22 +12,21 @@ debug = True
 date_coords = 'C2'
 temperature_coords = 'C3'
 sky_coords = 'C4'
-
+#
 # loc_id_coords = 'TBD'
 loc_type_coords = 'D10'
 loc_desc_coords = 'D6'
 loc_desc_other_coords = 'F6'
-
+#
 fac_name_coords = 'D7'
 fac_name_other_coords = 'F7'
-
+#
 street_1_coords = 'D12'
 street_2_coords = 'D13'
 street_1_dir_coords = 'D8'
 street_2_dir_coords = 'D9'
-
+#
 comments_coords = 'I4'
-
 
 # Pseudo-constants for 'indices' of count-types in the count sheets.
 bike_col = 'B'
@@ -70,7 +69,13 @@ def read_overview_sheet():
 	date_raw = overview_sheet[date_coords].value
 	loc_type = overview_sheet[loc_type_coords].value
 	loc_desc = overview_sheet[loc_desc_coords].value
+    if loc_desc == 'Other':
+        loc_desc = overview_sheet[loc_desc_other_coords].value
+    #
 	fac_name = overview_sheet[fac_name_coords].value
+    if fac_name == 'Other':
+        fac_name = overview_sheet[fac_name_other_coords].value
+    #
 	street_1 = overview_sheet[street_1_coords].value
 	street_1_dir = overview_sheet[street_1_dir_coords].value:
 	street_2 = overview_sheet[street_2_coords].value
@@ -79,6 +84,20 @@ def read_overview_sheet():
 	temperature = overview_sheet[temperature_coords].value
 	sky = overview_sheet[sky_coords].value
 	comments = overview_sheet[comments_coords].value
+    
+	if debug == True:
+		print('date ' + str(date_raw))
+		print('location type = ' + loc_type
+		print('location description = ' + loc_desc)
+		print('facility name = ' + fac_name)
+		print('street 1 = ' + street_1)
+		print('street 1 direction = ' + street_1_dir)
+		print('street 2 = ' + street_2_dir)
+		print('street 2 direction = ' + street_2_dir)
+		print('temperature = ' + str(temperature))
+		print('sky = ' + sky)
+		print('comments = '	 + comments)
+    # end_if 
 		 
     # *** TODO: Collect count location ID
     bp_loc_id = 42
