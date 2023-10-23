@@ -8,14 +8,17 @@ import psycopg
 
 debug = True
 
+# input_xlsx_fn = './xlsx/sample-spreadsheet1.xlsx'
+input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
+
 # Pseudo-constants for coordinates of various fields in 'Overview' sheet.
 date_coords = 'C2'
 temperature_coords = 'C3'
 sky_coords = 'C4'
 #
 bp_loc_id_coords = 'H5'	 # This is a hidden cell in the spreadsheet
-loc_desc_coords = 'D6'
-loc_desc_other_coords = 'F6'
+loc_desc_coords = 'D5'
+loc_desc_other_coords = 'F5'
 fac_name_coords = 'D6'
 fac_name_other_coords = 'F7'
 #
@@ -44,7 +47,7 @@ other_col = 'H'
 sheet_1_rows = range(2,12) # i.e., 2 to 11
 sheet_2_rows = sheet_3_rows = sheet_4_rows = sheet_5_rows = range(2, 14) # i.e., 2 to 13
 
-input_xlsx_fn = './xlsx/sample-spreadsheet1.xlsx'
+
 
 wb = None
 overview_sheet = None
@@ -69,10 +72,22 @@ def read_overview_sheet():
 	global overview_sheet, debug
 	
 	bp_loc_id = overview_sheet[bp_loc_id_coords].value
+	if bp_loc_id == None:
+		# Problem reading hidden cell...
+		# Work-around, for the immediate term
+		bp_loc_id = 99999
+	# 
+	
 	date_raw = overview_sheet[date_coords].value
+	if date_raw == None:
+		# Temp workaround, for now
+		date_raw = '10/23/2023'
+	#
 	
 	loc_desc = overview_sheet[loc_desc_coords].value
-	if loc_desc == 'Other':
+	if loc_desc == None:
+		loc_desc = ''
+	elif loc_desc == 'Other':
 		loc_desc = overview_sheet[loc_desc_other_coords].value
 	#
 	loc_type = overview_sheet[loc_type_coords].value
@@ -88,19 +103,44 @@ def read_overview_sheet():
 	#
 	
 	street_1 = overview_sheet[street_1_coords].value
-	street_1_dir = overview_sheet[street_1_dir_coords].value:
+	if street_1 == None:
+		street_1 = ''
+	street_1_dir = overview_sheet[street_1_dir_coords].value
 	street_2 = overview_sheet[street_2_coords].value
+	if street_2 == None:
+		street_2 = ''
 	street_2_dir = overview_sheet[street_2_dir_coords].value
 
 	temperature = overview_sheet[temperature_coords].value
+	if temperature == None:
+		temperature = ''
+	#
+	
 	sky = overview_sheet[sky_coords].value
+	if sky == 'Sunny':
+		sky = 1
+	elif sky == 'Partly Cloudy':
+		sky = 2
+	elif sky == 'Overcast':
+		sky = 3
+	elif sky == 'Precipitation':
+		sky = 4
+	elif sky == 'No Data':
+		sky = 99
+	else:
+		sky = 99
+	# end_if
+	
 	comments = overview_sheet[comments_coords].value
+	if comments == None:
+		comments = ''
+	#
 	
 	if debug == True:
-		print('bp_loc_id = ' + bp_loc_id)
-		print('date	 =' + str(date_raw))
+		print('bp_loc_id = ' + str(bp_loc_id))
+		print('date	 = ' + str(date_raw))
 		print('location description = ' + loc_desc)
-		print('location type = ' + loc_type
+		print('location type = ' + loc_type)
 		print('municipality = ' + muni)
 		print('facility name = ' + fac_name)
 		print('street 1 = ' + street_1)
@@ -108,7 +148,7 @@ def read_overview_sheet():
 		print('street 2 = ' + street_2_dir)
 		print('street 2 direction = ' + street_2_dir)
 		print('temperature = ' + str(temperature))
-		print('sky = ' + sky)
+		print('sky = ' + str(sky))
 		print('comments = '	 + comments)
 	# end_if 
 		
@@ -292,7 +332,13 @@ def read_count_tabs():
 # Test uber-driver routine:
 def test_driver():
 	initialize(input_xlsx_fn)
-	overview_data = read_overview_tab()
+	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have all info needed to assemble and run SQL INSERT query
 # end_def: test_driver
+
+# Test driver for only reading overview sheet
+def test_driver_overview():
+	initialize(input_xlsx_fn)
+	overview_data = read_overview_sheet()
+# end_def
