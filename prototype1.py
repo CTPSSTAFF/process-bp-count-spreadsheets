@@ -387,8 +387,8 @@ def read_count_sheets():
 # end_def: read_count_sheets
 
 # Test uber-driver routine:
-def test_driver():
-	initialize(input_xlsx_fn)
+def test_driver(xlsx_fn):
+	initialize(xlsx_fn)
 	lut = read_columns_sheet() # build lookup table
 	overview_data = read_overview_sheet(lut)
 	count_data = read_count_sheets()
@@ -396,14 +396,14 @@ def test_driver():
 # end_def: test_driver
 
 # Test driver for only reading 'Overview' sheet
-def test_driver_overview():
-	initialize(input_xlsx_fn)
+def test_driver_overview(xlsx_fn):
+	initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 # end_def
 
 # Test driver for reading 'Columns' sheet and constructing lookup table
-def test_driver_columns_sheet():
-	initialize(input_xlsx_fn)
+def test_driver_columns_sheet(xlsx_fn):
+	initialize(xlsx_fn)
 	lut = read_columns_sheet()
 	print('Dump of LUT:')
 	for row in lut:
