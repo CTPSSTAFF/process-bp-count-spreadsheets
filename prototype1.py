@@ -6,6 +6,7 @@
 import openpyxl
 from openpyxl.formula import Tokenizer
 import psycopg
+import datetime
 
 debug = True
 
@@ -98,9 +99,14 @@ def read_overview_sheet(lut):
 		print('bp_loc_id = ' + str(bp_loc_id))
 	
 	date_raw = overview_sheet[date_coords].value
+	# As best we can tell, the 'value' is in yyyy-mm-dd hh:mm:ss format.
+	# Extract just the 'date' part.
 	if date_raw == None:
 		# Temp workaround, for now
 		date_raw = '10/23/2023'
+		date_cooked = date_raw
+	else:
+		date_cooked = datetime.datetime.strftime(date_raw, '%m-%d-%Y')
 	#
 	
 	# Not sure what to do with the following:
@@ -159,7 +165,7 @@ def read_overview_sheet(lut):
 	
 	if debug:
 		print('bp_loc_id = ' + str(bp_loc_id))
-		print('date	 = ' + str(date_raw))
+		print('date	 = ' + date_cooked)
 		print('location description = ' + loc_desc)
 		print('location type = ' + loc_type)
 		print('municipality = ' + muni)
@@ -173,8 +179,6 @@ def read_overview_sheet(lut):
 		print('comments = '	 + comments)
 	# end_if 
 		
-	# *** TODO: Clean up raw date
-	date_cooked = date_raw
 	
 	# Assemble return value: dict of information harvested from overview table
 	retval = { 'bp_loc_id' : bp_loc_id, 'date' : date_cooked, 
