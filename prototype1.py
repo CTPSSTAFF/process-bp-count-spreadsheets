@@ -180,7 +180,30 @@ def read_overview_sheet():
 # from the contents of columns D and E in this sheet.
 #
 def read_columns_sheet():
-	pass
+	global columns_sheet, count_loc_desc_col, count_loc_id_col
+	
+	row_ix = 2
+	ix = count_loc_desc_col + str(row_ix)
+	val = columns_sheet[ix].value
+	if debug:
+		print('Value of cell ' + ix + ' is: ' + val)
+	while val != None:
+		row_ix = row_ix + 1
+		ix = count_loc_desc_col + str(row_ix)
+		val = columns_sheet[ix].value
+	# 
+	if debug:
+		print('Last row_ix was: ' + str(row_ix))
+		
+	# Note: row_ix is one beyond index of the last row w/ real data
+	lookup_table = []
+	for row in range(2, row_ix):
+		desc_ix = count_loc_desc_col + str(row)
+		id_ix = count_loc_id_col + str(row)
+		temp = { 'desc' : columns_sheet[desc_ix].value, 'id' : columns_sheet[id_ix].value }
+		lookup_table.append(temp)
+	#
+	return lookup_table
 # end_def read_columns_sheet
 
 
@@ -365,4 +388,14 @@ def test_driver():
 def test_driver_overview():
 	initialize(input_xlsx_fn)
 	overview_data = read_overview_sheet()
+# end_def
+
+
+def test_driver_columns_tab():
+	initialize(input_xlsx_fn)
+	lut = read_columns_sheet()
+	print('Dump of LUT:')
+	for row in lut:
+		print(str(row['id']))
+	#
 # end_def
