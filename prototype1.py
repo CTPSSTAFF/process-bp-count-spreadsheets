@@ -4,6 +4,7 @@
 # Author: Ben Krepp (bkrepp@ctps.org)
 
 import openpyxl
+from openpyxl.formula import Tokenizer
 import psycopg
 
 debug = True
@@ -16,7 +17,7 @@ date_coords = 'C2'
 temperature_coords = 'C3'
 sky_coords = 'C4'
 #
-bp_loc_id_coords = 'H5'	 # This is a hidden cell in the spreadsheet
+bp_loc_id_coords = 'H5'	 # This is a hidden cell in the 'Overview' sheet
 loc_desc_coords = 'D5'
 loc_desc_other_coords = 'F5'
 fac_name_coords = 'D6'
@@ -42,11 +43,14 @@ skater_col = 'F'
 wheelchair_col = 'G'
 other_col = 'H'
 
+# Pseudo-constants for columns of interest in the 'Columns' sheet
+count_loc_desc_col = 'D'
+count_loc_id_col = 'E'
+
 # Lists for ranges or row numbers with data in the count sheets.
 # Note that count sheet 1 has fewer rows than the other four count sheets.
 sheet_1_rows = range(2,12) # i.e., 2 to 11
 sheet_2_rows = sheet_3_rows = sheet_4_rows = sheet_5_rows = range(2, 14) # i.e., 2 to 13
-
 
 
 wb = None
@@ -55,9 +59,10 @@ count_sheet_1 = None
 count_sheet_3 = None
 count_sheet_4 = None
 count_sheet_5 = None
+columns_sheet = None  # Sheet containing lookup tables
 
 def initialize(input_fn):
-	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5
+	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5, columns_sheet
 	wb = openpyxl.load_workbook(filename = input_fn)
 	overview_sheet = wb['Overview']
 	count_sheet_1 = wb['630-845 AM']
@@ -65,18 +70,24 @@ def initialize(input_fn):
 	count_sheet_3 = wb['1200-245 PM']
 	count_sheet_4 = wb['300-545 PM']
 	count_sheet_5 = wb['600-845 PM']
+	columns_sheet = wb['Columns']
 # end_def
 
 
 def read_overview_sheet():
 	global overview_sheet, debug
 	
-	bp_loc_id = overview_sheet[bp_loc_id_coords].value
-	if bp_loc_id == None:
-		# Problem reading hidden cell...
-		# Work-around, for the immediate term
-		bp_loc_id = 99999
-	# 
+	bp_loc_id_cell_contents = overview_sheet[bp_loc_id_coords].value
+	#
+	# Dev: TBD try to parse formula in the 'bp_loc_id' cell
+	tok = Tokenizer(bp_loc_id_cell_contents)
+	if debug:
+		print('Results of parsing contents of bp_loc_id cell:')
+		print("\n".join("%12s%11s%9s" % (t.value, t.type, t.subtype) for t in tok.items))
+	
+	
+	# *** The following code is a temporary placeholder / temp work-around
+	bp_loc_id = 99999
 	
 	date_raw = overview_sheet[date_coords].value
 	if date_raw == None:
@@ -136,7 +147,7 @@ def read_overview_sheet():
 		comments = ''
 	#
 	
-	if debug == True:
+	if debug:
 		print('bp_loc_id = ' + str(bp_loc_id))
 		print('date	 = ' + str(date_raw))
 		print('location description = ' + loc_desc)
@@ -164,7 +175,17 @@ def read_overview_sheet():
 	return retval
 # end_def: read_overview_sheet
 
-# Read data from one count sheet.
+# read_columns_sheet - read data from 'Columns' sheet;
+# specifically create "count location description-to-bp_loc_id" lookup table
+# from the contents of columns D and E in this sheet.
+#
+def read_columns_sheet():
+	pass
+# end_def read_columns_sheet
+
+
+# read_count_sheet: Read data from _one_ count sheet.
+#
 # Parameters:
 #	  count_sheet - workbook count sheet to be read
 #	  rows - range of rows to be read in count sheet
@@ -183,7 +204,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		bike_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Bike counts:')
 		for c in bike_temp:
 			print(c)
@@ -201,7 +222,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		ped_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Ped counts:')
 		for c in ped_temp:
 			print(c)
@@ -219,7 +240,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		child_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Child counts:')
 		for c in child_temp:
 			print(c)
@@ -237,7 +258,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		jogger_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Jogger counts:')
 		for c in jogger_temp:
 			print(c)
@@ -255,7 +276,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		skater_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Skater counts:')
 		for c in skater_temp:
 			print(c)
@@ -273,7 +294,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		wheelchair_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Wheelchair counts:')
 		for c in wheelchair_temp:
 			print(c)
@@ -291,7 +312,7 @@ def read_count_sheet(count_sheet, rows):
 		#
 		other_temp.append(val)
 	#
-	if (debug == True):
+	if debug:
 		print('Other counts:')
 		for c in other_temp:
 			print(c)
@@ -305,8 +326,11 @@ def read_count_sheet(count_sheet, rows):
 	return retval
 # end_def: read_count sheet
 
-# Driver routine: read data from all count sheets.
-def read_count_tabs():
+# read_count_sheets - read data from all count sheets;
+# a 'driver routine' that calls read_count_sheet for 
+# each of the 5 'count' sheets'
+#
+def read_count_sheets():
 	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5
 	global sheet_1_rows, sheet_2_rows, sheet_3_rows, sheet_4_rows, sheet_5_rows
 	s1_data = read_count_sheet(count_sheet_1, sheet_1_rows)
@@ -315,19 +339,19 @@ def read_count_tabs():
 	s4_data = read_count_sheet(count_sheet_4, sheet_4_rows)
 	s5_data = read_count_sheet(count_sheet_5, sheet_5_rows)
 	# Assemble count data from all sheets
-	bike_data = s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike']
-	ped_data = s1['ped']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped']
-	child_data = s1['child']+ s2['child'] + s3['child'] + s4['child'] + s5['child']
-	jogger_data = s1['jogger']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger']
-	skater_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
-	wheelchair_data = s1['skater']+ s2['skater'] + s3['skater'] + s4['skater'] + s5['skater']
-	other_data = s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other']	 
+	bike_data = s1_data['bike'] + s2_data['bike'] + s3_data['bike'] + s4_data['bike'] + s5_data['bike']
+	ped_data = s1_data['ped']+ s2_data['ped'] + s3_data['ped'] + s4_data['ped'] + s5_data['ped']
+	child_data = s1_data['child']+ s2_data['child'] + s3_data['child'] + s4_data['child'] + s5_data['child']
+	jogger_data = s1_data['jogger']+ s2_data['jogger'] + s3_data['jogger'] + s4_data['jogger'] + s5_data['jogger']
+	skater_data = s1_data['skater']+ s2_data['skater'] + s3_data['skater'] + s4_data['skater'] + s5_data['skater']
+	wheelchair_data = s1_data['skater']+ s2_data['skater'] + s3_data['skater'] + s4_data['skater'] + s5_data['skater']
+	other_data = s1_data['other']+ s2_data['other'] + s3_data['other'] + s4_data['other'] + s5_data['other']	 
 	 # Assemble return value
 	retval = { 'bike' : bike_data, 'ped' : ped_data, 'child' : child_data,
 			   'jogger' : jogger_data, 'skater' : skater_data,
 			   'wheelchair' : wheelchair_data, 'other' : other_data }
 	return retval	
-# end_def: read_count_tabs
+# end_def: read_count_sheets
 
 # Test uber-driver routine:
 def test_driver():
