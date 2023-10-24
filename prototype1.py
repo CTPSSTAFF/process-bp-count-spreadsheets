@@ -61,6 +61,8 @@ count_sheet_4 = None
 count_sheet_5 = None
 columns_sheet = None  # Sheet containing lookup tables
 
+lookup_table = None	  # Table to map countloc description to countloc id
+
 def initialize(input_fn):
 	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5, columns_sheet
 	wb = openpyxl.load_workbook(filename = input_fn)
@@ -74,20 +76,26 @@ def initialize(input_fn):
 # end_def
 
 
-def read_overview_sheet():
+# read_overview_sheet: read and parse data from 'Overview' sheet
+# parameter: 'lut' - lookup table to map countloc description to id,
+#					 bult by read_columns_sheet().
+#
+def read_overview_sheet(lut):
 	global overview_sheet, debug
 	
-	bp_loc_id_cell_contents = overview_sheet[bp_loc_id_coords].value
+	loc_desc = overview_sheet[loc_desc_coords].value
+	
+	# Get bp_loc_id from lookup table (lut)
 	#
-	# Dev: TBD try to parse formula in the 'bp_loc_id' cell
-	tok = Tokenizer(bp_loc_id_cell_contents)
+	bp_loc_id = 99999 # Error value
+	for row in lut:
+		if row['desc'] == loc_desc:
+			bp_loc_id = row['id']
+			break
+		#
+	#
 	if debug:
-		print('Results of parsing contents of bp_loc_id cell:')
-		print("\n".join("%12s%11s%9s" % (t.value, t.type, t.subtype) for t in tok.items))
-	
-	
-	# *** The following code is a temporary placeholder / temp work-around
-	bp_loc_id = 99999
+		print('bp_loc_id = ' + str(bp_loc_id))
 	
 	date_raw = overview_sheet[date_coords].value
 	if date_raw == None:
@@ -95,12 +103,14 @@ def read_overview_sheet():
 		date_raw = '10/23/2023'
 	#
 	
-	loc_desc = overview_sheet[loc_desc_coords].value
-	if loc_desc == None:
-		loc_desc = ''
-	elif loc_desc == 'Other':
-		loc_desc = overview_sheet[loc_desc_other_coords].value
+	# Not sure what to do with the following:
 	#
+	# if loc_desc == None:
+	#	loc_desc = ''
+	# elif loc_desc == 'Other':
+	#	loc_desc = overview_sheet[loc_desc_other_coords].value
+	#
+	
 	loc_type = overview_sheet[loc_type_coords].value
 	
 	muni = overview_sheet[muni_coords].value
@@ -379,19 +389,20 @@ def read_count_sheets():
 # Test uber-driver routine:
 def test_driver():
 	initialize(input_xlsx_fn)
-	overview_data = read_overview_sheet()
+	lut = read_columns_sheet() # build lookup table
+	overview_data = read_overview_sheet(lut)
 	count_data = read_count_sheets()
 	# Here: Have all info needed to assemble and run SQL INSERT query
 # end_def: test_driver
 
-# Test driver for only reading overview sheet
+# Test driver for only reading 'Overview' sheet
 def test_driver_overview():
 	initialize(input_xlsx_fn)
 	overview_data = read_overview_sheet()
 # end_def
 
-
-def test_driver_columns_tab():
+# Test driver for reading 'Columns' sheet and constructing lookup table
+def test_driver_columns_sheet():
 	initialize(input_xlsx_fn)
 	lut = read_columns_sheet()
 	print('Dump of LUT:')
