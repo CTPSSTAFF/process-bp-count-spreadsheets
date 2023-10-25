@@ -18,7 +18,9 @@ date_coords = 'C2'
 temperature_coords = 'C3'
 sky_coords = 'C4'
 #
-bp_loc_id_coords = 'H5'	 # This is a hidden cell in the 'Overview' sheet
+bp_loc_id_coords = 'R3'
+count_id_coords = 'R4'
+
 loc_desc_coords = 'D5'
 loc_desc_other_coords = 'F5'
 fac_name_coords = 'D6'
@@ -48,11 +50,8 @@ other_col = 'H'
 count_loc_desc_col = 'D'
 count_loc_id_col = 'E'
 
-# Lists for ranges or row numbers with data in the count sheets.
-# Note that count sheet 1 has fewer rows than the other four count sheets.
-sheet_1_rows = range(2,12) # i.e., 2 to 11
-sheet_2_rows = sheet_3_rows = sheet_4_rows = sheet_5_rows = range(2, 14) # i.e., 2 to 13
-
+# List of range or row numbers with data in the count sheets.
+data_sheet_rows = range(2, 14) # i.e., 2 to 13
 
 wb = None
 overview_sheet = None
@@ -60,43 +59,45 @@ count_sheet_1 = None
 count_sheet_3 = None
 count_sheet_4 = None
 count_sheet_5 = None
+count_sheet_6 = None
+count_sheet_7 = None
+count_sheet_8 = None
 columns_sheet = None  # Sheet containing lookup tables
 
-lookup_table = None	  # Table to map countloc description to countloc id
 
 def initialize(input_fn):
-	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5, columns_sheet
+	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
+    global count_sheet_5, count_sheet_6, count_sheet_7, count_sheet_8
+    
 	wb = openpyxl.load_workbook(filename = input_fn)
 	overview_sheet = wb['Overview']
-	count_sheet_1 = wb['630-845 AM']
+	count_sheet_1 = wb['600-845 AM']
 	count_sheet_2 = wb['900-1145 AM']
 	count_sheet_3 = wb['1200-245 PM']
 	count_sheet_4 = wb['300-545 PM']
 	count_sheet_5 = wb['600-845 PM']
+    count_sheet_6 = wb['900-1145 PM']
+    count_sheet_7 = wb['1200-245 AM']
+    count_sheet_8 = wb['300-545 AM']
 	columns_sheet = wb['Columns']
 # end_def
 
 
 # read_overview_sheet: read and parse data from 'Overview' sheet
-# parameter: 'lut' - lookup table to map countloc description to id,
-#					 bult by read_columns_sheet().
 #
-def read_overview_sheet(lut):
+def read_overview_sheet():
 	global overview_sheet, debug
 	
+    bp_loc_id = overview_sheet[bp_loc_id_coords].value
+    count_id = overview_sheet[bp_count_id_coords].value
+    
 	loc_desc = overview_sheet[loc_desc_coords].value
+	if loc_desc == None:
+        loc_desc = ''
+    elif loc_desc == 'Other':
+        loc_desc = overview_sheet[loc_desc_other_coords].value
+    # end_if
 	
-	# Get bp_loc_id from lookup table (lut)
-	#
-	bp_loc_id = 99999 # Error value
-	for row in lut:
-		if row['desc'] == loc_desc:
-			bp_loc_id = row['id']
-			break
-		#
-	#
-	if debug:
-		print('bp_loc_id = ' + str(bp_loc_id))
 	
 	date_raw = overview_sheet[date_coords].value
 	# As best we can tell, the 'value' is in yyyy-mm-dd hh:mm:ss format.
@@ -107,14 +108,6 @@ def read_overview_sheet(lut):
 		date_cooked = date_raw
 	else:
 		date_cooked = datetime.datetime.strftime(date_raw, '%m-%d-%Y')
-	#
-	
-	# Not sure what to do with the following:
-	#
-	# if loc_desc == None:
-	#	loc_desc = ''
-	# elif loc_desc == 'Other':
-	#	loc_desc = overview_sheet[loc_desc_other_coords].value
 	#
 	
 	loc_type = overview_sheet[loc_type_coords].value
@@ -164,7 +157,8 @@ def read_overview_sheet(lut):
 	#
 	
 	if debug:
-		print('bp_loc_id = ' + str(bp_loc_id))
+		print('bp_loc_id = ' + bp_loc_id)
+        print('count_id = ' + count_id)
 		print('date	 = ' + date_cooked)
 		print('location description = ' + loc_desc)
 		print('location type = ' + loc_type)
@@ -179,46 +173,14 @@ def read_overview_sheet(lut):
 		print('comments = '	 + comments)
 	# end_if 
 		
-	
 	# Assemble return value: dict of information harvested from overview table
-	retval = { 'bp_loc_id' : bp_loc_id, 'date' : date_cooked, 
+	retval = { 'bp_loc_id' : bp_loc_id, 'count_id' : count_id, 'date' : date_cooked, 
 			   'street_1' : street_1, 'street_1_dir' : street_1_dir,
 			   'street_2' : street_2, 'street_2_dir' : street_2_dir,   
 			   'temperature' : temperature, 'sky' : sky,
 			   'comments' : comments }
 	return retval
 # end_def: read_overview_sheet
-
-# read_columns_sheet - read data from 'Columns' sheet;
-# specifically create "count location description-to-bp_loc_id" lookup table
-# from the contents of columns D and E in this sheet.
-#
-def read_columns_sheet():
-	global columns_sheet, count_loc_desc_col, count_loc_id_col
-	
-	row_ix = 2
-	ix = count_loc_desc_col + str(row_ix)
-	val = columns_sheet[ix].value
-	if debug:
-		print('Value of cell ' + ix + ' is: ' + val)
-	while val != None:
-		row_ix = row_ix + 1
-		ix = count_loc_desc_col + str(row_ix)
-		val = columns_sheet[ix].value
-	# 
-	if debug:
-		print('Last row_ix was: ' + str(row_ix))
-		
-	# Note: row_ix is one beyond index of the last row w/ real data
-	lookup_table = []
-	for row in range(2, row_ix):
-		desc_ix = count_loc_desc_col + str(row)
-		id_ix = count_loc_id_col + str(row)
-		temp = { 'desc' : columns_sheet[desc_ix].value, 'id' : columns_sheet[id_ix].value }
-		lookup_table.append(temp)
-	#
-	return lookup_table
-# end_def read_columns_sheet
 
 
 # read_count_sheet: Read data from _one_ count sheet.
@@ -368,21 +330,27 @@ def read_count_sheet(count_sheet, rows):
 # each of the 5 'count' sheets'
 #
 def read_count_sheets():
-	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4, count_sheet_5
-	global sheet_1_rows, sheet_2_rows, sheet_3_rows, sheet_4_rows, sheet_5_rows
-	s1_data = read_count_sheet(count_sheet_1, sheet_1_rows)
-	s2_data = read_count_sheet(count_sheet_2, sheet_2_rows)
-	s3_data = read_count_sheet(count_sheet_3, sheet_3_rows)
-	s4_data = read_count_sheet(count_sheet_4, sheet_4_rows)
-	s5_data = read_count_sheet(count_sheet_5, sheet_5_rows)
-	# Assemble count data from all sheets
-	bike_data = s1_data['bike'] + s2_data['bike'] + s3_data['bike'] + s4_data['bike'] + s5_data['bike']
-	ped_data = s1_data['ped']+ s2_data['ped'] + s3_data['ped'] + s4_data['ped'] + s5_data['ped']
-	child_data = s1_data['child']+ s2_data['child'] + s3_data['child'] + s4_data['child'] + s5_data['child']
-	jogger_data = s1_data['jogger']+ s2_data['jogger'] + s3_data['jogger'] + s4_data['jogger'] + s5_data['jogger']
-	skater_data = s1_data['skater']+ s2_data['skater'] + s3_data['skater'] + s4_data['skater'] + s5_data['skater']
-	wheelchair_data = s1_data['skater']+ s2_data['skater'] + s3_data['skater'] + s4_data['skater'] + s5_data['skater']
-	other_data = s1_data['other']+ s2_data['other'] + s3_data['other'] + s4_data['other'] + s5_data['other']	 
+	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
+    global count_sheet_5, count_sheet_6, count_sheet_7, count_sheet_8
+	global data_sheet_rows
+	s1 = read_count_sheet(count_sheet_1, data_sheet_rows)
+	s2 = read_count_sheet(count_sheet_2, data_sheet_rows)
+	s3 = read_count_sheet(count_sheet_3, data_sheet_rows)
+	s4 = read_count_sheet(count_sheet_4, data_sheet_rows)
+	s5 = read_count_sheet(count_sheet_5, data_sheet_rows)
+    s6 = read_count_sheet(count_sheet_6, data_sheet_rows)
+    s7 = read_count_sheet(count_sheet_7, data_sheet_rows)
+    s8 = read_count_sheet(count_sheet_8, data_sheet_rows)
+    
+	# Assemble count data from all sheets.
+    # Note that the order of the sheets, according to the 24-hour clock is: 7, 8, 1, 2, 3, 4, 5, 6
+	bike_data = s7['bike'] + s8['bike'] + s1['bike'] + s2['bike'] + s3['bike'] + s4['bike'] + s5['bike'] + s6['bike']
+	ped_data = s7['ped'] + s8['ped'] + s1['ped']+ s2['ped'] + s3['ped'] + s4['ped'] + s5['ped'] + s6['ped']
+	child_data = s7['child'] + s8['child'] + s1['child']+ s2['child'] + s3['child'] + s4['child'] + s5['child'] + s6['child']
+	jogger_data = s7['jogger'] + s8['jogger'] + s1['jogger']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger'] + s6['jogger']
+	skater_data = s7['skater'] + s8['skater'] +  s1['skater'] + s2['skater'] + s3['skater'] + s4['skater'] + s5['skater'] + s6['skater']
+	wheelchair_data = s7['wheelchair']+ s2['wheelchair'] + s3['wheelchair'] + s4['wheelchair'] + s5['wheelchair'] + s6['wheelchair']
+	other_data = s7['skater']+ s8['skater'] + s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other'] + s6['other'] 
 	 # Assemble return value
 	retval = { 'bike' : bike_data, 'ped' : ped_data, 'child' : child_data,
 			   'jogger' : jogger_data, 'skater' : skater_data,
@@ -393,8 +361,7 @@ def read_count_sheets():
 # Test uber-driver routine:
 def test_driver(xlsx_fn):
 	initialize(xlsx_fn)
-	lut = read_columns_sheet() # build lookup table
-	overview_data = read_overview_sheet(lut)
+	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have all info needed to assemble and run SQL INSERT query
 # end_def: test_driver
@@ -403,14 +370,4 @@ def test_driver(xlsx_fn):
 def test_driver_overview(xlsx_fn):
 	initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
-# end_def
-
-# Test driver for reading 'Columns' sheet and constructing lookup table
-def test_driver_columns_sheet(xlsx_fn):
-	initialize(xlsx_fn)
-	lut = read_columns_sheet()
-	print('Dump of LUT:')
-	for row in lut:
-		print(str(row['id']))
-	#
 # end_def
