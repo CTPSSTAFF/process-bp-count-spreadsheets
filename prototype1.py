@@ -337,37 +337,37 @@ def read_count_sheet(count_sheet, rows, row_keys):
 	if debug:
 		print('Bike counts:')
 		for c in bike_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Ped counts:')
 		for c in ped_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Child counts:')
 		for c in child_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Jogger counts:')
 		for c in jogger_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Skater counts:')
 		for c in skater_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Wheelchair counts:')
 		for c in wheelchair_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Other counts:')
 		for c in other_temp:
-			s = c.k + ' : ' + c.v if c.v != None else 'NULL'
+			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 	# end_if debug
