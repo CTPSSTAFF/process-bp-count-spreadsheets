@@ -115,7 +115,6 @@ CREATE TABLE IF NOT EXISTS public.bp_counts_staging
     cnt_2330 integer,
     cnt_2345 integer,
     cnt_total integer,
-    CONSTRAINT cnt_pk1 PRIMARY KEY (id)
 )
 
 TABLESPACE pg_default;
