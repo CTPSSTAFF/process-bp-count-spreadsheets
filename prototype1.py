@@ -418,12 +418,23 @@ def read_count_sheets():
 	return retval	
 # end_def: read_count_sheets
 
+# run_insert_queries: run INSERT QUERIES to insert count data into staging counts table
+#
+# parameters: overview - data harvested from overview sheet
+#			  counts - data harvested from count sheets
+#
+def run_insert_queries(overview, counts):
+	pass
+	# *** TO BE WRITTEN
+# end_def run_insert_queries
+
 # Test uber-driver routine:
 def test_driver(xlsx_fn):
 	initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have all info needed to assemble and run SQL INSERT INTO query
+	run_insert_queries(overview_data, count_data)
 # end_def: test_driver
 
 # Test driver for only reading 'Overview' sheet
