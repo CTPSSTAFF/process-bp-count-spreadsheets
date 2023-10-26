@@ -55,39 +55,37 @@ data_sheet_rows = range(2, 14) # i.e., 2 to 13
 
 # Lists of 'key values' for rows in each of the data sheets,
 # i.e., the name of the relevant column in the datbase counts table
-keys_sheet_1 = [ 'cnt_0600,' 'cnt_0615', 'cnt_0630', 'cnt_0645',
+keys_sheet_1 = [ 'cnt_0600', 'cnt_0615', 'cnt_0630', 'cnt_0645',
 				 'cnt_0700', 'cnt_0715', 'cnt_0730', 'cnt_0745',
 				 'cnt_0800', 'cnt_0815', 'cnt_0830', 'cnt_0845' ]
 				 
-keys_sheet_2 = [ 'cnt_0900,' 'cnt_0915', 'cnt_0930', 'cnt_0945',
+keys_sheet_2 = [ 'cnt_0900', 'cnt_0915', 'cnt_0930', 'cnt_0945',
 				 'cnt_1000', 'cnt_1015', 'cnt_1030', 'cnt_1045',
 				 'cnt_1100', 'cnt_1115', 'cnt_1130', 'cnt_1145' ]
 
-keys_sheet_3 = [ 'cnt_1200,' 'cnt_1215', 'cnt_1230', 'cnt_1245',
+keys_sheet_3 = [ 'cnt_1200', 'cnt_1215', 'cnt_1230', 'cnt_1245',
 				 'cnt_1300', 'cnt_1315', 'cnt_1330', 'cnt_1345',
 				 'cnt_1400', 'cnt_1415', 'cnt_1430', 'cnt_1445' ]
 
-keys_sheet_4 = [ 'cnt_1500,' 'cnt_1515', 'cnt_1530', 'cnt_1545',
+keys_sheet_4 = [ 'cnt_1500', 'cnt_1515', 'cnt_1530', 'cnt_1545',
 				 'cnt_1600', 'cnt_1615', 'cnt_1630', 'cnt_1645',
 				 'cnt_1700', 'cnt_1715', 'cnt_1730', 'cnt_1745' ]
 				 
-keys_sheet_5 = [ 'cnt_1800,' 'cnt_1815', 'cnt_1830', 'cnt_1845',
+keys_sheet_5 = [ 'cnt_1800', 'cnt_1815', 'cnt_1830', 'cnt_1845',
 				 'cnt_1900', 'cnt_1915', 'cnt_1930', 'cnt_1945',
 				 'cnt_2000', 'cnt_2015', 'cnt_2030', 'cnt_2045' ]
 
-keys_sheet_6 = [ 'cnt_2100,' 'cnt_2115', 'cnt_2130', 'cnt_2145',
+keys_sheet_6 = [ 'cnt_2100', 'cnt_2115', 'cnt_2130', 'cnt_2145',
 				 'cnt_2200', 'cnt_2215', 'cnt_2230', 'cnt_2245',
 				 'cnt_2300', 'cnt_2315', 'cnt_2330', 'cnt_2345' ]
 
-keys_sheet_7 = [ 'cnt_0000,' 'cnt_0015', 'cnt_0030', 'cnt_0045',
+keys_sheet_7 = [ 'cnt_0000', 'cnt_0015', 'cnt_0030', 'cnt_0045',
 				 'cnt_0100', 'cnt_0115', 'cnt_0130', 'cnt_0145',
 				 'cnt_0200', 'cnt_0215', 'cnt_0230', 'cnt_0245' ]
 
-keys_sheet_8 = [ 'cnt_0300,' 'cnt_0315', 'cnt_0330', 'cnt_0345',
+keys_sheet_8 = [ 'cnt_0300', 'cnt_0315', 'cnt_0330', 'cnt_0345',
 				 'cnt_0400', 'cnt_0415', 'cnt_0430', 'cnt_0445',
 				 'cnt_0500', 'cnt_0515', 'cnt_0530', 'cnt_0545' ]
-
-
 
 
 
@@ -333,41 +331,47 @@ def read_count_sheet(count_sheet, rows, row_keys):
 		other_temp.append(dtmp)
 	#
 	
-
 	if debug:
 		print('Bike counts:')
 		for c in bike_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Ped counts:')
 		for c in ped_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Child counts:')
 		for c in child_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Jogger counts:')
 		for c in jogger_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Skater counts:')
 		for c in skater_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Wheelchair counts:')
 		for c in wheelchair_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 		print('Other counts:')
 		for c in other_temp:
-			s = c['k'] + ' : ' + str(c['v']) if c['v'] != None else 'NULL'
+			s = c['k'] + ' : ' 
+			s += str(c['v']) if c['v'] != None else 'NULL'
 			print(s)
 		#
 	# end_if debug
@@ -407,7 +411,7 @@ def read_count_sheets():
 	skater_data = s7['skater'] + s8['skater'] +	 s1['skater'] + s2['skater'] + s3['skater'] + s4['skater'] + s5['skater'] + s6['skater']
 	wheelchair_data = s7['wheelchair']+ s2['wheelchair'] + s3['wheelchair'] + s4['wheelchair'] + s5['wheelchair'] + s6['wheelchair']
 	other_data = s7['skater']+ s8['skater'] + s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other'] + s6['other'] 
-	 # Assemble return value
+	# Assemble return value
 	retval = { 'bike' : bike_data, 'ped' : ped_data, 'child' : child_data,
 			   'jogger' : jogger_data, 'skater' : skater_data,
 			   'wheelchair' : wheelchair_data, 'other' : other_data }
