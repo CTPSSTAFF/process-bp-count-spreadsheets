@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS public.bp_counts_staging
     cnt_2315 integer,
     cnt_2330 integer,
     cnt_2345 integer,
-    cnt_total integer,
+    cnt_total integer
 )
 
 TABLESPACE pg_default;
