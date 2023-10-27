@@ -8,7 +8,10 @@ from openpyxl.formula import Tokenizer
 import psycopg
 import datetime
 
-debug = True
+# Debug toggles
+debug_read_overview = False
+debug_read_counts = False
+debug_query_string = True
 
 # input_xlsx_fn = './xlsx/sample-spreadsheet1.xlsx'
 input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
@@ -128,10 +131,10 @@ def initialize(input_fn):
 # read_overview_sheet: read and parse data from 'Overview' sheet
 #
 def read_overview_sheet():
-	global overview_sheet, debug
+	global overview_sheet, debug_read_overview
 	
 	bp_loc_id = overview_sheet[bp_loc_id_coords].value
-	count_id = overview_sheet[bp_count_id_coords].value
+	count_id = overview_sheet[count_id_coords].value
 	
 	loc_desc = overview_sheet[loc_desc_coords].value
 	if loc_desc == None:
@@ -198,7 +201,7 @@ def read_overview_sheet():
 		comments = ''
 	#
 	
-	if debug:
+	if debug_read_overview:
 		print('bp_loc_id = ' + bp_loc_id)
 		print('count_id = ' + count_id)
 		print('date	 = ' + date_cooked)
@@ -243,7 +246,7 @@ def read_overview_sheet():
 #  count, which may be None, i.e., NULL.
 #
 def read_count_sheet(count_sheet, rows, row_keys):
-	global debug
+	global debug_read_counts
 	
 	bike_temp = []
 	for (row_ix, row_key) in zip(rows, row_keys):
@@ -336,7 +339,7 @@ def read_count_sheet(count_sheet, rows, row_keys):
 		other_temp.append(dtmp)
 	#
 	
-	if debug:
+	if debug_read_counts:
 		print('Bike counts:')
 		for c in bike_temp:
 			s = c['k'] + ' : ' 
@@ -432,6 +435,8 @@ def read_count_sheets():
 #			  mode - mode of travel, e.g., 'bike' or 'ped'
 #
 def run_insert_query(overview, count, table_name, mode):
+	global debug_query_string
+	
 	# Common fields, from 'overview' sheet
 	bp_loc_id = overview['bp_loc_id']
 	count_id = overview['count_id']
@@ -453,26 +458,48 @@ def run_insert_query(overview, count, table_name, mode):
 		count_type = 'C'
 	elif mode == 'jogger':
 		count_type = 'J'
-	elif mode == 'S':
-		count_type = '?'
-	elif mode == 'W:
-		count_type = '?'
-	elif mode == 'O':
-		count_type = '?'
+	elif mode == 'skater':
+		count_type = 'S'
+	elif mode == 'wheelchair':
+		count_type = 'W'
+	elif mode == 'other':
+		count_type = 'O'
 	else:
 		msg = "Unrecognized mode (" + mode + ") in 'run_insert_query'."
 		bail_out(msg)
 	# end_if
 	
-	# Assemble query string
-	part1 = 'INSERT INTO ' + table_name + ' '
-	part1 += 'bp_loc_id, count_id, date, street_1_name, street_1_dir, street_2_name, street_2_dir, temperature, sky, comments, '
-	# List of 'count' columns for which we have data for this mode: first
-	part2 =	 'TBD' + ' '
-	part3 = 'VALUES ('
-	part4 = 'TBD' + ' ;'
-
+	# Get lists of (1) keys with non-Null values and (2) those values from 'count'
+	key_list =[]
+	val_list = []
+	for i in count:
+		if i['v'] != None:
+			key_list.append(i['k'])
+			val_list.append(str(i['v']))
+		#
+	#
 	
+	key_string = ', '.join(key_list)
+	val_string = ', '.join(val_list)
+	
+	# Assemble query string
+	part1 = 'INSERT INTO ' + table_name + ' ('
+	part1 += 'bp_loc_id, count_id, date, street_1_name, street_1_dir, street_2_name, street_2_dir, temperature, sky, comments,'
+	# List of 'count' columns for which we have data for this mode
+	part2 =	 ' ' + key_string + ' ) '
+	# List of corresponding values
+	part3 = 'VALUES ( ' + val_string + ' );'
+	query_string = part1 + part2 + part3
+	
+	if debug_query_string:
+		print('Query string:')
+		print(query_string)
+	#
+
+	# For now
+	return
+	
+	# *** TBD: run query
 # end_def run_insert_query
 
 # run_insert_queries: driver routine for running INSERT QUERIES to insert B-P count data into staging counts table
@@ -482,27 +509,15 @@ def run_insert_query(overview, count, table_name, mode):
 #			  table_name - name of table into which to insert data
 #
 def run_insert_queries(overview, counts, table_name):
-	# Common fields, from 'overview' sheet
-	bp_loc_id = overview['bp_loc_id']
-	count_id = overview['count_id']
-	date = overview['date']
-	street_1 = overview['street_1']
-	street_1_dir = overview['street_1_dir']
-	street_2 = overview['street_2']
-	street_2_dir = overview['street_2_dir']
-	temperature = overview['temperature']
-	sky = overview['sky']
-	comments = overview['comments']
-	
 	# For each of the 'modes' (e.g., 'bike', 'ped', etc.) only assemble and execute
 	# an INSERT INTO query if there is at least one) real data value for that mode
 	# in the input spreadsheet.
 	#
-	for mode in ['bike', 'ped', 'child', 'jogger', 'skater', 'wheelchair', 'other']
-		c = count_data[mode]
+	for mode in ['bike', 'ped', 'child', 'jogger', 'skater', 'wheelchair', 'other']:
+		c = counts[mode]
 		t = [x['v'] == None for x in c]
 		if any(y == True for y in t):
-			run_insert_query(overview, count, table_name, mode)
+			run_insert_query(overview, c, table_name, mode)
 		#
 	 #
 # end_def run_insert_queries
