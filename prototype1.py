@@ -13,8 +13,8 @@ debug_read_overview = False
 debug_read_counts = False
 debug_query_string = True
 
-# input_xlsx_fn = './xlsx/sample-spreadsheet1.xlsx'
-input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
+# input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
+input_xlsx_fn = './xlsx/sample-spreadsheet3.xlsx'
 
 # Pseudo-constants for coordinates of various fields in 'Overview' sheet.
 date_coords = 'C2'
@@ -134,7 +134,11 @@ def read_overview_sheet():
 	global overview_sheet, debug_read_overview
 	
 	bp_loc_id = overview_sheet[bp_loc_id_coords].value
+	# *** TEMP: FOR NOW
+	bp_loc_id = str(bp_loc_id)
+	
 	count_id = overview_sheet[count_id_coords].value
+	count_id = str(count_id)
 	
 	loc_desc = overview_sheet[loc_desc_coords].value
 	if loc_desc == None:
@@ -179,21 +183,23 @@ def read_overview_sheet():
 	temperature = overview_sheet[temperature_coords].value
 	if temperature == None:
 		temperature = ''
+	else:
+		temperature = str(temperature)
 	#
 	
 	sky = overview_sheet[sky_coords].value
 	if sky == 'Sunny':
-		sky = 1
+		sky = '1'
 	elif sky == 'Partly Cloudy':
-		sky = 2
+		sky = '2'
 	elif sky == 'Overcast':
-		sky = 3
+		sky = '3'
 	elif sky == 'Precipitation':
-		sky = 4
+		sky = '4'
 	elif sky == 'No Data':
-		sky = 99
+		sky = '99'
 	else:
-		sky = 99
+		sky = '99'
 	# end_if
 	
 	comments = overview_sheet[comments_coords].value
@@ -203,7 +209,7 @@ def read_overview_sheet():
 	
 	if debug_read_overview:
 		print('bp_loc_id = ' + bp_loc_id)
-		print('count_id = ' + count_id)
+		print('count_id = ' + str(count_id))
 		print('date	 = ' + date_cooked)
 		print('location description = ' + loc_desc)
 		print('location type = ' + loc_type)
@@ -469,30 +475,31 @@ def run_insert_query(overview, count, table_name, mode):
 		bail_out(msg)
 	# end_if
 	
-	# Get lists of (1) keys with non-Null values and (2) those values from 'count'
-	key_list =[]
-	val_list = []
+	# Prep for constructing query string: Get lists of (1) keys with non-Null values and (2) those values from 'count'
+	count_keys_list =[]
+	count_vals_list = []
 	for i in count:
 		if i['v'] != None:
-			key_list.append(i['k'])
-			val_list.append(str(i['v']))
+			count_keys_list.append(i['k'])
+			count_vals_list.append(str(i['v']))
 		#
 	#
-	
-	key_string = ', '.join(key_list)
-	val_string = ', '.join(val_list)
+	count_keys_string = ', '.join(count_keys_list)
+	count_vals_string = ', '.join(count_vals_list)
 	
 	# Assemble query string
 	part1 = 'INSERT INTO ' + table_name + ' ('
 	part1 += 'bp_loc_id, count_id, date, street_1_name, street_1_dir, street_2_name, street_2_dir, temperature, sky, comments,'
 	# List of 'count' columns for which we have data for this mode
-	part2 =	 ' ' + key_string + ' ) '
-	# List of corresponding values
-	part3 = 'VALUES ( ' + val_string + ' );'
-	query_string = part1 + part2 + part3
+	part2 =	 ' ' + count_keys_string + ' ) '
+	part3 = 'VALUES ( '
+	part3 += ', '.join([bp_loc_id,	count_id, date, street_1, street_1_dir, street_2, street_2_dir, temperature, sky, comments])
+	# List of values for 'count' coulumns for which we have data for this mode
+	part4 =	 ', ' + count_vals_string + ' );'
+	query_string = part1 + part2 + part3 + part4
 	
 	if debug_query_string:
-		print('Query string:')
+		print('Query string for mode ' + mode + ':')
 		print(query_string)
 	#
 
