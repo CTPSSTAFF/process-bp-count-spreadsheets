@@ -87,8 +87,6 @@ keys_sheet_8 = [ 'cnt_0300', 'cnt_0315', 'cnt_0330', 'cnt_0345',
 				 'cnt_0400', 'cnt_0415', 'cnt_0430', 'cnt_0445',
 				 'cnt_0500', 'cnt_0515', 'cnt_0530', 'cnt_0545' ]
 
-
-
 wb = None
 overview_sheet = None
 count_sheet_1 = None	# 6:00-8:45 AM
@@ -101,6 +99,13 @@ count_sheet_7 = None	# 12:00-2:45 AM
 count_sheet_8 = None	# 3:00-5:45 AM
 columns_sheet = None	# Sheet containing lookup tables (no longer used)
 
+# bail_out: report fatal error an exit
+#
+def bail_out(msg):
+	print('Fatal error')
+	print(msg)
+	exit()
+#
 
 def initialize(input_fn):
 	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
@@ -410,7 +415,7 @@ def read_count_sheets():
 	jogger_data = s7['jogger'] + s8['jogger'] + s1['jogger']+ s2['jogger'] + s3['jogger'] + s4['jogger'] + s5['jogger'] + s6['jogger']
 	skater_data = s7['skater'] + s8['skater'] +	 s1['skater'] + s2['skater'] + s3['skater'] + s4['skater'] + s5['skater'] + s6['skater']
 	wheelchair_data = s7['wheelchair']+ s2['wheelchair'] + s3['wheelchair'] + s4['wheelchair'] + s5['wheelchair'] + s6['wheelchair']
-	other_data = s7['skater']+ s8['skater'] + s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other'] + s6['other'] 
+	other_data = s7['other']+ s8['other'] + s1['other']+ s2['other'] + s3['other'] + s4['other'] + s5['other'] + s6['other'] 
 	# Assemble return value
 	retval = { 'bike' : bike_data, 'ped' : ped_data, 'child' : child_data,
 			   'jogger' : jogger_data, 'skater' : skater_data,
@@ -418,23 +423,96 @@ def read_count_sheets():
 	return retval	
 # end_def: read_count_sheets
 
-# run_insert_queries: run INSERT QUERIES to insert count data into staging counts table
+# run_insert query: create and execute a single INSERT INTO query for B-P count data into staging counts table;
+#					this is called once per 'mode' for any given count_id
+#
+# parameters: overview - data harvested from overview sheet
+#			  count - count data for a single mode harvested from counts sheets
+#			  table_name - name of table into which to insert data
+#			  mode - mode of travel, e.g., 'bike' or 'ped'
+#
+def run_insert_query(overview, count, table_name, mode):
+	# Common fields, from 'overview' sheet
+	bp_loc_id = overview['bp_loc_id']
+	count_id = overview['count_id']
+	date = overview['date']
+	street_1 = overview['street_1']
+	street_1_dir = overview['street_1_dir']
+	street_2 = overview['street_2']
+	street_2_dir = overview['street_2_dir']
+	temperature = overview['temperature']
+	sky = overview['sky']
+	comments = overview['comments']
+	
+	# The following is, admittedly, a quick hack
+	if mode == 'bike':
+		count_type = 'B'
+	elif mode == 'ped':
+		count_type = 'P'
+	elif mode == 'child':
+		count_type = 'C'
+	elif mode == 'jogger':
+		count_type = 'J'
+	elif mode == 'S':
+		count_type = '?'
+	elif mode == 'W:
+		count_type = '?'
+	elif mode == 'O':
+		count_type = '?'
+	else:
+		msg = "Unrecognized mode (" + mode + ") in 'run_insert_query'."
+		bail_out(msg)
+	# end_if
+	
+	# Assemble query string
+	part1 = 'INSERT INTO ' + table_name + ' '
+	part1 += 'bp_loc_id, count_id, date, street_1_name, street_1_dir, street_2_name, street_2_dir, temperature, sky, comments, '
+	# List of 'count' columns for which we have data for this mode: first
+	part2 =	 'TBD' + ' '
+	part3 = 'VALUES ('
+	part4 = 'TBD' + ' ;'
+
+	
+# end_def run_insert_query
+
+# run_insert_queries: driver routine for running INSERT QUERIES to insert B-P count data into staging counts table
 #
 # parameters: overview - data harvested from overview sheet
 #			  counts - data harvested from count sheets
+#			  table_name - name of table into which to insert data
 #
-def run_insert_queries(overview, counts):
-	pass
-	# *** TO BE WRITTEN
+def run_insert_queries(overview, counts, table_name):
+	# Common fields, from 'overview' sheet
+	bp_loc_id = overview['bp_loc_id']
+	count_id = overview['count_id']
+	date = overview['date']
+	street_1 = overview['street_1']
+	street_1_dir = overview['street_1_dir']
+	street_2 = overview['street_2']
+	street_2_dir = overview['street_2_dir']
+	temperature = overview['temperature']
+	sky = overview['sky']
+	comments = overview['comments']
+	
+	# For each of the 'modes' (e.g., 'bike', 'ped', etc.) only assemble and execute
+	# an INSERT INTO query if there is at least one) real data value for that mode
+	# in the input spreadsheet.
+	#
+	for mode in ['bike', 'ped', 'child', 'jogger', 'skater', 'wheelchair', 'other']
+		c = count_data[mode]
+		t = [x['v'] == None for x in c]
+		if any(y == True for y in t):
+			run_insert_query(overview, count, table_name, mode)
+		#
 # end_def run_insert_queries
 
 # Test uber-driver routine:
-def test_driver(xlsx_fn):
+def test_driver(xlsx_fn, table_name):
 	initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have all info needed to assemble and run SQL INSERT INTO query
-	run_insert_queries(overview_data, count_data)
+	run_insert_queries(overview_data, count_data, table_name)
 # end_def: test_driver
 
 # Test driver for only reading 'Overview' sheet
@@ -447,4 +525,5 @@ def test_driver_overview(xlsx_fn):
 def test_driver_counts(xlsx_fn):
 	initialize(xlsx_fn)
 	count_data = read_count_sheets()
+	return count_data
 # end_def: test_driver_counts
