@@ -475,6 +475,57 @@ def run_insert_query(overview, count, table_name, mode):
 		bail_out(msg)
 	# end_if
 	
+	# Prep for constructing query string: Get lists of 'overview' keys with non-Null values, and (2) those values
+	overview_keys_list = []
+	overview_vals_list = []
+	
+	overview_keys_list.append('bp_loc_id')
+	overview_keys_list.append('count_id')
+	overview_keys_list.append('date')
+	overview_keys_list.append('count_type')
+	overview_vals_list.append(bp_loc_id)
+	overview_vals_list.append(count_id)
+	overview_vals_list.append(date)
+	overview_vals_list.append(count_type)
+	
+	# street_1 and street_1_dir
+	if street_1 != '':
+		overview_keys_list.append('street_1_name')
+		overview_vals_list.append(street_1)
+	#
+	if street_1_dir != '':
+		overview_keys_list.append('street_1_dir')
+		overview_vals_list.append(street_1_dir)
+	#
+	
+	# street_2 and street_2_dir
+	if street_2 != '':
+		overview_keys_list.append('street_2_name')
+		overview_vals_list.append(street_2)
+	#
+	if street_2_dir != '':
+		overview_keys_list.append('street_2_dir')
+		overview_vals_list.append(street_2_dir)
+	#
+	
+	# temperature, sky, and comments
+	if temperature != '':
+		overview_keys_list.append('temperature')
+		overview_vals_list.append(temperature)
+	#
+	if sky != '':
+		overview_keys_list.append('sky')
+		overview_vals_list.append(sky)
+	#
+	if comments != '':
+		overview_keys_list.append('comments')
+		overview_vals_list.append(comments)
+	#
+	
+	overview_keys_string = ', '.join(overview_keys_list)
+	overview_vals_string = ', '.join(overview_vals_list)
+	
+	
 	# Prep for constructing query string: Get lists of (1) keys with non-Null values and (2) those values from 'count'
 	count_keys_list =[]
 	count_vals_list = []
@@ -488,12 +539,17 @@ def run_insert_query(overview, count, table_name, mode):
 	count_vals_string = ', '.join(count_vals_list)
 	
 	# Assemble query string
+	#
 	part1 = 'INSERT INTO ' + table_name + ' ('
-	part1 += 'bp_loc_id, count_id, date, street_1_name, street_1_dir, street_2_name, street_2_dir, temperature, sky, comments,'
+	part1 += overview_keys_string
+    part1 += ', '
+	
 	# List of 'count' columns for which we have data for this mode
 	part2 =	 ' ' + count_keys_string + ' ) '
+	
 	part3 = 'VALUES ( '
-	part3 += ', '.join([bp_loc_id,	count_id, date, street_1, street_1_dir, street_2, street_2_dir, temperature, sky, comments])
+	part3 += overview_vals_string
+	
 	# List of values for 'count' coulumns for which we have data for this mode
 	part4 =	 ', ' + count_vals_string + ' );'
 	query_string = part1 + part2 + part3 + part4
