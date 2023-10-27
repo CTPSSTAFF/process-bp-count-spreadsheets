@@ -446,11 +446,11 @@ def run_insert_query(overview, count, table_name, mode):
 	# Common fields, from 'overview' sheet
 	bp_loc_id = overview['bp_loc_id']
 	count_id = overview['count_id']
-	date = overview['date']
-	street_1 = overview['street_1']
-	street_1_dir = overview['street_1_dir']
-	street_2 = overview['street_2']
-	street_2_dir = overview['street_2_dir']
+	count_date = overview['date']
+	from_st_name = overview['street_1']			# NOTE: Change in column name
+	from_st_dir = overview['street_1_dir']		# NOTE: Change in column name
+	to_st_name = overview['street_2']			# NOTE: Change in column name
+	to_st_dir = overview['street_2_dir']		# NOTE: Change in column name
 	temperature = overview['temperature']
 	sky = overview['sky']
 	comments = overview['comments']
@@ -481,31 +481,31 @@ def run_insert_query(overview, count, table_name, mode):
 	
 	overview_keys_list.append('bp_loc_id')
 	overview_keys_list.append('count_id')
-	overview_keys_list.append('date')
+	overview_keys_list.append('count_date')
 	overview_keys_list.append('count_type')
 	overview_vals_list.append(bp_loc_id)
 	overview_vals_list.append(count_id)
-	overview_vals_list.append(date)
+	overview_vals_list.append(count_date)
 	overview_vals_list.append(count_type)
 	
 	# street_1 and street_1_dir
-	if street_1 != '':
-		overview_keys_list.append('street_1_name')
-		overview_vals_list.append(street_1)
+	if from_st_name != '':
+		overview_keys_list.append('from_st_name')
+		overview_vals_list.append(from_st_name)
 	#
-	if street_1_dir != '':
-		overview_keys_list.append('street_1_dir')
-		overview_vals_list.append(street_1_dir)
+	if from_st_dir != '':
+		overview_keys_list.append('from_st_dir')
+		overview_vals_list.append(from_st_dir)
 	#
 	
 	# street_2 and street_2_dir
-	if street_2 != '':
-		overview_keys_list.append('street_2_name')
-		overview_vals_list.append(street_2)
+	if to_st_name != '':
+		overview_keys_list.append('to_st_name')
+		overview_vals_list.append(to_st_name)
 	#
-	if street_2_dir != '':
-		overview_keys_list.append('street_2_dir')
-		overview_vals_list.append(street_2_dir)
+	if to_st_dir != '':
+		overview_keys_list.append('to_st_dir')
+		overview_vals_list.append(to_st_dir)
 	#
 	
 	# temperature, sky, and comments
@@ -542,7 +542,7 @@ def run_insert_query(overview, count, table_name, mode):
 	#
 	part1 = 'INSERT INTO ' + table_name + ' ('
 	part1 += overview_keys_string
-    part1 += ', '
+	part1 += ', '
 	
 	# List of 'count' columns for which we have data for this mode
 	part2 =	 ' ' + count_keys_string + ' ) '
