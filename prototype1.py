@@ -498,7 +498,7 @@ def run_insert_query(overview, count, table_name, mode):
 	overview_vals_list = []
 	
 	# Note that bp_loc_id has type INTEGER;
-    # count_id, count_date, and count_type have type STRING.
+	# count_id, count_date, and count_type have type STRING.
 	overview_keys_list.append('bp_loc_id')
 	overview_keys_list.append('count_id')
 	overview_keys_list.append('count_date')
@@ -556,15 +556,20 @@ def run_insert_query(overview, count, table_name, mode):
 	overview_vals_string = ', '.join(overview_vals_list)
 	
 	
-	# Prep for constructing query string: Get lists of (1) keys with non-Null values and (2) those values from 'count'
+	# Prep for constructing query string: Get lists of (1) keys with non-Null values and (2) those values from 'count'.
+	# While we're at it, calculate cnt_total
 	count_keys_list =[]
 	count_vals_list = []
+	cnt_total = 0
 	for i in count:
 		if i['v'] != None:
 			count_keys_list.append(i['k'])
 			count_vals_list.append(str(i['v']))
+			cnt_total += i['v']
 		#
 	#
+	count_keys_list.append('cnt_total')
+	count_vals_list.append(str(cnt_total))
 	count_keys_string = ', '.join(count_keys_list)
 	count_vals_string = ', '.join(count_vals_list)
 	
