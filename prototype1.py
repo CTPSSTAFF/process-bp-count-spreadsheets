@@ -134,8 +134,9 @@ def initialize(input_fn):
 # read_overview_sheet: read and parse data from 'Overview' sheet
 #
 # return value - dict containing the following keys:
-#	  'bp_loc_id', 'count_id', 'date', 'from_st_name', 'from_st_dir',
-#	  'to_st_name', 'to_st_dir', 'temperature', 'sky', 'comments'
+#	  'bp_loc_id', 'count_id', 'date', dow_str',
+#	  'from_st_name', 'from_st_dir','to_st_name', 'to_st_dir', 
+#	  'temperature', 'sky', 'comments'
 #
 def read_overview_sheet():
 	global overview_sheet, debug_read_overview
@@ -170,6 +171,13 @@ def read_overview_sheet():
 	# Extract just the 'date' part.
 	# Convert to PostgreSQL date format: yyyy-mm-dd.:
 	date_cooked = datetime.datetime.strftime(date_raw, "%Y-%m-%d")
+	
+	dow_ix = datetime.date.weekday(date_raw)
+	# Python's datetime.date.weekday returns a 0-based index of the day-of-the-week for a given date object.
+	# 0 corresponds to 'Monday', 1 to 'Tuesday, etc.
+	# The cnt_dow is encoded in the count database as a 3-character string.
+	dow_translation_table = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	dow_str = dow_translation_table[dow_ix]
 	
 	loc_type = overview_sheet[loc_type_coords].value
 	
@@ -227,6 +235,7 @@ def read_overview_sheet():
 		print('bp_loc_id = ' + str(bp_loc_id))
 		print('count_id = ' + count_id)
 		print('date	 = ' + date_cooked)
+		print('dow = ' + dow_str)
 		print('location description = ' + loc_desc)
 		print('location type = ' + loc_type)
 		print('municipality = ' + muni)
@@ -241,7 +250,7 @@ def read_overview_sheet():
 	# end_if 
 		
 	# Assemble return value: dict of information harvested from overview table
-	retval = { 'bp_loc_id' : bp_loc_id, 'count_id' : count_id, 'date' : date_cooked, 
+	retval = { 'bp_loc_id' : bp_loc_id, 'count_id' : count_id, 'date' : date_cooked, 'dow' : dow_str,
 			   'from_st_name' : from_st_name, 'from_st_dir' : from_st_dir,
 			   'to_st_name' : to_st_name, 'to_st_dir' : to_st_dir, 
 			   'temperature' : temperature, 'sky' : sky,
@@ -466,6 +475,7 @@ def run_insert_query(overview, count, table_name, mode):
 	bp_loc_id = overview['bp_loc_id']
 	count_id = overview['count_id']
 	count_date = overview['date']
+	count_dow = overview['dow']
 	from_st_name = overview['from_st_name']
 	from_st_dir = overview['from_st_dir']
 	to_st_name = overview['to_st_name']
@@ -498,14 +508,16 @@ def run_insert_query(overview, count, table_name, mode):
 	overview_vals_list = []
 	
 	# Note that bp_loc_id has type INTEGER;
-	# count_id, count_date, and count_type have type STRING.
+	# count_id, count_date, count_dow, and count_type have type STRING.
 	overview_keys_list.append('bp_loc_id')
 	overview_keys_list.append('count_id')
 	overview_keys_list.append('count_date')
+	overview_keys_list.append('count_dow')
 	overview_keys_list.append('count_type')
 	overview_vals_list.append(str(bp_loc_id))
 	overview_vals_list.append("'" + count_id + "'")
 	overview_vals_list.append("'" + count_date + "'")
+	overview_vals_list.append("'" + count_dow + "'")
 	overview_vals_list.append("'" + count_type + "'")
 	
 	# from_st_name and from_st_dir - these are of type STRING
