@@ -102,7 +102,7 @@ count_sheet_7 = None	# 12:00-2:45 AM
 count_sheet_8 = None	# 3:00-5:45 AM
 columns_sheet = None	# Sheet containing lookup tables (no longer used)
 
-# bail_out: report fatal error an exit
+# bail_out: report fatal error and exit
 #
 def bail_out(msg):
 	print('Fatal error')
@@ -130,14 +130,21 @@ def initialize(input_fn):
 
 # read_overview_sheet: read and parse data from 'Overview' sheet
 #
+# return value - dict containing the following keys
+#
 def read_overview_sheet():
 	global overview_sheet, debug_read_overview
 	
 	bp_loc_id = overview_sheet[bp_loc_id_coords].value
-	# *** TEMP: FOR NOW
+	if bp_loc_id == None:
+		bail_out("count location ID missing")
+	#
 	bp_loc_id = str(bp_loc_id)
 	
 	count_id = overview_sheet[count_id_coords].value
+	if count_id == None:
+		bail_out("count_id missing.")
+	#
 	count_id = str(count_id)
 	
 	loc_desc = overview_sheet[loc_desc_coords].value
@@ -149,15 +156,13 @@ def read_overview_sheet():
 	
 	
 	date_raw = overview_sheet[date_coords].value
-	# As best we can tell, the 'value' is in yyyy-mm-dd hh:mm:ss format.
-	# Extract just the 'date' part.
 	if date_raw == None:
-		# Temp workaround, for now
-		date_raw = '10/23/2023'
-		date_cooked = date_raw
-	else:
-		date_cooked = datetime.datetime.strftime(date_raw, '%m-%d-%Y')
+		bail_out("Date missing.")
 	#
+	# As best we can tell, the 'value' in the spreadsheet is in yyyy-mm-dd hh:mm:ss format.
+	# Extract just the 'date' part.
+	# Convert to PostgreSQL date format: yyyy-mm-dd.:
+	date_cooked = datetime.datetime.strftime(date_raw, "%Y-%m-$d")
 	
 	loc_type = overview_sheet[loc_type_coords].value
 	
