@@ -29,10 +29,10 @@ loc_desc_other_coords = 'F5'
 fac_name_coords = 'D6'
 fac_name_other_coords = 'F7'
 #
-street_1_coords = 'D7'
-street_1_dir_coords = 'D8'
-street_2_coords = 'D9'
-street_2_dir_coords = 'D10'
+from_st_name_coords = 'D7'
+from_st_dir_coords = 'D8'
+to_st_name_coords = 'D9'
+to_st_dir_coords = 'D10'
 #
 loc_type_coords = 'D11'
 muni_coords = 'D12'
@@ -130,7 +130,9 @@ def initialize(input_fn):
 
 # read_overview_sheet: read and parse data from 'Overview' sheet
 #
-# return value - dict containing the following keys
+# return value - dict containing the following keys:
+#     'bp_loc_id', 'count_id', 'date', 'from_st_name', 'from_st_dir',
+#     'to_st_name', 'to_st_dir', 'temperature', 'sky', 'comments'
 #
 def read_overview_sheet():
 	global overview_sheet, debug_read_overview
@@ -176,14 +178,14 @@ def read_overview_sheet():
 		fac_name = overview_sheet[fac_name_other_coords].value
 	#
 	
-	street_1 = overview_sheet[street_1_coords].value
-	if street_1 == None:
-		street_1 = ''
-	street_1_dir = overview_sheet[street_1_dir_coords].value
-	street_2 = overview_sheet[street_2_coords].value
-	if street_2 == None:
-		street_2 = ''
-	street_2_dir = overview_sheet[street_2_dir_coords].value
+	from_st_name = overview_sheet[from_st_name_coords].value
+	if from_st_name == None:
+		from_st_name = ''
+	from_st_dir = overview_sheet[from_st_dir_coords].value
+	to_st_name = overview_sheet[to_st_name_coords].value
+	if to_st_name == None:
+		to_st_name = ''
+	to_st_dir = overview_sheet[to_st_dir_coords].value
 
 	temperature = overview_sheet[temperature_coords].value
 	if temperature == None:
@@ -220,10 +222,10 @@ def read_overview_sheet():
 		print('location type = ' + loc_type)
 		print('municipality = ' + muni)
 		print('facility name = ' + fac_name)
-		print('street 1 = ' + street_1)
-		print('street 1 direction = ' + street_1_dir)
-		print('street 2 = ' + street_2_dir)
-		print('street 2 direction = ' + street_2_dir)
+		print('from street name = ' + from_st_name)
+		print('from street direction = ' + from_st_dir)
+		print('to street name = ' + to_st_name)
+		print('to street direction = ' + to_st_dir)
 		print('temperature = ' + str(temperature))
 		print('sky = ' + str(sky))
 		print('comments = '	 + comments)
@@ -231,8 +233,8 @@ def read_overview_sheet():
 		
 	# Assemble return value: dict of information harvested from overview table
 	retval = { 'bp_loc_id' : bp_loc_id, 'count_id' : count_id, 'date' : date_cooked, 
-			   'street_1' : street_1, 'street_1_dir' : street_1_dir,
-			   'street_2' : street_2, 'street_2_dir' : street_2_dir,   
+			   'from_st_name' : from_st_name, 'from_st_dir' : from_st_dir,
+			   'to_st_name' : to_st_name, 'to_st_dir' : to_st_dir, 
 			   'temperature' : temperature, 'sky' : sky,
 			   'comments' : comments }
 	return retval
@@ -244,11 +246,14 @@ def read_overview_sheet():
 # Parameters:
 #	  count_sheet - workbook count sheet to be read
 #	  rows - range of rows to be read in count sheet
+#            At one point, a different number of rows was to be read from the first sheets
+#            than the others, but this has now been changed. Retaining this parameter in
+#            case things change again.
 #
 # Return value:
 #	A 3-level data structure.
 #	The top-level has the keys: 'bike', 'ped', 'child', 'jogger',
-#								'skater', 'wheelchair', and 'other
+#								'skater', 'wheelchair', and 'other'
 #  The second level: each of the topl-level dicts contains a list
 #  each of whose 96 elements are dicts.
 #  Each of these dicts has two keys: 'k' and 'v'.
@@ -452,10 +457,10 @@ def run_insert_query(overview, count, table_name, mode):
 	bp_loc_id = overview['bp_loc_id']
 	count_id = overview['count_id']
 	count_date = overview['date']
-	from_st_name = overview['street_1']			# NOTE: Change in column name
-	from_st_dir = overview['street_1_dir']		# NOTE: Change in column name
-	to_st_name = overview['street_2']			# NOTE: Change in column name
-	to_st_dir = overview['street_2_dir']		# NOTE: Change in column name
+	from_st_name = overview['from_st_name']
+	from_st_dir = overview['from_st_dir']
+	to_st_name = overview['to_st_name']
+	to_st_dir = overview['to_st_dir']
 	temperature = overview['temperature']
 	sky = overview['sky']
 	comments = overview['comments']
@@ -476,8 +481,7 @@ def run_insert_query(overview, count, table_name, mode):
 	elif mode == 'other':
 		count_type = 'O'
 	else:
-		msg = "Unrecognized mode (" + mode + ") in 'run_insert_query'."
-		bail_out(msg)
+		bail_out("Unrecognized mode (" + mode + ") in 'run_insert_query'.")
 	# end_if
 	
 	# Prep for constructing query string: Get lists of 'overview' keys with non-Null values, and (2) those values
@@ -493,7 +497,7 @@ def run_insert_query(overview, count, table_name, mode):
 	overview_vals_list.append(count_date)
 	overview_vals_list.append(count_type)
 	
-	# street_1 and street_1_dir
+	# from_st_name and from_st_dir
 	if from_st_name != '':
 		overview_keys_list.append('from_st_name')
 		overview_vals_list.append(from_st_name)
@@ -503,7 +507,7 @@ def run_insert_query(overview, count, table_name, mode):
 		overview_vals_list.append(from_st_dir)
 	#
 	
-	# street_2 and street_2_dir
+	# to_st_name and to_st_dir
 	if to_st_name != '':
 		overview_keys_list.append('to_st_name')
 		overview_vals_list.append(to_st_name)
