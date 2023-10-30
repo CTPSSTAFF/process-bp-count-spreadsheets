@@ -5,7 +5,7 @@
 
 import openpyxl
 from openpyxl.formula import Tokenizer
-import psycopg
+import psycopg2
 import datetime
 
 # Debug toggles
@@ -113,7 +113,7 @@ def bail_out(msg):
 	exit()
 #
 
-def initialize(input_fn):
+def spreadsheet_initialize(input_fn):
 	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
 	global count_sheet_5, count_sheet_6, count_sheet_7, count_sheet_8
 	
@@ -128,7 +128,7 @@ def initialize(input_fn):
 	count_sheet_7 = wb['1200-245 AM']
 	count_sheet_8 = wb['300-545 AM']
 	columns_sheet = wb['Columns']
-# end_def
+# end_def spreadsheet_initialize
 
 
 # read_overview_sheet: read and parse data from 'Overview' sheet
@@ -460,7 +460,7 @@ def read_count_sheets():
 	return retval	
 # end_def: read_count_sheets
 
-# run_insert query: create and execute a single INSERT INTO query for B-P count data into staging counts table;
+# geenrate_insert query: generate text of a single INSERT INTO query for B-P count data into staging counts table;
 #					this is called once per 'mode' for any given count_id
 #
 # parameters: overview - data harvested from overview sheet
@@ -468,7 +468,9 @@ def read_count_sheets():
 #			  table_name - name of table into which to insert data
 #			  mode - mode of travel, e.g., 'bike' or 'ped'
 #
-def run_insert_query(overview, count, table_name, mode):
+# return value: text of SQL INSERT INTO query string
+#
+def generate_insert_query(overview, count, table_name, mode):
 	global debug_query_string
 	
 	# Common fields, from 'overview' sheet
@@ -559,10 +561,10 @@ def run_insert_query(overview, count, table_name, mode):
 	#
 	
 	# DEBUG
-	if debug_query_string:
-		for item in overview_vals_list:
-			print(str(item))
-		#
+	# if debug_query_string:
+	#	for item in overview_vals_list:
+	#		print(str(item))
+	#	#
 	#
 	
 	overview_keys_string = ', '.join(overview_keys_list)
@@ -606,11 +608,17 @@ def run_insert_query(overview, count, table_name, mode):
 		print('Query string for mode ' + mode + ':')
 		print(query_string)
 	#
+	return query_string
+# end_generate_insert_query
 
-	# For now
-	return
-	
-	# *** TBD: run query
+def run_insert_query(query_string, db_conn, db_cursor):
+	try:
+		db_cursor.execute(query_str)
+	except:
+		db_conn.rollback()
+	else:
+		db_conn.commit()
+	#
 # end_def run_insert_query
 
 # run_insert_queries: driver routine for running INSERT QUERIES to insert B-P count data into staging counts table
@@ -618,8 +626,9 @@ def run_insert_query(overview, count, table_name, mode):
 # parameters: overview - data harvested from overview sheet
 #			  counts - data harvested from count sheets
 #			  table_name - name of table into which to insert data
+#			  db_cursor - database cursor
 #
-def run_insert_queries(overview, counts, table_name):
+def run_insert_queries(overview, counts, table_name, db_conn, db_cursor):
 	# For each of the 'modes' (e.g., 'bike', 'ped', etc.) only assemble and execute
 	# an INSERT INTO query if there is at least one) real data value for that mode
 	# in the input spreadsheet.
@@ -628,29 +637,85 @@ def run_insert_queries(overview, counts, table_name):
 		c = counts[mode]
 		t = [x['v'] == None for x in c]
 		if any(y == True for y in t):
-			run_insert_query(overview, c, table_name, mode)
+			query_string = generate_insert_query(overview, c, table_name, mode)
+			run_insert_query(query_string, db_conn, db_cursor)
 		#
 	 #
 # end_def run_insert_queries
 
+
+def db_initialize(parm):
+	# The last two parameters to the 'connect' call, per:
+	# https://stackoverflow.com/questions/59190010/psycopg2-operationalerror-fatal-unsupported-frontend-protocol-1234-5679-serve
+	#
+	if parm == 'office':
+		try:
+			conn = psycopg2.connect(dbname="mpodata", 
+									host="appsrvr3.ad.ctps.org",
+									port=5433,
+									user="postgres", 
+									password="ZeusDBMS",
+									sslmode="disable",
+									gssencmode="disable")
+			 retval = conn
+		except psycopg2.Error as e:
+			print('Error code: ' + e.pgcode)
+			print(e.pgerror)
+			retval = None
+	else:
+		try:
+			conn = psycopg2.connect(dbname="postgres", 
+									host="localhost",
+									port=5432,
+									user="postgres", 
+									password="",
+									sslmode="disable",
+									gssencmode="disable")
+			 retval = conn
+		except psycopg2.Error as e:
+			print('Error code: ' + e.pgcode)
+			print(e.pgerror)
+			retval = None
+	# end_if
+	return retval
+# end_df db_initialize
+
 # Test uber-driver routine:
-def test_driver(xlsx_fn, table_name):
-	initialize(xlsx_fn)
+def test_driver(xlsx_fn, table_name, db_parm):
+	spreadsheet_initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
-	# Here: Have all info needed to assemble and run SQL INSERT INTO query
-	run_insert_queries(overview_data, count_data, table_name)
+	# Here: Have read info from the spreadsheet needed to assemble and run SQL INSERT INTO query
+	# Initialize for database operations
+	db_conn = database_initialize(db_parm)
+	if db_conn != None:
+		db_cursor = db_conn.cursor()
+		run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
+		# Shutdown database connection
+		db_cursor.close()
+		db_conn.close()
+	# end_if
 # end_def: test_driver
 
-# Test driver for only reading 'Overview' sheet
+# Test driver for only reading data from 'Overview' sheet
 def test_driver_overview(xlsx_fn):
-	initialize(xlsx_fn)
+	spreadsheet_initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 # end_def
 
-# Test driver for only reading count data
+# Test driver for only reading count data from spreadsheet
 def test_driver_counts(xlsx_fn):
-	initialize(xlsx_fn)
+	spreadsheet_initialize(xlsx_fn)
 	count_data = read_count_sheets()
 	return count_data
 # end_def: test_driver_counts
+
+# Test driver for database connection
+def test_driver_db(db_parm):
+	db_conn = database_initialize(db_parm)
+	if db_conn != None:
+		db_cursor = db_conn.cursor()
+		db_cursor.close()
+		db_conn.close()
+	#
+# end_def
