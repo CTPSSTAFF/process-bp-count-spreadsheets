@@ -38,7 +38,7 @@ loc_type_coords = 'D11'
 muni_coords = 'D12'
 muni_other_coords = 'F12'
 #
-comments_coords = 'J4'
+description_coords = 'J4'
 
 # Pseudo-constants for 'indices' of count-types in the count sheets.
 bike_col = 'B'
@@ -136,7 +136,7 @@ def initialize(input_fn):
 # return value - dict containing the following keys:
 #	  'bp_loc_id', 'count_id', 'date', dow_str',
 #	  'from_st_name', 'from_st_dir','to_st_name', 'to_st_dir', 
-#	  'temperature', 'sky', 'comments'
+#	  'temperature', 'sky', 'description'
 #
 def read_overview_sheet():
 	global overview_sheet, debug_read_overview
@@ -226,9 +226,9 @@ def read_overview_sheet():
 		sky = '99'
 	# end_if
 	
-	comments = overview_sheet[comments_coords].value
-	if comments == None:
-		comments = ''
+	description = overview_sheet[description_coords].value
+	if description == None:
+		description = ''
 	#
 	
 	if debug_read_overview:
@@ -246,7 +246,7 @@ def read_overview_sheet():
 		print('to street direction = ' + to_st_dir)
 		print('temperature = ' + str(temperature))
 		print('sky = ' + str(sky))
-		print('comments = '	 + comments)
+		print('description = '	 + description)
 	# end_if 
 		
 	# Assemble return value: dict of information harvested from overview table
@@ -254,7 +254,7 @@ def read_overview_sheet():
 			   'from_st_name' : from_st_name, 'from_st_dir' : from_st_dir,
 			   'to_st_name' : to_st_name, 'to_st_dir' : to_st_dir, 
 			   'temperature' : temperature, 'sky' : sky,
-			   'comments' : comments }
+			   'description' : description }
 	return retval
 # end_def: read_overview_sheet
 
@@ -482,7 +482,7 @@ def run_insert_query(overview, count, table_name, mode):
 	to_st_dir = overview['to_st_dir']
 	temperature = overview['temperature']
 	sky = overview['sky']
-	comments = overview['comments']
+	description = overview['description']
 	
 	# The following is, admittedly, a quick hack
 	if mode == 'bike':
@@ -550,12 +550,12 @@ def run_insert_query(overview, count, table_name, mode):
 		overview_vals_list.append(sky)
 	#
 	
-	# comments
-	# Escape any single quotes in comments string
-	if comments != '':
-		overview_keys_list.append('comments')
-		comments_cooked = comments.replace("'", "''")
-		overview_vals_list.append("'" + comments_cooked + "'")
+	# description
+	# Escape any single quotes in description string
+	if description != '':
+		overview_keys_list.append('description')
+		description_cooked = description.replace("'", "''")
+		overview_vals_list.append("'" + description_cooked + "'")
 	#
 	
 	# DEBUG
