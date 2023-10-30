@@ -554,7 +554,8 @@ def run_insert_query(overview, count, table_name, mode):
 	# *** TBD: Escape any single quotes in comments string
 	if comments != '':
 		overview_keys_list.append('comments')
-		overview_vals_list.append("'" + comments + "'")
+		comments_cooked = comments.replace("'", "\\'")
+		overview_vals_list.append("'" + comments_cooked + "'")
 	#
 	
 	# DEBUG
