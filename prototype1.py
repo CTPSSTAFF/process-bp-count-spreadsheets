@@ -9,7 +9,7 @@ import psycopg
 import datetime
 
 # Debug toggles
-debug_read_overview = False
+debug_read_overview = True
 debug_read_counts = False
 debug_query_string = True
 
@@ -52,6 +52,9 @@ other_col = 'H'
 # Pseudo-constants for columns of interest in the 'Columns' sheet
 count_loc_desc_col = 'D'
 count_loc_id_col = 'E'
+
+# Pseudo-constant for 'temperature_not_recorded'
+temp_not_recorded = -99
 
 # List of range or row numbers with data in each of the count sheets
 data_sheet_rows = range(2, 14) # i.e., 2 to 13
@@ -105,8 +108,8 @@ columns_sheet = None	# Sheet containing lookup tables (no longer used)
 # bail_out: report fatal error and exit
 #
 def bail_out(msg):
-	print('Fatal error')
-	print(msg)
+	print('Fatal error:')
+	print('\t' + msg)
 	exit()
 #
 
@@ -131,23 +134,25 @@ def initialize(input_fn):
 # read_overview_sheet: read and parse data from 'Overview' sheet
 #
 # return value - dict containing the following keys:
-#     'bp_loc_id', 'count_id', 'date', 'from_st_name', 'from_st_dir',
-#     'to_st_name', 'to_st_dir', 'temperature', 'sky', 'comments'
+#	  'bp_loc_id', 'count_id', 'date', 'from_st_name', 'from_st_dir',
+#	  'to_st_name', 'to_st_dir', 'temperature', 'sky', 'comments'
 #
 def read_overview_sheet():
 	global overview_sheet, debug_read_overview
 	
+	# bp_loc_id: type is INTEGER
 	bp_loc_id = overview_sheet[bp_loc_id_coords].value
 	if bp_loc_id == None:
 		bail_out("count location ID missing")
 	#
-	bp_loc_id = str(bp_loc_id)
+	bp_loc_id = bp_loc_id
 	
+	# count_id: type is STRING
 	count_id = overview_sheet[count_id_coords].value
 	if count_id == None:
 		bail_out("count_id missing.")
 	#
-	count_id = str(count_id)
+	count_id = count_id
 	
 	loc_desc = overview_sheet[loc_desc_coords].value
 	if loc_desc == None:
@@ -164,7 +169,7 @@ def read_overview_sheet():
 	# As best we can tell, the 'value' in the spreadsheet is in yyyy-mm-dd hh:mm:ss format.
 	# Extract just the 'date' part.
 	# Convert to PostgreSQL date format: yyyy-mm-dd.:
-	date_cooked = datetime.datetime.strftime(date_raw, "%Y-%m-$d")
+	date_cooked = datetime.datetime.strftime(date_raw, "%Y-%m-%d")
 	
 	loc_type = overview_sheet[loc_type_coords].value
 	
@@ -187,13 +192,15 @@ def read_overview_sheet():
 		to_st_name = ''
 	to_st_dir = overview_sheet[to_st_dir_coords].value
 
+	# temperature: type is INTEGER
 	temperature = overview_sheet[temperature_coords].value
 	if temperature == None:
-		temperature = ''
+		temperature = temp_not_recorded 
 	else:
-		temperature = str(temperature)
+		temperature = temperature
 	#
 	
+	# sky: type is INTEGER - string converted to integer
 	sky = overview_sheet[sky_coords].value
 	if sky == 'Sunny':
 		sky = '1'
@@ -205,6 +212,8 @@ def read_overview_sheet():
 		sky = '4'
 	elif sky == 'No Data':
 		sky = '99'
+	elif sky == None:
+		sky = '99'
 	else:
 		sky = '99'
 	# end_if
@@ -215,8 +224,8 @@ def read_overview_sheet():
 	#
 	
 	if debug_read_overview:
-		print('bp_loc_id = ' + bp_loc_id)
-		print('count_id = ' + str(count_id))
+		print('bp_loc_id = ' + str(bp_loc_id))
+		print('count_id = ' + count_id)
 		print('date	 = ' + date_cooked)
 		print('location description = ' + loc_desc)
 		print('location type = ' + loc_type)
@@ -246,9 +255,9 @@ def read_overview_sheet():
 # Parameters:
 #	  count_sheet - workbook count sheet to be read
 #	  rows - range of rows to be read in count sheet
-#            At one point, a different number of rows was to be read from the first sheets
-#            than the others, but this has now been changed. Retaining this parameter in
-#            case things change again.
+#			 At one point, a different number of rows was to be read from the first sheets
+#			 than the others, but this has now been changed. Retaining this parameter in
+#			 case things change again.
 #
 # Return value:
 #	A 3-level data structure.
@@ -488,47 +497,59 @@ def run_insert_query(overview, count, table_name, mode):
 	overview_keys_list = []
 	overview_vals_list = []
 	
+	# Note that bp_loc_id has type INTEGER;
+    # count_id, count_date, and count_type have type STRING.
 	overview_keys_list.append('bp_loc_id')
 	overview_keys_list.append('count_id')
 	overview_keys_list.append('count_date')
 	overview_keys_list.append('count_type')
-	overview_vals_list.append(bp_loc_id)
-	overview_vals_list.append(count_id)
-	overview_vals_list.append(count_date)
-	overview_vals_list.append(count_type)
+	overview_vals_list.append(str(bp_loc_id))
+	overview_vals_list.append("'" + count_id + "'")
+	overview_vals_list.append("'" + count_date + "'")
+	overview_vals_list.append("'" + count_type + "'")
 	
-	# from_st_name and from_st_dir
+	# from_st_name and from_st_dir - these are of type STRING
 	if from_st_name != '':
 		overview_keys_list.append('from_st_name')
-		overview_vals_list.append(from_st_name)
+		overview_vals_list.append("'" + from_st_name + "'")
 	#
 	if from_st_dir != '':
 		overview_keys_list.append('from_st_dir')
-		overview_vals_list.append(from_st_dir)
+		overview_vals_list.append("'" + from_st_dir + "'")
 	#
 	
-	# to_st_name and to_st_dir
+	# to_st_name and to_st_dir - these are of type STRING
 	if to_st_name != '':
 		overview_keys_list.append('to_st_name')
-		overview_vals_list.append(to_st_name)
+		overview_vals_list.append("'" + to_st_name + "'")
 	#
 	if to_st_dir != '':
 		overview_keys_list.append('to_st_dir')
-		overview_vals_list.append(to_st_dir)
+		overview_vals_list.append("'" + to_st_dir  + "'")
 	#
 	
-	# temperature, sky, and comments
-	if temperature != '':
+	# temperature and sky: these are of type INTEGER
+	if temperature != temp_not_recorded:
 		overview_keys_list.append('temperature')
-		overview_vals_list.append(temperature)
+		overview_vals_list.append(int(temperature))
 	#
 	if sky != '':
 		overview_keys_list.append('sky')
 		overview_vals_list.append(sky)
 	#
+	
+	# comments
+	# *** TBD: Escape any single quotes in comments string
 	if comments != '':
 		overview_keys_list.append('comments')
-		overview_vals_list.append(comments)
+		overview_vals_list.append("'" + comments + "'")
+	#
+	
+	# DEBUG
+	if debug_query_string:
+		for item in overview_vals_list:
+			print(str(item))
+		#
 	#
 	
 	overview_keys_string = ', '.join(overview_keys_list)
@@ -549,18 +570,18 @@ def run_insert_query(overview, count, table_name, mode):
 	
 	# Assemble query string
 	#
-	part1 = 'INSERT INTO ' + table_name + ' ('
+	part1 = "INSERT INTO " + table_name + " ("
 	part1 += overview_keys_string
-	part1 += ', '
+	part1 += ", "
 	
 	# List of 'count' columns for which we have data for this mode
-	part2 =	 ' ' + count_keys_string + ' ) '
+	part2 =	 " " + count_keys_string + " ) "
 	
-	part3 = 'VALUES ( '
+	part3 = "VALUES ( "
 	part3 += overview_vals_string
 	
 	# List of values for 'count' coulumns for which we have data for this mode
-	part4 =	 ', ' + count_vals_string + ' );'
+	part4 =	 ", " + count_vals_string + " );"
 	query_string = part1 + part2 + part3 + part4
 	
 	if debug_query_string:
