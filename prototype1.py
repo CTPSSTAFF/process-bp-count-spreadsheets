@@ -4,7 +4,6 @@
 # Author: Ben Krepp (bkrepp@ctps.org)
 
 import openpyxl
-from openpyxl.formula import Tokenizer
 import psycopg2
 import datetime
 
