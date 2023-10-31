@@ -104,6 +104,7 @@ count_sheet_7 = None	# 12:00-2:45 AM
 count_sheet_8 = None	# 3:00-5:45 AM
 columns_sheet = None	# Sheet containing lookup tables (no longer used)
 
+
 # bail_out: report fatal error and exit
 #
 def bail_out(msg):
@@ -111,6 +112,7 @@ def bail_out(msg):
 	print('\t' + msg)
 	exit()
 #
+
 
 def spreadsheet_initialize(input_fn):
 	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
@@ -272,7 +274,9 @@ def read_overview_sheet():
 #	The top-level has the keys: 'bike', 'ped', 'child', 'jogger',
 #								'skater', 'wheelchair', and 'other'
 #  The second level: each of the topl-level dicts contains a list
-#  each of whose 96 elements are dicts.
+#  12 elements are dicts - one for each of the 15 minute chunks of time
+#  in the time period covered by the sheet.
+#
 #  Each of these dicts has two keys: 'k' and 'v'.
 #  The value of the 'k' key is the name of a database 'count' column,
 #  e.g., 'cnt_1030'; the value of the 'v' key is the corresponding
@@ -424,9 +428,24 @@ def read_count_sheet(count_sheet, rows, row_keys):
 	return retval
 # end_def: read_count sheet
 
-# read_count_sheets - read data from all count sheets;
-# a 'driver routine' that calls read_count_sheet for 
-# each of the 5 'count' sheets'
+
+# read_count_sheets - read data from all count sheets.
+# This is a 'driver routine' that calls read_count_sheet for 
+# each of the 8 individual 'count' sheets' and assembles
+# a single return value for all count data.
+#
+# Return value:
+#	A 3-level data structure.
+#	The top-level has the keys: 'bike', 'ped', 'child', 'jogger',
+#								'skater', 'wheelchair', and 'other'
+#  The second level: each of the topl-level dicts contains a list
+#  each of whose 96 elements are dicts - one for each of the
+#  15 minute chunks of time in a 24-hour day.
+#
+#  Each of these dicts has two keys: 'k' and 'v'.
+#  The value of the 'k' key is the name of a database 'count' column,
+#  e.g., 'cnt_1030'; the value of the 'v' key is the corresponding
+#  count, which may be None, i.e., NULL.
 #
 def read_count_sheets():
 	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
@@ -458,6 +477,7 @@ def read_count_sheets():
 			   'wheelchair' : wheelchair_data, 'other' : other_data }
 	return retval	
 # end_def: read_count_sheets
+
 
 # geenrate_insert query: generate text of a single INSERT INTO query for B-P count data into staging counts table;
 #					this is called once per 'mode' for any given count_id
@@ -610,6 +630,7 @@ def generate_insert_query(overview, count, table_name, mode):
 	return query_string
 # end_generate_insert_query
 
+
 def run_insert_query(query_string, db_conn, db_cursor):
 	try:
 		db_cursor.execute(query_str)
@@ -619,6 +640,7 @@ def run_insert_query(query_string, db_conn, db_cursor):
 		db_conn.commit()
 	#
 # end_def run_insert_query
+
 
 # run_insert_queries: driver routine for running INSERT QUERIES to insert B-P count data into staging counts table
 #
@@ -679,6 +701,7 @@ def db_initialize(parm, db_pwd):
 	return retval
 # end_df db_initialize
 
+
 # Test uber-driver routine:
 def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 	spreadsheet_initialize(xlsx_fn)
@@ -695,6 +718,7 @@ def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 		db_conn.close()
 	# end_if
 # end_def: test_driver
+
 
 # Test driver for only reading data from 'Overview' sheet
 def test_driver_overview(xlsx_fn):
