@@ -717,7 +717,7 @@ def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		if debug_db:
-			print('DB connection established')
+			print('DB connection established.')
 		#
 		db_cursor = db_conn.cursor()
 		if debug_db:
@@ -753,11 +753,15 @@ def test_driver_db(db_parm, db_pwd):
 	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		if debug_db:
-			print('DB connection established')
+			print('DB connection established.')
 		db_cursor = db_conn.cursor()
 		if debug_db:
 			print('DB cursor created.')
 		db_cursor.close()
 		db_conn.close()
+	else:
+		if debug_db:
+			print('Failed to establish DB connection.')
+		#
 	#
 # end_def
