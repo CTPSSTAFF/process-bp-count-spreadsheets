@@ -709,7 +709,7 @@ def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 	count_data = read_count_sheets()
 	# Here: Have read info from the spreadsheet needed to assemble and run SQL INSERT INTO query
 	# Initialize for database operations
-	db_conn = database_initialize(db_parm, db_pwd)
+	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		db_cursor = db_conn.cursor()
 		run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
@@ -735,7 +735,7 @@ def test_driver_counts(xlsx_fn):
 
 # Test driver for database connection
 def test_driver_db(db_parm, db_pwd):
-	db_conn = database_initialize(db_parm, db_pwd)
+	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		db_cursor = db_conn.cursor()
 		db_cursor.close()
