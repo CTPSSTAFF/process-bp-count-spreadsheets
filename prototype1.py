@@ -678,7 +678,7 @@ def db_initialize(parm, db_pwd):
 									password=db_pwd,
 									sslmode="disable",
 									gssencmode="disable")
-			 retval = conn
+			retval = conn
 		except psycopg2.Error as e:
 			print('Error code: ' + e.pgcode)
 			print(e.pgerror)
@@ -692,7 +692,7 @@ def db_initialize(parm, db_pwd):
 									password=db_pwd,
 									sslmode="disable",
 									gssencmode="disable")
-			 retval = conn
+			retval = conn
 		except psycopg2.Error as e:
 			print('Error code: ' + e.pgcode)
 			print(e.pgerror)
