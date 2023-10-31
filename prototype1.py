@@ -734,7 +734,7 @@ def test_driver_counts(xlsx_fn):
 # end_def: test_driver_counts
 
 # Test driver for database connection
-def test_driver_db(db_parm):
+def test_driver_db(db_parm, db_pwd):
 	db_conn = database_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		db_cursor = db_conn.cursor()
