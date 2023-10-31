@@ -8,9 +8,10 @@ import psycopg2
 import datetime
 
 # Debug toggles
-debug_read_overview = True
+debug_read_overview = False
 debug_read_counts = False
 debug_query_string = True
+debug_db = True
 
 # input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
 input_xlsx_fn = './xlsx/sample-spreadsheet3.xlsx'
@@ -636,8 +637,12 @@ def run_insert_query(query_string, db_conn, db_cursor):
 		db_cursor.execute(query_str)
 	except:
 		db_conn.rollback()
+		if debug_db:
+			print('Insert query raised exception.')
 	else:
 		db_conn.commit()
+		if debug_db:
+		   print('Insert query committed.') 
 	#
 # end_def run_insert_query
 
@@ -711,11 +716,21 @@ def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 	# Initialize for database operations
 	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
+		if debug_db:
+			print('DB connection established')
+		#
 		db_cursor = db_conn.cursor()
+		if debug_db:
+			print('DB cursor created.')
+		#
 		run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
 		# Shutdown database connection
 		db_cursor.close()
 		db_conn.close()
+	else:
+		if debug_db:
+			print('Failed to establish DB connection.')
+		#
 	# end_if
 # end_def: test_driver
 
@@ -737,7 +752,11 @@ def test_driver_counts(xlsx_fn):
 def test_driver_db(db_parm, db_pwd):
 	db_conn = db_initialize(db_parm, db_pwd)
 	if db_conn != None:
+		if debug_db:
+			print('DB connection established')
 		db_cursor = db_conn.cursor()
+		if debug_db:
+			print('DB cursor created.')
 		db_cursor.close()
 		db_conn.close()
 	#
