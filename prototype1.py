@@ -634,11 +634,12 @@ def generate_insert_query(overview, count, table_name, mode):
 
 def run_insert_query(query_string, db_conn, db_cursor):
 	try:
-		db_cursor.execute(query_str)
-	except:
+		db_cursor.execute(query_string)
+	except psycopg2.Error as e:
 		db_conn.rollback()
-		if debug_db:
-			print('Insert query raised exception.')
+		print('Insert query raised exception.')
+		print('Error code: ' + e.pgcode)
+		print(e.pgerror)
 	else:
 		db_conn.commit()
 		if debug_db:
@@ -679,7 +680,7 @@ def db_initialize(parm, db_pwd):
 			conn = psycopg2.connect(dbname="mpodata", 
 									host="appsrvr3.ad.ctps.org",
 									port=5433,
-									user="postgres", 
+									user="mpodata", 
 									password=db_pwd,
 									sslmode="disable",
 									gssencmode="disable")
