@@ -644,7 +644,7 @@ def run_insert_queries(overview, counts, table_name, db_conn, db_cursor):
 # end_def run_insert_queries
 
 
-def db_initialize(parm):
+def db_initialize(parm, db_pwd):
 	# The last two parameters to the 'connect' call, per:
 	# https://stackoverflow.com/questions/59190010/psycopg2-operationalerror-fatal-unsupported-frontend-protocol-1234-5679-serve
 	#
@@ -654,7 +654,7 @@ def db_initialize(parm):
 									host="appsrvr3.ad.ctps.org",
 									port=5433,
 									user="postgres", 
-									password="ZeusDBMS",
+									password=db_pwd,
 									sslmode="disable",
 									gssencmode="disable")
 			 retval = conn
@@ -668,7 +668,7 @@ def db_initialize(parm):
 									host="localhost",
 									port=5432,
 									user="postgres", 
-									password="",
+									password=db_pwd,
 									sslmode="disable",
 									gssencmode="disable")
 			 retval = conn
@@ -681,13 +681,13 @@ def db_initialize(parm):
 # end_df db_initialize
 
 # Test uber-driver routine:
-def test_driver(xlsx_fn, table_name, db_parm):
+def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 	spreadsheet_initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have read info from the spreadsheet needed to assemble and run SQL INSERT INTO query
 	# Initialize for database operations
-	db_conn = database_initialize(db_parm)
+	db_conn = database_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		db_cursor = db_conn.cursor()
 		run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
@@ -712,7 +712,7 @@ def test_driver_counts(xlsx_fn):
 
 # Test driver for database connection
 def test_driver_db(db_parm):
-	db_conn = database_initialize(db_parm)
+	db_conn = database_initialize(db_parm, db_pwd)
 	if db_conn != None:
 		db_cursor = db_conn.cursor()
 		db_cursor.close()
