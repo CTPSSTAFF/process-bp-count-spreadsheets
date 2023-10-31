@@ -1,8 +1,8 @@
--- Table: mpodata.bp_counts_staging
+-- Table: mpodata.ctps_bp_counts_staging
 
--- DROP TABLE IF EXISTS mpodata.bp_counts_staging;
+-- DROP TABLE IF EXISTS mpodata.ctps_bp_counts_staging;
 
-CREATE TABLE IF NOT EXISTS mpodata.bp_counts_staging
+CREATE TABLE IF NOT EXISTS mpodata.ctps_bp_counts_staging
 (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     bp_loc_id integer,
