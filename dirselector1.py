@@ -88,7 +88,7 @@ class HelloFrame(wx.Frame):
 	def OnProcess(self, event):
 		"""Say hello to the user."""
 		# Get selected folder from directory selection dialog
-		dialog = wx.DirDialog(self, 'Select folder', '', wx.DD_DEFAULT_STYLE)
+		dialog = wx.DirDialog(self, 'Select folder', '', wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
 		path = ''
 		if dialog.ShowModal() == wx.ID_OK:
 			path = dialog.GetPath()
