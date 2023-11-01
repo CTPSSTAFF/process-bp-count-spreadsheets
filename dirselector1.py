@@ -17,19 +17,10 @@ class HelloFrame(wx.Frame):
 		# create a panel in the frame
 		pnl = wx.Panel(self)
 		
-		# ADDITION: Create directory selection dialog
-		dialog = wx.DirDialog(self, 'Select folder', '', wx.DD_DEFAULT_STYLE)
-		path = ''
-		if dialog.ShowModal() == wx.ID_OK:
-			path = dialog.GetPath()
-			# print('Selected path = ' + path)
-		#		 
-
-		# put some text of selected path with a larger bold font on it
-		# st = wx.StaticText(pnl, label="Hello World!")
-		st = wx.StaticText(pnl, label='Selected folder is:\n' + path)
+		# put some text with a larger bold font on it
+		st = wx.StaticText(pnl, label='Select File->Process to select folder to process.')
 		font = st.GetFont()
-		# font.PointSize += 10
+		font.PointSize += 5
 		font = font.Bold()
 		st.SetFont(font)
 
@@ -43,7 +34,7 @@ class HelloFrame(wx.Frame):
 
 		# and a status bar
 		self.CreateStatusBar()
-		self.SetStatusText("Welcome to wxPython!")
+		self.SetStatusText("Welcome to bike-ped count processor.")
 		
 
 
@@ -55,11 +46,11 @@ class HelloFrame(wx.Frame):
 		when the menu item is selected.
 		"""
 
-		# Make a file menu with Hello and Exit items
+		# Make a file menu with Process and Exit items
 		fileMenu = wx.Menu()
 		# The "\t..." syntax defines an accelerator key that also triggers
 		# the same event
-		helloItem = fileMenu.Append(-1, "&Hello...\tCtrl-H",
+		processItem = fileMenu.Append(-1, "&Process...\tCtrl-P",
 				"Help string shown in status bar for this menu item")
 		fileMenu.AppendSeparator()
 		# When using a stock ID we don't need to specify the menu item's
@@ -84,7 +75,7 @@ class HelloFrame(wx.Frame):
 		# Finally, associate a handler function with the EVT_MENU event for
 		# each of the menu items. That means that when that menu item is
 		# activated then the associated handler function will be called.
-		self.Bind(wx.EVT_MENU, self.OnHello, helloItem)
+		self.Bind(wx.EVT_MENU, self.OnProcess, processItem)
 		self.Bind(wx.EVT_MENU, self.OnExit,	 exitItem)
 		self.Bind(wx.EVT_MENU, self.OnAbout, aboutItem)
 
@@ -94,15 +85,23 @@ class HelloFrame(wx.Frame):
 		self.Close(True)
 
 
-	def OnHello(self, event):
+	def OnProcess(self, event):
 		"""Say hello to the user."""
-		wx.MessageBox("Hello again from wxPython")
+		# Get selected folder from directory selection dialog
+		dialog = wx.DirDialog(self, 'Select folder', '', wx.DD_DEFAULT_STYLE)
+		path = ''
+		if dialog.ShowModal() == wx.ID_OK:
+			path = dialog.GetPath()
+			wx.MessageBox('Processing spreadsheets in:\n' + path)
+			# Here: Call processing logic
+		else:
+			wx.MessageBox("No folder selected.")
+		#
 		
 
 	def OnAbout(self, event):
 		"""Display an About Dialog"""
-		wx.MessageBox("This is a wxPython Hello World sample",
-					  "About Hello World 2",
+		wx.MessageBox("Select folder containing spreadsheets with bike-ped counts to load.", "",
 					  wx.OK|wx.ICON_INFORMATION)
 
 
