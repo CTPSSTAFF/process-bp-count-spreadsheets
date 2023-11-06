@@ -6,12 +6,14 @@
 import openpyxl
 import psycopg2
 import datetime
+import glob
 
 # Debug toggles
 debug_read_overview = False
 debug_read_counts = False
 debug_query_string = True
 debug_db = True
+debug_driver = True
 
 # input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
 input_xlsx_fn = './xlsx/sample-spreadsheet3.xlsx'
@@ -707,9 +709,55 @@ def db_initialize(parm, db_pwd):
 	return retval
 # end_df db_initialize
 
+#
+# Various 'test drivers' to excercise specific functional areas in isolation follow:
+# 1. to read data in the 'Overview' sheet (tabs)
+# 2. to read data from the 'counts' sheets (tabs)
+# 3. to exercise establishing the database connection
+#
+# Test driver for only reading data from 'Overview' sheet
+def test_driver_overview(xlsx_fn):
+	spreadsheet_initialize(xlsx_fn)
+	overview_data = read_overview_sheet()
+# end_def
 
-# Test uber-driver routine:
-def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
+# Test driver for only reading count data from spreadsheet
+def test_driver_counts(xlsx_fn):
+	spreadsheet_initialize(xlsx_fn)
+	count_data = read_count_sheets()
+	return count_data
+# end_def: test_driver_counts
+
+# Test driver for establishing database connection
+def test_driver_db(db_parm, db_pwd):
+	db_conn = db_initialize(db_parm, db_pwd)
+	if db_conn != None:
+		if debug_db:
+			print('DB connection established.')
+		db_cursor = db_conn.cursor()
+		if debug_db:
+			print('DB cursor created.')
+		db_cursor.close()
+		db_conn.close()
+	else:
+		if debug_db:
+			print('Failed to establish DB connection.')
+		#
+	#
+# end_def
+
+
+# process_xlsx_file: driver rouine for processing a single XLSX file
+#
+# parameters:
+# xlsx_fn - full path to a XLSX file containing B-P count data to process_bp_counts
+# table_name - name of table in database to which to write data.
+#			   Eventually, it should be possible to remove this.
+# db_parm - temp, to allow dev/debug at work and at home;
+#			set to 'office' for in-office processing.
+#			To be removed.
+# db_pwd -	database password
+def process_xlsx_file(xlsx_fn, table_name, db_parm, db_pwd):
 	spreadsheet_initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
@@ -733,36 +781,27 @@ def test_driver(xlsx_fn, table_name, db_parm, db_pwd):
 			print('Failed to establish DB connection.')
 		#
 	# end_if
-# end_def: test_driver
+# end_def: process_xlsx_file
 
-
-# Test driver for only reading data from 'Overview' sheet
-def test_driver_overview(xlsx_fn):
-	spreadsheet_initialize(xlsx_fn)
-	overview_data = read_overview_sheet()
-# end_def
-
-# Test driver for only reading count data from spreadsheet
-def test_driver_counts(xlsx_fn):
-	spreadsheet_initialize(xlsx_fn)
-	count_data = read_count_sheets()
-	return count_data
-# end_def: test_driver_counts
-
-# Test driver for database connection
-def test_driver_db(db_parm, db_pwd):
-	db_conn = db_initialize(db_parm, db_pwd)
-	if db_conn != None:
-		if debug_db:
-			print('DB connection established.')
-		db_cursor = db_conn.cursor()
-		if debug_db:
-			print('DB cursor created.')
-		db_cursor.close()
-		db_conn.close()
-	else:
-		if debug_db:
-			print('Failed to establish DB connection.')
+# process_folder: driver routine called from the GUI to process all XLSX files in one directory
+# 
+# parameters:
+# folder_path - full path to folder containing one or more XLSX files containing
+#				B-P count data to be loaded into the B-P count database
+# db_parm - temp, to allow dev/debug at work and at home;
+#			set to 'office' for in-office processing.
+# db_pwd -	database password
+#
+# *** TBD: Connection to DB need not be (re-)established for each XLSX file
+def process_folder(folder_path, db_parm, db_pwd):
+	pass
+	table_name = 'mpodata.cpts_bp_counts_staging'
+	pathname = folder_path + '/*.xlsx'
+	file_list = glob.glob(pathname)
+	for file in file_list:
+		if debug_driver:
+			print('Processing ' + file)
 		#
+		# process_xlsx_file(file, table_name, db_parm, db_pwd)
 	#
-# end_def
+# end_def: process_folder
