@@ -1,20 +1,28 @@
-from tkinter import filedialog
+import tkinter as tk
 from tkinter import *
+from tkinter import filedialog as fd
+
 
 def browse_button():
+	global dir_name, label1
 	# Allow user to select a directory and store it in global var
 	# called folder_path
-	filename = filedialog.askdirectory()
-	folder_path.set(filename)
-	print(filename)
-
+	temp = fd.askdirectory()
+	dir_name.set(temp)
+	print('dirname = ' + temp)
+	label1.text = temp
+#
 
 root = Tk()
 
-folder_path = StringVar()
-lbl1 = Label(master=root,textvariable=folder_path)
-lbl1.grid(row=2, column=1)
-button2 = Button(text="Browse", command=browse_button)
-button2.grid(row=1, column=1)
+button1 = tk.Button(text="Browse for folder", command=browse_button)
+button1.pack(fill=tk.X)
+
+dir_name = tk.StringVar()
+label1 = tk.Label(master=root,textvariable=dir_name)
+label1.pack(fill=tk.X)
+
+button2 = tk.Button(text="Enter database password:")
+button2.pack(fill=tk.X)
 
 mainloop()
