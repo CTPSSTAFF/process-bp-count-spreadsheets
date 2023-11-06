@@ -2,8 +2,6 @@
 import tkinter as tk
 from tkinter import filedialog as fd
 
-dir_name = ''
-pwd = ''
 
 def browse_button():
 	global dir_name
@@ -48,18 +46,20 @@ def do_quit():
 ##################################################################################
 # import tkinter as tk
 
+dir_text = None
+
 def browse_button():
-	global dir_name
+	global dir_name, dir_text
 	# Allow user to select a directory and store it in global var
 	# called folder_path
-	temp = fd.askdirectory()
-	dir_name.set(temp)
-	print('dirname = ' + temp)
-	# dirLabel(text=temp)
-# 
+	dir_text = fd.askdirectory()
+	dir_name.set(dir_text)
+	print('dir_text = ' + dir_text)
+#
 
 def process_spreadsheets():
-	print("Selected folder: " + 'TBD')
+	global dir_text, pwdEntry
+	print("Selected folder: " + dir_text)
 	print("DB paassword: %s\n" % (pwdEntry.get()))
 #
 
