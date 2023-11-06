@@ -2,50 +2,6 @@
 import tkinter as tk
 from tkinter import filedialog as fd
 
-
-def browse_button():
-	global dir_name
-	# Allow user to select a directory and store it in global var
-	# called folder_path
-	dir_name = fd.askdirectory()
-	print('dirname = ' + dir_name)
-	dirText = tk.Label(master, text=dr_name)
-	dirText.grid(row=1, column=2)
-#
-
-def process_spreadsheets():
-	global dir_name, pwd
-	print('dir_name = ' + dir_name)
-	print('password = ' + pwd)
-#
-
-def do_quit():
-	print("That's all folks!")
-#
-
-# master = tk.Tk()
-
-# browseButton = tk.Button(master, text="Browse for folder", command=browse_button)
-# browseButton.grid(row=1, column=1)
-
-# pwdPromptLabel = tk.Label(master, text="Database password:")
-# pwdPromptLabel.grid(row=2, column=1)
-
-# pwdEntry = tk.Entry(master)
-# pwdEntry.grid(row=2, column=2)
-
-# runButton = tk.Button("Run", command=process_spreadsheets)
-# runButton.grid(row=3, column=1)
-
-# quitButton = tk.Button("Quit", command=do_quit)
-# quitButton.grid(row=3, column=2)
-
-# master.mainloop()
-# tk.mainloop()
-
-##################################################################################
-# import tkinter as tk
-
 dir_text = None
 
 def browse_button():
