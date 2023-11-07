@@ -23,6 +23,9 @@ def process_spreadsheets():
 
 
 master = tk.Tk()
+master.title("Load bike-ped count spreadsheets")
+# Launch GUI: dimension = 500x100, offset from ULH = 200,200
+master.geometry("500x100+200+200")
 browseButton = tk.Button(master, 
 						 text="Browse for folder", 
 						 command=browse_button).grid(row=1, column=0)
@@ -38,13 +41,13 @@ pwdEntry.grid(row=2, column=1)
 tk.Button(master, 
 		  text='Run', command=process_spreadsheets).grid(row=3, 
 														 column=0, 
-														 sticky=tk.W, 
+														 sticky=tk.W+tk.E+tk.N+tk.S, 
 														 pady=4)
 tk.Button(master, 
 		  text='Quit', 
 		  command=master.quit).grid(row=3, 
 									column=1, 
-									sticky=tk.W, 
+									sticky=tk.W+tk.E+tk.N+tk.S, 
 									pady=4)
 
 
