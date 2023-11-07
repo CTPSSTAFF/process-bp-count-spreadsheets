@@ -1,4 +1,6 @@
-# GUI prototype using Tk 
+# Tk-based GUI for bike-ped traffic count input app.
+# Author: Ben Krepp (bkrepp@ctps.org)
+ 
 import tkinter as tk
 from tkinter import filedialog as fd
 
