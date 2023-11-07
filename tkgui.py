@@ -17,8 +17,22 @@ def browse_button():
 
 def process_spreadsheets():
 	global dir_text, pwdEntry
-	print("Selected folder: " + dir_text)
-	print("DB paassword: %s\n" % (pwdEntry.get()))
+	error_text = ''
+	pwd = pwdEntry.get()
+	if pwd == None or pwd == '':
+		error_text += 'No password supplied. '
+	#
+	if dir_text == None or dir_text == '':
+		error_text += 'No input folder specified.'
+	#
+	if error_text != '':
+		print(error_text)
+		return
+	else:
+		print("Selected folder: " + dir_text)
+		print("DB paassword: %s\n" % pwd)
+		# HERE: Call processing driver routine
+	# end_if
 #
 
 
@@ -49,6 +63,5 @@ tk.Button(master,
 									column=1, 
 									sticky=tk.W+tk.E+tk.N+tk.S, 
 									pady=4)
-
 
 tk.mainloop()
