@@ -1,5 +1,5 @@
-# Prototype #1 of utility to parse spreadsheet of B-P count data,
-# and write it to a table in a PostgreSQL database.
+# Python module to parse spreadsheet of bike-ped traffic count data,
+# submitted in a standard XLSX format file, and write it to a table in a PostgreSQL database.
 #
 # Author: Ben Krepp (bkrepp@ctps.org)
 
