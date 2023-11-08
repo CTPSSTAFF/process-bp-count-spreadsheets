@@ -3,6 +3,7 @@
  
 import tkinter as tk
 from tkinter import filedialog as fd
+from process_bp_counts import process_folder
 
 dir_text = None
 
@@ -19,6 +20,7 @@ def process_spreadsheets():
 	global dir_text, pwdEntry
 	error_text = ''
 	pwd = pwdEntry.get()
+
 	if pwd == None or pwd == '':
 		error_text += 'No password supplied. '
 	#
@@ -29,9 +31,16 @@ def process_spreadsheets():
 		print(error_text)
 		return
 	else:
+		# Fill pwdEntry GUI text box with *'s during processing
+		pwd_len = len(pwd)
+		fill = '*'*len(pwd)
+		pwdEntry.delete(0, pwd_len)
+		pwdEntry.insert(0, fill)
 		print("Selected folder: " + dir_text)
 		print("DB paassword: %s\n" % pwd)
-		# HERE: Call processing driver routine
+		# Call routine to process all XLSXs in the specified folder
+		process_folder(dir_text, 'office', pwd)
+		print("Returned from call to 'process_folder'.")
 	# end_if
 #
 
