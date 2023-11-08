@@ -707,7 +707,11 @@ def db_initialize(parm, db_pwd):
 			retval = None
 	# end_if
 	return retval
-# end_df db_initialize
+# end_def db_initialize
+
+def db_shutdown(db_conn):
+	db_conn.close()
+# end_def
 
 #
 # Various 'test drivers' to excercise specific functional areas in isolation follow:
@@ -753,34 +757,22 @@ def test_driver_db(db_parm, db_pwd):
 # xlsx_fn - full path to a XLSX file containing B-P count data to process_bp_counts
 # table_name - name of table in database to which to write data.
 #			   Eventually, it should be possible to remove this.
-# db_parm - temp, to allow dev/debug at work and at home;
-#			set to 'office' for in-office processing.
-#			To be removed.
-# db_pwd -	database password
-def process_xlsx_file(xlsx_fn, table_name, db_parm, db_pwd):
+# db_conn - psycopg database connection object
+#
+def process_xlsx_file(xlsx_fn, table_name, db_conn):
 	spreadsheet_initialize(xlsx_fn)
 	overview_data = read_overview_sheet()
 	count_data = read_count_sheets()
 	# Here: Have read info from the spreadsheet needed to assemble and run SQL INSERT INTO query
 	# Initialize for database operations
-	db_conn = db_initialize(db_parm, db_pwd)
-	if db_conn != None:
-		if debug_db:
-			print('DB connection established.')
-		#
-		db_cursor = db_conn.cursor()
-		if debug_db:
-			print('DB cursor created.')
-		#
-		run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
-		# Shutdown database connection
-		db_cursor.close()
-		db_conn.close()
-	else:
-		if debug_db:
-			print('Failed to establish DB connection.')
-		#
-	# end_if
+	db_cursor = db_conn.cursor()
+	if debug_db:
+		print('DB cursor created.')
+	#
+	run_insert_queries(overview_data, count_data, table_name, db_conn, db_cursor)
+	# Close database cursor
+	db_cursor.close()
+	return
 # end_def: process_xlsx_file
 
 # process_folder: driver routine called from the GUI to process all XLSX files in one directory
@@ -788,12 +780,11 @@ def process_xlsx_file(xlsx_fn, table_name, db_parm, db_pwd):
 # parameters:
 # folder_path - full path to folder containing one or more XLSX files containing
 #				B-P count data to be loaded into the B-P count database
-# db_parm - temp, to allow dev/debug at work and at home;
-#			set to 'office' for in-office processing.
-# db_pwd -	database password
+# db_conn - psycopg2 database connection object
 #
-# *** TBD: Connection to DB need not be (re-)established for each XLSX file
-def process_folder(folder_path, db_parm, db_pwd):
+# requires: connection to database has been successfully established
+#
+def process_folder(folder_path, db_conn):
 	table_name = 'mpodata.ctps_bp_counts_staging'
 	pathname = folder_path + '/*.xlsx'
 	file_list = glob.glob(pathname)
@@ -801,6 +792,6 @@ def process_folder(folder_path, db_parm, db_pwd):
 		if debug_driver:
 			print('Processing ' + file)
 		#
-		process_xlsx_file(file, table_name, db_parm, db_pwd)
+		process_xlsx_file(file, table_name, db_conn)
 	#
 # end_def: process_folder

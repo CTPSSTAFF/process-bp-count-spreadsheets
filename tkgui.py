@@ -3,7 +3,9 @@
  
 import tkinter as tk
 from tkinter import filedialog as fd
-from process_bp_counts import process_folder
+from process_bp_counts import db_initialize, db_shutdown, process_folder
+
+debug = True
 
 dir_text = None
 
@@ -19,9 +21,9 @@ def browse_button():
 def process_spreadsheets():
 	global dir_text, pwdEntry
 	error_text = ''
-	pwd = pwdEntry.get()
+	db_pwd = pwdEntry.get()
 
-	if pwd == None or pwd == '':
+	if db_pwd == None or db_pwd == '':
 		error_text += 'No password supplied. '
 	#
 	if dir_text == None or dir_text == '':
@@ -32,15 +34,26 @@ def process_spreadsheets():
 		return
 	else:
 		# Fill pwdEntry GUI text box with *'s during processing
-		pwd_len = len(pwd)
-		fill = '*'*len(pwd)
+		pwd_len = len(db_pwd)
+		fill = '*'*len(db_pwd)
 		pwdEntry.delete(0, pwd_len)
 		pwdEntry.insert(0, fill)
-		print("Selected folder: " + dir_text)
-		print("DB paassword: %s\n" % pwd)
-		# Call routine to process all XLSXs in the specified folder
-		process_folder(dir_text, 'office', pwd)
-		print("Returned from call to 'process_folder'.")
+		if debug:
+			print("Selected folder: " + dir_text)
+			print("DB paassword: %s\n" % db_pwd)
+		# end_if
+		# 
+		# Open DB connection
+		db_conn = db_initialize('office', db_pwd)
+		if db_conn != None:
+			# Call routine to process all XLSXs in the specified folder
+			process_folder(dir_text, db_conn)
+			print("Returned from call to 'process_folder'.")
+			db_shutdown(db_conn)
+		else:
+			print("Failed to establish connection to database.")
+		# end_if
+		return
 	# end_if
 #
 
