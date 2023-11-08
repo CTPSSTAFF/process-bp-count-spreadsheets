@@ -795,13 +795,13 @@ def process_xlsx_file(xlsx_fn, table_name, db_parm, db_pwd):
 # *** TBD: Connection to DB need not be (re-)established for each XLSX file
 def process_folder(folder_path, db_parm, db_pwd):
 	pass
-	table_name = 'mpodata.cpts_bp_counts_staging'
+	table_name = 'mpodata.ctps_bp_counts_staging'
 	pathname = folder_path + '/*.xlsx'
 	file_list = glob.glob(pathname)
 	for file in file_list:
 		if debug_driver:
 			print('Processing ' + file)
 		#
-		# process_xlsx_file(file, table_name, db_parm, db_pwd)
+		process_xlsx_file(file, table_name, db_parm, db_pwd)
 	#
 # end_def: process_folder
