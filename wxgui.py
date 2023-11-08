@@ -79,6 +79,12 @@ class Frame(wx.Frame):
 		self.m_text.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL))
 		self.m_text.SetSize(self.m_text.GetBestSize())
 		box.Add(self.m_text, 0, wx.ALL, 10)	 
+		box.AddSpacer(20)
+		
+        # *** TBD here: Add button to popup wxTextEntryDialog to collect DB pwd
+		
+		box.Add(self.textCtrl, 0, wx.CENTER)
+		box.AddSpacer(20)
 
 		m_run = wx.Button(panel, wx.ID_ANY, "Load bike/ped counts")
 		m_run.Bind(wx.EVT_BUTTON, self.OnRun)
