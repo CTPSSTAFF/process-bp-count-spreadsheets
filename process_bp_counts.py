@@ -794,7 +794,6 @@ def process_xlsx_file(xlsx_fn, table_name, db_parm, db_pwd):
 #
 # *** TBD: Connection to DB need not be (re-)established for each XLSX file
 def process_folder(folder_path, db_parm, db_pwd):
-	pass
 	table_name = 'mpodata.ctps_bp_counts_staging'
 	pathname = folder_path + '/*.xlsx'
 	file_list = glob.glob(pathname)
