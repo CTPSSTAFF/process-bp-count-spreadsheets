@@ -1,4 +1,4 @@
-# wxPython-based GUI for GUI for bike-ped traffic count input app.
+# wxPython-based GUI for bike-ped traffic count input app.
 # Author: Ben Krepp (bkrepp@ctps.org)
 
 import wx, wx.html, sys
@@ -81,11 +81,12 @@ class Frame(wx.Frame):
 		box.Add(self.m_text, 0, wx.ALL, 10)	 
 		box.AddSpacer(20)
 		
-        # *** TBD here: Add button to popup wxTextEntryDialog to collect DB pwd
-		
-		box.Add(self.textCtrl, 0, wx.CENTER)
+		# Button to popup wx.TextEntryDialog to collect DB pwd
+		m_db_pwd = wx.Button(panel, wx.ID_ANY, "Enter database password")
+		m_db_pwd.Bind(wx.EVT_BUTTON, self.OnGetDbPwd)
+		box.Add(m_db_pwd, 0, wx.CENTER)
 		box.AddSpacer(20)
-
+		
 		m_run = wx.Button(panel, wx.ID_ANY, "Load bike/ped counts")
 		m_run.Bind(wx.EVT_BUTTON, self.OnRun)
 		box.Add(m_run, 0, wx.CENTER)		
@@ -104,17 +105,29 @@ class Frame(wx.Frame):
 			self.Destroy()
 	# end_def OnClose()
 
+	def OnGetDbPwd(self, event):
+		frame = wx.Frame(None, -1, 'win.py')
+		frame.SetSize(0,0,200,50)
+		dlg = wx.TextEntryDialog(None, 'Please enter database password below:',
+             'Database is password protected', '',
+             style = wx.TextEntryDialogStyle|wx.TE_PASSWORD)
+		dlg.ShowModal()
+		self.db_pwd = str(dlg.GetValue())
+		dlg.Destroy()
+		frame.Destroy()
+	# end_def OnGetDbPwd()	 
+	
 	def OnSelectInputDir(self, event):
 		frame = wx.Frame(None, -1, 'win.py')
 		frame.SetSize(0,0,200,50)
-		dlg = wx.DirDialog(None, "Specify input folder", "",
+		dlg = wx.DirDialog(None, "pecify input folder", "",
 						   wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
 		dlg.ShowModal()
 		self.inputDirName = dlg.GetPath()
 		self.m_text.SetLabel("Selected input folder: " + self.inputDirName)
 		dlg.Destroy()
 		frame.Destroy()
-	# end_def OnSelectInputDir()   
+	# end_def OnSelectInputDir()	
 	
 	def OnRun(self, event):
 		dlg = wx.MessageDialog(self, 
