@@ -48,7 +48,7 @@ class Frame(wx.Frame):
 	db_pwd = '' 
 	
 	def __init__(self, title):
-		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(800,450),
+		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(600,300),
 						  style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
 		self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -109,8 +109,8 @@ class Frame(wx.Frame):
 		frame = wx.Frame(None, -1, 'win.py')
 		frame.SetSize(0,0,200,50)
 		dlg = wx.TextEntryDialog(None, 'Please enter database password below:',
-             'Database is password protected', '',
-             style = wx.TextEntryDialogStyle|wx.TE_PASSWORD)
+			 'Database is password protected', '',
+			 style = wx.TextEntryDialogStyle|wx.TE_PASSWORD)
 		dlg.ShowModal()
 		self.db_pwd = str(dlg.GetValue())
 		dlg.Destroy()
@@ -130,6 +130,21 @@ class Frame(wx.Frame):
 	# end_def OnSelectInputDir()	
 	
 	def OnRun(self, event):
+		msg = ''
+		if self.inputDirName == '':
+			msg += 'Input folder name not specified. '
+		#
+		if self.db_pwd == '':
+			msg += 'Database password not supplied.'
+		#
+		if len(msg) > 0:
+			msg = 'Error(s): ' + msg
+			dlg = wx.MessageDialog(self, msg, 'Error(s)', wx.OK)
+			result = dlg.ShowModal()
+			dlg.Destroy()
+			return
+		#
+		# Here: We have folder name and DB password.
 		dlg = wx.MessageDialog(self, 
 			"Confirm that you want to run the bike-ped count loading tool.",
 			"Confirm: OK/Cancel", wx.OK|wx.CANCEL|wx.ICON_QUESTION)
@@ -151,7 +166,7 @@ class Frame(wx.Frame):
 			caption = "Bicycle/Pedestrian Traffic Count Loader"
 			dlg = wx.MessageDialog(None, message, caption, wx.OK | wx.ICON_INFORMATION)
 			dlg.ShowModal()
-			dlg.Destroy()			
+			dlg.Destroy()
 		else:
 			pass
 			# self.Destroy()
