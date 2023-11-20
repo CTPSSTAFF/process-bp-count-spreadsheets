@@ -152,7 +152,7 @@ class Frame(wx.Frame):
 		dlg.Destroy()
 		if result == wx.ID_OK:
 			# 1. Establish database connection
-			db_conn = db_initialize('office', self.db_pwd)
+			db_conn = db_initialize(self.db_pwd)
 			if db_conn != None:
 				# 2. Call routine to process XLSX files in specified folder
 				process_folder(self.inputDirName, db_conn)

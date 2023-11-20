@@ -673,38 +673,23 @@ def run_insert_queries(overview, counts, table_name, db_conn, db_cursor):
 # end_def run_insert_queries
 
 
-def db_initialize(parm, db_pwd):
+def db_initialize(db_pwd):
 	# The last two parameters to the 'connect' call, per:
 	# https://stackoverflow.com/questions/59190010/psycopg2-operationalerror-fatal-unsupported-frontend-protocol-1234-5679-serve
 	#
-	if parm == 'office':
-		try:
-			conn = psycopg2.connect(dbname="mpodata", 
-									host="appsrvr3.ad.ctps.org",
-									port=5433,
-									user="mpodata", 
-									password=db_pwd,
-									sslmode="disable",
-									gssencmode="disable")
-			retval = conn
-		except psycopg2.Error as e:
-			print('Error code: ' + e.pgcode)
-			print(e.pgerror)
-			retval = None
-	else:
-		try:
-			conn = psycopg2.connect(dbname="postgres", 
-									host="localhost",
-									port=5432,
-									user="postgres", 
-									password=db_pwd,
-									sslmode="disable",
-									gssencmode="disable")
-			retval = conn
-		except psycopg2.Error as e:
-			print('Error code: ' + e.pgcode)
-			print(e.pgerror)
-			retval = None
+	try:
+		conn = psycopg2.connect(dbname="postgres", 
+								host="localhost",
+								port=5432,
+								user="postgres", 
+								password=db_pwd,
+								sslmode="disable",
+								gssencmode="disable")
+		retval = conn
+	except psycopg2.Error as e:
+		print('Error code: ' + e.pgcode)
+		print(e.pgerror)
+		retval = None
 	# end_if
 	return retval
 # end_def db_initialize
@@ -733,8 +718,8 @@ def test_driver_counts(xlsx_fn):
 # end_def: test_driver_counts
 
 # Test driver for establishing database connection
-def test_driver_db(db_parm, db_pwd):
-	db_conn = db_initialize(db_parm, db_pwd)
+def test_driver_db(db_pwd):
+	db_conn = db_initialize(db_pwd)
 	if db_conn != None:
 		if debug_db:
 			print('DB connection established.')

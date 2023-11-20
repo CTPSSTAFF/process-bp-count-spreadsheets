@@ -44,7 +44,7 @@ def process_spreadsheets():
 		# end_if
 		# 
 		# Open DB connection
-		db_conn = db_initialize('office', db_pwd)
+		db_conn = db_initialize(db_pwd)
 		if db_conn != None:
 			# Call routine to process all XLSXs in the specified folder
 			process_folder(dir_text, db_conn)
