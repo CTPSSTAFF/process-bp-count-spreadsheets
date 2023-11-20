@@ -8,6 +8,7 @@ from process_bp_counts import db_initialize, db_shutdown, process_folder
 debug = True
 
 dir_text = None
+table_text = None
 
 def browse_button():
 	global dir_name, dir_text
@@ -70,18 +71,24 @@ dir_name = tk.StringVar()
 dirLabel = tk.Label(master,textvariable=dir_name).grid(row=1, column=1)
 
 pwdLabel = tk.Label(master, 
-					text="Database password").grid(row=2)
+					text="Database passwor:").grid(row=2)
 pwdEntry = tk.Entry(master)
 pwdEntry.grid(row=2, column=1)
 
+tblLabel = tk.Label(master,
+					text="Database table:").grid(row=3)
+tblEntry = tk.Entry(master)
+tblEntry.grid(row=3, column=1)
+					
+
 tk.Button(master, 
-		  text='Run', command=process_spreadsheets).grid(row=3, 
+		  text='Run', command=process_spreadsheets).grid(row=4, 
 														 column=0, 
 														 sticky=tk.W+tk.E+tk.N+tk.S, 
 														 pady=4)
 tk.Button(master, 
 		  text='Quit', 
-		  command=master.quit).grid(row=3, 
+		  command=master.quit).grid(row=4, 
 									column=1, 
 									sticky=tk.W+tk.E+tk.N+tk.S, 
 									pady=4)
