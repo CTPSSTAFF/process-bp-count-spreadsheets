@@ -44,11 +44,13 @@ class AboutBox(wx.Dialog):
 class Frame(wx.Frame):
 	# Name of directory containing XLSX files to be read
 	inputDirName = ''
+	# DB table name
+	dbTableName = ''
 	# DB password
 	db_pwd = '' 
 	
 	def __init__(self, title):
-		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(600,300),
+		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(600,320),
 						  style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
 		self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -69,16 +71,27 @@ class Frame(wx.Frame):
 		box = wx.BoxSizer(wx.VERTICAL)
 		box.AddSpacer(20)
 			  
-		m_select_input_dir = wx.Button(panel, wx.ID_ANY, "Specify input folder")
+		m_select_input_dir = wx.Button(panel, wx.ID_ANY, "Select input folder")
 		m_select_input_dir.Bind(wx.EVT_BUTTON, self.OnSelectInputDir)
 		box.Add(m_select_input_dir, 0, wx.CENTER)
 		box.AddSpacer(20)		
 		
 		# Placeholder for name of selected input folder; it is populated in OnSelectInputDir(). 
-		self.m_text = wx.StaticText(panel, -1, " ")
-		self.m_text.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL))
-		self.m_text.SetSize(self.m_text.GetBestSize())
-		box.Add(self.m_text, 0, wx.ALL, 10)	 
+		self.m_dirText = wx.StaticText(panel, -1, " ")
+		self.m_dirText.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL))
+		self.m_dirText.SetSize(self.m_dirText.GetBestSize())
+		box.Add(self.m_dirText, 0, wx.ALL, 10)	 
+		box.AddSpacer(20)
+		
+		l1 = wx.StaticText(panel, -1, "Database table name:") 
+		box.Add(l1)
+		box.AddSpacer(20)
+		
+		# Name of destination database table
+		self.m_tblText = wx.TextCtrl(panel, value="ctps_bp_counts_staging") 
+		self.m_tblText.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL))
+		self.m_tblText.SetSize(self.m_tblText.GetBestSize())
+		box.Add(self.m_tblText, 0, wx.CENTER)
 		box.AddSpacer(20)
 		
 		# Button to popup wx.TextEntryDialog to collect DB pwd
@@ -120,11 +133,11 @@ class Frame(wx.Frame):
 	def OnSelectInputDir(self, event):
 		frame = wx.Frame(None, -1, 'win.py')
 		frame.SetSize(0,0,200,50)
-		dlg = wx.DirDialog(None, "pecify input folder", "",
+		dlg = wx.DirDialog(None, "Select input folder", "",
 						   wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
 		dlg.ShowModal()
 		self.inputDirName = dlg.GetPath()
-		self.m_text.SetLabel("Selected input folder: " + self.inputDirName)
+		self.m_dirText.SetLabel("Selected input folder: " + self.inputDirName)
 		dlg.Destroy()
 		frame.Destroy()
 	# end_def OnSelectInputDir()	
@@ -161,7 +174,7 @@ class Frame(wx.Frame):
 				# 3. Close database connection
 				db_shutdown(db_conn)
 				message = "Bicycle/Pedestrian count data loaded."
-			else:
+			else: 
 				message = "Failed to establish database connection."
 			# end_if
 			caption = "Bicycle/Pedestrian Traffic Count Loader"
