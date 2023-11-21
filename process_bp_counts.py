@@ -765,18 +765,18 @@ def process_xlsx_file(xlsx_fn, table_name, db_conn):
 # parameters:
 # folder_path - full path to folder containing one or more XLSX files containing
 #				B-P count data to be loaded into the B-P count database
+# db_table_name - name of database table into which to load count data
 # db_conn - psycopg2 database connection object
 #
 # requires: connection to database has been successfully established
 #
-def process_folder(folder_path, db_conn):
-	table_name = 'mpodata.ctps_bp_counts_staging'
+def process_folder(folder_path, db_table_name, db_conn):
 	pathname = folder_path + '/*.xlsx'
 	file_list = glob.glob(pathname)
 	for file in file_list:
 		if debug_driver:
 			print('Processing ' + file)
 		#
-		process_xlsx_file(file, table_name, db_conn)
+		process_xlsx_file(file, db_table_name, db_conn)
 	#
 # end_def: process_folder

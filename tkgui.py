@@ -8,7 +8,6 @@ from process_bp_counts import db_initialize, db_shutdown, process_folder
 debug = True
 
 dir_text = None
-table_text = None
 
 def browse_button():
 	global dir_name, dir_text
@@ -20,16 +19,21 @@ def browse_button():
 #
 
 def process_spreadsheets():
-	global dir_text, pwdEntry
+	global dir_text, pwdEntry, tblEntry
 	error_text = ''
+	
 	db_pwd = pwdEntry.get()
-
 	if db_pwd == None or db_pwd == '':
-		error_text += 'No password supplied. '
+		error_text += 'No database password supplied. '
 	#
 	if dir_text == None or dir_text == '':
-		error_text += 'No input folder specified.'
+		error_text += 'No input folder specified.' 
 	#
+	db_tbl_name = tblEntry.get()
+	if db_tbl_name == None or db_tbl_name == '':
+		error_text += 'No database table name supplied. '
+	#
+	
 	if error_text != '':
 		print(error_text)
 		return
@@ -41,14 +45,15 @@ def process_spreadsheets():
 		pwdEntry.insert(0, fill)
 		if debug:
 			print("Selected folder: " + dir_text)
-			print("DB paassword: %s\n" % db_pwd)
+			print("DB paassword: " + db_pwd)
+			print("DB table name: " + db_tbl_name)
 		# end_if
-		# 
+		
 		# Open DB connection
 		db_conn = db_initialize(db_pwd)
 		if db_conn != None:
 			# Call routine to process all XLSXs in the specified folder
-			process_folder(dir_text, db_conn)
+			process_folder(dir_text, db_tbl_name, db_conn)
 			print("Returned from call to 'process_folder'.")
 			db_shutdown(db_conn)
 		else:
