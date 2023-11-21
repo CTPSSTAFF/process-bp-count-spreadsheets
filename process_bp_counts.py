@@ -678,10 +678,10 @@ def db_initialize(db_pwd):
 	# https://stackoverflow.com/questions/59190010/psycopg2-operationalerror-fatal-unsupported-frontend-protocol-1234-5679-serve
 	#
 	try:
-		conn = psycopg2.connect(dbname="postgres", 
-								host="localhost",
-								port=5432,
-								user="postgres", 
+		conn = psycopg2.connect(dbname="mpodata", 
+								host="appsrvr3.ad.ctps.org",
+								port=5433,
+								user="mpodata", 
 								password=db_pwd,
 								sslmode="disable",
 								gssencmode="disable")
