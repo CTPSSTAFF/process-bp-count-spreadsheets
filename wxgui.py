@@ -155,7 +155,8 @@ class Frame(wx.Frame):
 			db_conn = db_initialize(self.db_pwd)
 			if db_conn != None:
 				# 2. Call routine to process XLSX files in specified folder
-				process_folder(self.inputDirName, db_conn)
+				# *** TBD: DB table name parm (parm #2) is hard-wired for the moment.
+				process_folder(self.inputDirName, 'ctps_bp_counts_staging', db_conn)
 				print("Returned from call to 'process_folder'.")
 				# 3. Close database connection
 				db_shutdown(db_conn)
