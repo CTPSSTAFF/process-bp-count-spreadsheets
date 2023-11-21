@@ -19,16 +19,21 @@ def browse_button():
 #
 
 def process_spreadsheets():
-	global dir_text, pwdEntry
+	global dir_text, pwdEntry, tblEntry
 	error_text = ''
+	
 	db_pwd = pwdEntry.get()
-
 	if db_pwd == None or db_pwd == '':
-		error_text += 'No password supplied. '
+		error_text += 'No database password supplied. '
 	#
 	if dir_text == None or dir_text == '':
-		error_text += 'No input folder specified.'
+		error_text += 'No input folder specified.' 
 	#
+	db_tbl_name = tblEntry.get()
+	if db_tbl_name == None or db_tbl_name == '':
+		error_text += 'No database table name supplied. '
+	#
+	
 	if error_text != '':
 		print(error_text)
 		return
@@ -40,14 +45,15 @@ def process_spreadsheets():
 		pwdEntry.insert(0, fill)
 		if debug:
 			print("Selected folder: " + dir_text)
-			print("DB paassword: %s\n" % db_pwd)
+			print("DB paassword: " + db_pwd)
+			print("DB table name: " + db_tbl_name)
 		# end_if
-		# 
+		
 		# Open DB connection
 		db_conn = db_initialize(db_pwd)
 		if db_conn != None:
 			# Call routine to process all XLSXs in the specified folder
-			process_folder(dir_text, db_conn)
+			process_folder(dir_text, db_tbl_name, db_conn)
 			print("Returned from call to 'process_folder'.")
 			db_shutdown(db_conn)
 		else:
@@ -67,21 +73,27 @@ browseButton = tk.Button(master,
 						 command=browse_button).grid(row=1, column=0)
 
 dir_name = tk.StringVar()
-dirLabel = tk.Label(master,textvariable=dir_name).grid(row=1, column=1)
+dirLabel = tk.Label(master, textvariable=dir_name).grid(row=1, column=1)
 
-pwdLabel = tk.Label(master, 
-					text="Database password").grid(row=2)
-pwdEntry = tk.Entry(master)
-pwdEntry.grid(row=2, column=1)
+pwdLabel = tk.Label(master, text="Database password:").grid(row=2)
+pwdEntry = tk.Entry(master, width=30)
+pwdEntry.grid(row=2, column=1, sticky=tk.W)
+
+table_name = tk.StringVar()
+table_name.set('ctps_bp_counts_staging')
+tblLabel = tk.Label(master, text="Database table name:").grid(row=3)
+tblEntry = tk.Entry(master, width=30, textvariable=table_name)
+tblEntry.grid(row=3, column=1, sticky=tk.W)
+					
 
 tk.Button(master, 
-		  text='Run', command=process_spreadsheets).grid(row=3, 
+		  text='Run', command=process_spreadsheets).grid(row=4, 
 														 column=0, 
 														 sticky=tk.W+tk.E+tk.N+tk.S, 
 														 pady=4)
 tk.Button(master, 
 		  text='Quit', 
-		  command=master.quit).grid(row=3, 
+		  command=master.quit).grid(row=4, 
 									column=1, 
 									sticky=tk.W+tk.E+tk.N+tk.S, 
 									pady=4)
