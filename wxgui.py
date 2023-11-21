@@ -50,7 +50,7 @@ class Frame(wx.Frame):
 	db_pwd = '' 
 	
 	def __init__(self, title):
-		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(600,320),
+		wx.Frame.__init__(self, None, title=title, pos=(250,250), size=(600,400),
 						  style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
 		self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -148,7 +148,11 @@ class Frame(wx.Frame):
 			msg += 'Input folder name not specified. '
 		#
 		if self.db_pwd == '':
-			msg += 'Database password not supplied.'
+			msg += 'Database password not supplied. '
+		#
+		self.dbTableName = self.m_tblText.GetValue()
+		if self.dbTableName == '':
+			msg += 'Database table name not supplied. '
 		#
 		if len(msg) > 0:
 			msg = 'Error(s): ' + msg
@@ -168,8 +172,7 @@ class Frame(wx.Frame):
 			db_conn = db_initialize(self.db_pwd)
 			if db_conn != None:
 				# 2. Call routine to process XLSX files in specified folder
-				# *** TBD: DB table name parm (parm #2) is hard-wired for the moment.
-				process_folder(self.inputDirName, 'ctps_bp_counts_staging', db_conn)
+				process_folder(self.inputDirName, self.dbTableName, db_conn)
 				print("Returned from call to 'process_folder'.")
 				# 3. Close database connection
 				db_shutdown(db_conn)
