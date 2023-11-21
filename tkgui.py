@@ -68,17 +68,17 @@ browseButton = tk.Button(master,
 						 command=browse_button).grid(row=1, column=0)
 
 dir_name = tk.StringVar()
-dirLabel = tk.Label(master,textvariable=dir_name).grid(row=1, column=1)
+dirLabel = tk.Label(master, textvariable=dir_name).grid(row=1, column=1)
 
-pwdLabel = tk.Label(master, 
-					text="Database passwor:").grid(row=2)
-pwdEntry = tk.Entry(master)
-pwdEntry.grid(row=2, column=1)
+pwdLabel = tk.Label(master, text="Database password:").grid(row=2)
+pwdEntry = tk.Entry(master, width=30)
+pwdEntry.grid(row=2, column=1, sticky=tk.W)
 
-tblLabel = tk.Label(master,
-					text="Database table:").grid(row=3)
-tblEntry = tk.Entry(master)
-tblEntry.grid(row=3, column=1)
+table_name = tk.StringVar()
+table_name.set('ctps_bp_counts_staging')
+tblLabel = tk.Label(master, text="Database table name:").grid(row=3)
+tblEntry = tk.Entry(master, width=30, textvariable=table_name)
+tblEntry.grid(row=3, column=1, sticky=tk.W)
 					
 
 tk.Button(master, 
