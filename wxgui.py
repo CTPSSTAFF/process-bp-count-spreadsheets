@@ -115,6 +115,7 @@ class Frame(wx.Frame):
 		dlg.Destroy()
 		if result == wx.ID_OK:
 			self.Destroy()
+			quit()
 	# end_def OnClose()
 
 	def OnGetDbPwd(self, event):
