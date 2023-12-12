@@ -25,20 +25,30 @@ sky_coords = 'C4'
 #
 bp_loc_id_coords = 'R3'
 count_id_coords = 'R4'
-
+#
 loc_desc_coords = 'D5'
 loc_desc_other_coords = 'F5'
-fac_name_coords = 'D6'
+#
+side_coords = 'F6'
+#
+fac_name_coords = 'D7'
 fac_name_other_coords = 'F7'
 #
-from_st_name_coords = 'D7'
-from_st_dir_coords = 'D8'
-to_st_name_coords = 'D9'
-to_st_dir_coords = 'D10'
+# 'from_street' == 'street_1'
+from_st_name_coords = 'D8'
+from_st_dir_coords = 'D9'
+from_st_dir_other_coords = 'F9'
 #
-loc_type_coords = 'D11'
-muni_coords = 'D12'
-muni_other_coords = 'F12'
+# 'to_street' == 'street_2'
+to_st_name_coords = 'D10'
+to_st_dir_coords = 'D11'
+to_st_dir_other_coords = 'F11'
+#
+loc_type_coords = 'D12'
+loc_type_other_coords = 'F12'
+#
+muni_coords = 'D13'
+muni_other_coords = 'F13'
 #
 description_coords = 'J4'
 
@@ -118,7 +128,8 @@ def bail_out(msg):
 
 
 def spreadsheet_initialize(input_fn):
-	global wb, overview_sheet, count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
+	global wb, overview_sheet
+	global count_sheet_1, count_sheet_2, count_sheet_3, count_sheet_4
 	global count_sheet_5, count_sheet_6, count_sheet_7, count_sheet_8
 	
 	wb = openpyxl.load_workbook(filename = input_fn)
@@ -139,7 +150,7 @@ def spreadsheet_initialize(input_fn):
 #
 # return value - dict containing the following keys:
 #	  'bp_loc_id', 'count_id', 'date', dow_str',
-#	  'from_st_name', 'from_st_dir','to_st_name', 'to_st_dir', 
+#	  'from_st_name', 'from_st_dir', 'to_st_name', 'to_st_dir', 'side', 
 #	  'temperature', 'sky', 'description'
 #
 def read_overview_sheet():
@@ -165,7 +176,6 @@ def read_overview_sheet():
 	elif loc_desc == 'Other':
 		loc_desc = overview_sheet[loc_desc_other_coords].value
 	# end_if
-	
 	
 	date_raw = overview_sheet[date_coords].value
 	if date_raw == None:
@@ -199,10 +209,16 @@ def read_overview_sheet():
 	if from_st_name == None:
 		from_st_name = ''
 	from_st_dir = overview_sheet[from_st_dir_coords].value
+	
 	to_st_name = overview_sheet[to_st_name_coords].value
 	if to_st_name == None:
 		to_st_name = ''
 	to_st_dir = overview_sheet[to_st_dir_coords].value
+	
+	side = overview_sheet[side_coords].value
+	if side == None:
+		side = ''
+	#
 
 	# temperature: type is INTEGER
 	temperature = overview_sheet[temperature_coords].value
@@ -248,6 +264,7 @@ def read_overview_sheet():
 		print('from street direction = ' + from_st_dir)
 		print('to street name = ' + to_st_name)
 		print('to street direction = ' + to_st_dir)
+		print('side = ' side)
 		print('temperature = ' + str(temperature))
 		print('sky = ' + str(sky))
 		print('description = '	 + description)
@@ -257,6 +274,7 @@ def read_overview_sheet():
 	retval = { 'bp_loc_id' : bp_loc_id, 'count_id' : count_id, 'date' : date_cooked, 'dow' : dow_str,
 			   'from_st_name' : from_st_name, 'from_st_dir' : from_st_dir,
 			   'to_st_name' : to_st_name, 'to_st_dir' : to_st_dir, 
+			   'side' : side, 
 			   'temperature' : temperature, 'sky' : sky,
 			   'description' : description }
 	return retval
@@ -504,6 +522,7 @@ def generate_insert_query(overview, count, table_name, mode):
 	from_st_dir = overview['from_st_dir']
 	to_st_name = overview['to_st_name']
 	to_st_dir = overview['to_st_dir']
+	side = overview['side']
 	temperature = overview['temperature']
 	sky = overview['sky']
 	description = overview['description']
@@ -563,6 +582,12 @@ def generate_insert_query(overview, count, table_name, mode):
 		overview_keys_list.append('to_st_dir')
 		overview_vals_list.append("'" + to_st_dir  + "'")
 	#
+	
+	# 'side' (i.e., side-of-street - of type STRING
+	if side != '':
+		overview_keys_list.append('side')
+		overview_vals_list.append("'" + side  + "'")
+	#	 
 	
 	# temperature and sky: these are of type INTEGER
 	if temperature != temp_not_recorded:
