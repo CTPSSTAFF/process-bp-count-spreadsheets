@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS mpodata.ctps_bp_counts_staging
     from_st_dir character varying(3) COLLATE pg_catalog."default",
     to_st_name character varying(30) COLLATE pg_catalog."default",
     to_st_dir character varying(3) COLLATE pg_catalog."default",
+	side character varying(20) COLLATE pg_catalog."default",
     count_date DATE,
     count_dow character varying(3) COLLATE pg_catalog."default",
 	cnt_0000 integer,
