@@ -134,14 +134,14 @@ def spreadsheet_initialize(input_fn):
 	
 	wb = openpyxl.load_workbook(filename = input_fn)
 	overview_sheet = wb['Overview']
-	count_sheet_1 = wb['600-845 AM']
-	count_sheet_2 = wb['900-1145 AM']
-	count_sheet_3 = wb['1200-245 PM']
-	count_sheet_4 = wb['300-545 PM']
-	count_sheet_5 = wb['600-845 PM']
-	count_sheet_6 = wb['900-1145 PM']
-	count_sheet_7 = wb['1200-245 AM']
-	count_sheet_8 = wb['300-545 AM']
+	count_sheet_1 = wb['600-859 AM']
+	count_sheet_2 = wb['900-1159 AM']
+	count_sheet_3 = wb['1200-259 PM']
+	count_sheet_4 = wb['300-559 PM']
+	count_sheet_5 = wb['600-859 PM']
+	count_sheet_6 = wb['900-1159 PM']
+	count_sheet_7 = wb['1200-259 AM']
+	count_sheet_8 = wb['300-559 AM']
 	columns_sheet = wb['Columns']
 # end_def spreadsheet_initialize
 
