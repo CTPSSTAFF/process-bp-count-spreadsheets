@@ -9,8 +9,8 @@ import datetime
 import glob
 
 # Debug toggles
-debug_read_overview = False
-debug_read_counts = False
+debug_read_overview = True
+debug_read_counts = True
 debug_query_string = True
 debug_db = True
 debug_driver = True
@@ -107,14 +107,14 @@ keys_sheet_8 = [ 'cnt_0300', 'cnt_0315', 'cnt_0330', 'cnt_0345',
 
 wb = None
 overview_sheet = None
-count_sheet_1 = None	# 6:00-8:45 AM
-count_sheet_2 = None	# 9:00-11:45 AM
-count_sheet_3 = None	# 12:00-2:45 PM
-count_sheet_4 = None	# 3:00-5:45 PM
-count_sheet_5 = None	# 6:00-8:45 PM
-count_sheet_6 = None	# 9:00-11:45 PM
-count_sheet_7 = None	# 12:00-2:45 AM
-count_sheet_8 = None	# 3:00-5:45 AM
+count_sheet_1 = None	# 6:00-8:59 AM
+count_sheet_2 = None	# 9:00-11:59 AM
+count_sheet_3 = None	# 12:00-2:59 PM
+count_sheet_4 = None	# 3:00-5:59 PM
+count_sheet_5 = None	# 6:00-8:59 PM
+count_sheet_6 = None	# 9:00-11:59 PM
+count_sheet_7 = None	# 12:00-2:59 AM
+count_sheet_8 = None	# 3:00-5:59 AM
 columns_sheet = None	# Sheet containing lookup tables (no longer used)
 
 
