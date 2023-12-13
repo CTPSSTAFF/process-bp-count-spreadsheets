@@ -9,11 +9,11 @@ import datetime
 import glob
 
 # Debug toggles
-debug_read_overview = True
-debug_read_counts = True
-debug_query_string = True
-debug_db = True
-debug_driver = True
+debug_read_overview = False
+debug_read_counts = False
+debug_query_string = False
+debug_db = False
+debug_driver = False
 
 # input_xlsx_fn = './xlsx/template-spreadsheet.xlsx'
 input_xlsx_fn = './xlsx/sample-spreadsheet3.xlsx'
