@@ -1,0 +1,2304 @@
+Processing K:\projects\process-bp-count-spreadsheets\xlsx_test\test-spreadsheet1.xlsx
+C:\Lib\site-packages\openpyxl\worksheet\_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+bp_loc_id = 12345
+count_id = 98765-2023-10-30-v1
+date	 = 2023-10-30
+dow = Mon
+location description = Alewife Greenway at Massachusetts Avenue
+location type = Bicycle-Pedestrian Facility Intersection
+municipality = Arlington
+facility name = Alewife Greenway
+from street name = 
+from street direction = All
+to street name = 
+to street direction = All
+side = 
+temperature = -99
+sky = 1
+description = This is test input spreadsheet #1. Here is some text with an apostrophe in it: It's like this.
+Bike counts:
+cnt_0600 : 1
+cnt_0615 : 11
+cnt_0630 : 22
+cnt_0645 : 33
+cnt_0700 : 44
+cnt_0715 : NULL
+cnt_0730 : 66
+cnt_0745 : 77
+cnt_0800 : 88
+cnt_0815 : 99
+cnt_0830 : 99
+cnt_0845 : 88
+Ped counts:
+cnt_0600 : 19
+cnt_0615 : 18
+cnt_0630 : 17
+cnt_0645 : 16
+cnt_0700 : 15
+cnt_0715 : 14
+cnt_0730 : 12
+cnt_0745 : 11
+cnt_0800 : NULL
+cnt_0815 : 9
+cnt_0830 : 9
+cnt_0845 : NULL
+Child counts:
+cnt_0600 : 200
+cnt_0615 : NULL
+cnt_0630 : 300
+cnt_0645 : 400
+cnt_0700 : 500
+cnt_0715 : 600
+cnt_0730 : 700
+cnt_0745 : 800
+cnt_0800 : 900
+cnt_0815 : 1000
+cnt_0830 : 1000
+cnt_0845 : 900
+Jogger counts:
+cnt_0600 : 30
+cnt_0615 : 40
+cnt_0630 : NULL
+cnt_0645 : 60
+cnt_0700 : 70
+cnt_0715 : 80
+cnt_0730 : 90
+cnt_0745 : 100
+cnt_0800 : 110
+cnt_0815 : 120
+cnt_0830 : 120
+cnt_0845 : 110
+Skater counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : NULL
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : 9
+cnt_0830 : 9
+cnt_0845 : 9
+Wheelchair counts:
+cnt_0600 : NULL
+cnt_0615 : 1
+cnt_0630 : 1
+cnt_0645 : 1
+cnt_0700 : 1
+cnt_0715 : 1
+cnt_0730 : 1
+cnt_0745 : 1
+cnt_0800 : 1
+cnt_0815 : 1
+cnt_0830 : 1
+cnt_0845 : 1
+Other counts:
+cnt_0600 : 11
+cnt_0615 : 11
+cnt_0630 : 11
+cnt_0645 : 11
+cnt_0700 : 11
+cnt_0715 : 11
+cnt_0730 : NULL
+cnt_0745 : 11
+cnt_0800 : 11
+cnt_0815 : 11
+cnt_0830 : 11
+cnt_0845 : 11
+Bike counts:
+cnt_0900 : 9
+cnt_0915 : 9
+cnt_0930 : 9
+cnt_0945 : 9
+cnt_1000 : 9
+cnt_1015 : 9
+cnt_1030 : 9
+cnt_1045 : 9
+cnt_1100 : 9
+cnt_1115 : 9
+cnt_1130 : 9
+cnt_1145 : 9
+Ped counts:
+cnt_0900 : 10
+cnt_0915 : 10
+cnt_0930 : 10
+cnt_0945 : 10
+cnt_1000 : 10
+cnt_1015 : 10
+cnt_1030 : 10
+cnt_1045 : 10
+cnt_1100 : 10
+cnt_1115 : 10
+cnt_1130 : 10
+cnt_1145 : 10
+Child counts:
+cnt_0900 : 11
+cnt_0915 : 11
+cnt_0930 : 11
+cnt_0945 : 11
+cnt_1000 : 11
+cnt_1015 : 11
+cnt_1030 : 11
+cnt_1045 : 11
+cnt_1100 : 11
+cnt_1115 : 11
+cnt_1130 : 11
+cnt_1145 : 11
+Jogger counts:
+cnt_0900 : 12
+cnt_0915 : 12
+cnt_0930 : 12
+cnt_0945 : 12
+cnt_1000 : 12
+cnt_1015 : 12
+cnt_1030 : 12
+cnt_1045 : 12
+cnt_1100 : 12
+cnt_1115 : 12
+cnt_1130 : 12
+cnt_1145 : 12
+Skater counts:
+cnt_0900 : 13
+cnt_0915 : 13
+cnt_0930 : 13
+cnt_0945 : 13
+cnt_1000 : 13
+cnt_1015 : 13
+cnt_1030 : 13
+cnt_1045 : 13
+cnt_1100 : 13
+cnt_1115 : 13
+cnt_1130 : 13
+cnt_1145 : 13
+Wheelchair counts:
+cnt_0900 : 14
+cnt_0915 : 14
+cnt_0930 : 14
+cnt_0945 : 14
+cnt_1000 : 14
+cnt_1015 : 14
+cnt_1030 : 14
+cnt_1045 : 14
+cnt_1100 : 14
+cnt_1115 : 14
+cnt_1130 : 14
+cnt_1145 : 14
+Other counts:
+cnt_0900 : 15
+cnt_0915 : 15
+cnt_0930 : 15
+cnt_0945 : 15
+cnt_1000 : 15
+cnt_1015 : 15
+cnt_1030 : 15
+cnt_1045 : 15
+cnt_1100 : 15
+cnt_1115 : 15
+cnt_1130 : 15
+cnt_1145 : 15
+Bike counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Ped counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Child counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Jogger counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Skater counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Wheelchair counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Other counts:
+cnt_1200 : 12
+cnt_1215 : 13
+cnt_1230 : 14
+cnt_1245 : 15
+cnt_1300 : 16
+cnt_1315 : 17
+cnt_1330 : 18
+cnt_1345 : 19
+cnt_1400 : 20
+cnt_1415 : 21
+cnt_1430 : 22
+cnt_1445 : 23
+Bike counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Ped counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Child counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Jogger counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Skater counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Wheelchair counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Other counts:
+cnt_1500 : 100
+cnt_1515 : 100
+cnt_1530 : 100
+cnt_1545 : 100
+cnt_1600 : 100
+cnt_1615 : 100
+cnt_1630 : 100
+cnt_1645 : 100
+cnt_1700 : 100
+cnt_1715 : 100
+cnt_1730 : 100
+cnt_1745 : 100
+Bike counts:
+cnt_1800 : 1
+cnt_1815 : 2
+cnt_1830 : 3
+cnt_1845 : 4
+cnt_1900 : 5
+cnt_1915 : 6
+cnt_1930 : 7
+cnt_1945 : 8
+cnt_2000 : 9
+cnt_2015 : 10
+cnt_2030 : 11
+cnt_2045 : 12
+Ped counts:
+cnt_1800 : 2
+cnt_1815 : 3
+cnt_1830 : 4
+cnt_1845 : 5
+cnt_1900 : 6
+cnt_1915 : 7
+cnt_1930 : 8
+cnt_1945 : NULL
+cnt_2000 : 10
+cnt_2015 : 11
+cnt_2030 : 12
+cnt_2045 : 13
+Child counts:
+cnt_1800 : 3
+cnt_1815 : 4
+cnt_1830 : 5
+cnt_1845 : 6
+cnt_1900 : 7
+cnt_1915 : 8
+cnt_1930 : 9
+cnt_1945 : 10
+cnt_2000 : NULL
+cnt_2015 : 16
+cnt_2030 : 13
+cnt_2045 : 14
+Jogger counts:
+cnt_1800 : 4
+cnt_1815 : 5
+cnt_1830 : 6
+cnt_1845 : 7
+cnt_1900 : 8
+cnt_1915 : 9
+cnt_1930 : 10
+cnt_1945 : 11
+cnt_2000 : 12
+cnt_2015 : NULL
+cnt_2030 : 14
+cnt_2045 : 15
+Skater counts:
+cnt_1800 : 5
+cnt_1815 : 6
+cnt_1830 : 7
+cnt_1845 : 8
+cnt_1900 : 9
+cnt_1915 : 10
+cnt_1930 : 11
+cnt_1945 : 12
+cnt_2000 : 13
+cnt_2015 : 14
+cnt_2030 : NULL
+cnt_2045 : 16
+Wheelchair counts:
+cnt_1800 : 6
+cnt_1815 : 7
+cnt_1830 : 8
+cnt_1845 : 9
+cnt_1900 : 10
+cnt_1915 : 11
+cnt_1930 : 12
+cnt_1945 : 13
+cnt_2000 : 14
+cnt_2015 : 15
+cnt_2030 : 16
+cnt_2045 : NULL
+Other counts:
+cnt_1800 : 7
+cnt_1815 : 8
+cnt_1830 : 9
+cnt_1845 : 10
+cnt_1900 : 11
+cnt_1915 : 12
+cnt_1930 : 13
+cnt_1945 : 14
+cnt_2000 : 15
+cnt_2015 : 16
+cnt_2030 : 17
+cnt_2045 : 18
+Bike counts:
+cnt_2100 : 1
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Ped counts:
+cnt_2100 : NULL
+cnt_2115 : 2
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : 23
+Child counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : 3
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : 11
+cnt_2345 : NULL
+Jogger counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : 4
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : 10
+cnt_2330 : NULL
+cnt_2345 : NULL
+Skater counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : 5
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : 9
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Wheelchair counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : 6
+cnt_2230 : NULL
+cnt_2245 : 8
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Other counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : 7
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Bike counts:
+cnt_0000 : 1
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : 1
+Ped counts:
+cnt_0000 : NULL
+cnt_0015 : 2
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : 2
+cnt_0245 : NULL
+Child counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : 3
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : 3
+cnt_0230 : NULL
+cnt_0245 : NULL
+Jogger counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : 4
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : 4
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Skater counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : 5
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : 5
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Wheelchair counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : 6
+cnt_0115 : NULL
+cnt_0130 : 6
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Other counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : 7
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Bike counts:
+cnt_0300 : 10
+cnt_0315 : 10
+cnt_0330 : 10
+cnt_0345 : 10
+cnt_0400 : 10
+cnt_0415 : 10
+cnt_0430 : 10
+cnt_0445 : 10
+cnt_0500 : 10
+cnt_0515 : 10
+cnt_0530 : 10
+cnt_0545 : 10
+Ped counts:
+cnt_0300 : 9
+cnt_0315 : 9
+cnt_0330 : 9
+cnt_0345 : 9
+cnt_0400 : 9
+cnt_0415 : 9
+cnt_0430 : 9
+cnt_0445 : 9
+cnt_0500 : 9
+cnt_0515 : 9
+cnt_0530 : 9
+cnt_0545 : 9
+Child counts:
+cnt_0300 : 8
+cnt_0315 : 8
+cnt_0330 : 8
+cnt_0345 : 8
+cnt_0400 : 8
+cnt_0415 : 8
+cnt_0430 : 8
+cnt_0445 : 8
+cnt_0500 : 8
+cnt_0515 : 8
+cnt_0530 : 8
+cnt_0545 : 8
+Jogger counts:
+cnt_0300 : 7
+cnt_0315 : 7
+cnt_0330 : 7
+cnt_0345 : 7
+cnt_0400 : 7
+cnt_0415 : 7
+cnt_0430 : 7
+cnt_0445 : 7
+cnt_0500 : 7
+cnt_0515 : 7
+cnt_0530 : 7
+cnt_0545 : 7
+Skater counts:
+cnt_0300 : 6
+cnt_0315 : 6
+cnt_0330 : 6
+cnt_0345 : 6
+cnt_0400 : 6
+cnt_0415 : 6
+cnt_0430 : 6
+cnt_0445 : 6
+cnt_0500 : 6
+cnt_0515 : 6
+cnt_0530 : 6
+cnt_0545 : 6
+Wheelchair counts:
+cnt_0300 : 5
+cnt_0315 : 5
+cnt_0330 : 5
+cnt_0345 : 5
+cnt_0400 : 5
+cnt_0415 : 5
+cnt_0430 : 5
+cnt_0445 : 5
+cnt_0500 : 5
+cnt_0515 : 5
+cnt_0530 : 5
+cnt_0545 : 5
+Other counts:
+cnt_0300 : 4
+cnt_0315 : 4
+cnt_0330 : 4
+cnt_0345 : 4
+cnt_0400 : 4
+cnt_0415 : 4
+cnt_0430 : 4
+cnt_0445 : 4
+cnt_0500 : 4
+cnt_0515 : 4
+cnt_0530 : 4
+cnt_0545 : 4
+DB cursor created.
+Query string for mode bike:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0000, cnt_0245, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2100, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'B', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 1, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1, 11, 22, 33, 44, 66, 77, 88, 99, 99, 88, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2347 );
+Insert query committed.
+Query string for mode ped:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0015, cnt_0230, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0815, cnt_0830, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2115, cnt_2345, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'P', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 19, 18, 17, 16, 15, 14, 12, 11, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 2, 23, 1888 );
+Insert query committed.
+Query string for mode child:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0030, cnt_0215, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2015, cnt_2030, cnt_2045, cnt_2130, cnt_2330, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'C', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1000, 900, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 3, 4, 5, 6, 7, 8, 9, 10, 16, 13, 14, 3, 11, 9053 );
+Insert query committed.
+Query string for mode jogger:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0045, cnt_0200, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2030, cnt_2045, cnt_2145, cnt_2315, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'J', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 30, 40, 60, 70, 80, 90, 100, 110, 120, 120, 110, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 4, 10, 2691 );
+Insert query committed.
+Query string for mode skater:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0045, cnt_0145, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2045, cnt_2200, cnt_2300, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'S', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 9, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 5, 9, 1839 );
+Insert query committed.
+Query string for mode wheelchair:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0100, cnt_0130, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2215, cnt_2245, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'W', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 6, 6, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 6, 8, 1725 );
+Insert query committed.
+Query string for mode other:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0115, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2230, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-10-30', 'Mon', 'O', 'All', 'All', 1, 'This is test input spreadsheet #1. Here is some text with an apostrophe in it: It''s like this.', 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 7, 1923 );
+Insert query committed.
+Processing K:\projects\process-bp-count-spreadsheets\xlsx_test\test-spreadsheet2.xlsx
+bp_loc_id = 23456
+count_id = 98765-2023-11-07-v1
+date	 = 2023-11-07
+dow = Tue
+location description = Beacon Street at Charles Street
+location type = Street Intersection
+municipality = Boston
+facility name =  Other (please type in cell to the right)
+from street name = 
+from street direction = All
+to street name = 
+to street direction = All
+side = 
+temperature = -99
+sky = 1
+description = This is test input spreadsheet #2.
+Bike counts:
+cnt_0600 : 1
+cnt_0615 : 11
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : NULL
+cnt_0715 : 6
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Ped counts:
+cnt_0600 : 19
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : NULL
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Child counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : 6
+cnt_0730 : NULL
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Jogger counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : 6
+cnt_0730 : 7
+cnt_0745 : NULL
+cnt_0800 : 9
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Skater counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : 6
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : NULL
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Wheelchair counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : 4
+cnt_0700 : 5
+cnt_0715 : 6
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : NULL
+cnt_0830 : 11
+cnt_0845 : NULL
+Other counts:
+cnt_0600 : 1
+cnt_0615 : 2
+cnt_0630 : 3
+cnt_0645 : NULL
+cnt_0700 : 5
+cnt_0715 : 6
+cnt_0730 : 7
+cnt_0745 : 8
+cnt_0800 : 9
+cnt_0815 : 10
+cnt_0830 : 11
+cnt_0845 : NULL
+Bike counts:
+cnt_0900 : 42
+cnt_0915 : 42
+cnt_0930 : 42
+cnt_0945 : 42
+cnt_1000 : 42
+cnt_1015 : 42
+cnt_1030 : 42
+cnt_1045 : 42
+cnt_1100 : 42
+cnt_1115 : 42
+cnt_1130 : 42
+cnt_1145 : 42
+Ped counts:
+cnt_0900 : 43
+cnt_0915 : 43
+cnt_0930 : 43
+cnt_0945 : 43
+cnt_1000 : 43
+cnt_1015 : 43
+cnt_1030 : 43
+cnt_1045 : 43
+cnt_1100 : 43
+cnt_1115 : 43
+cnt_1130 : 43
+cnt_1145 : 43
+Child counts:
+cnt_0900 : NULL
+cnt_0915 : NULL
+cnt_0930 : NULL
+cnt_0945 : NULL
+cnt_1000 : NULL
+cnt_1015 : NULL
+cnt_1030 : NULL
+cnt_1045 : NULL
+cnt_1100 : NULL
+cnt_1115 : NULL
+cnt_1130 : NULL
+cnt_1145 : NULL
+Jogger counts:
+cnt_0900 : NULL
+cnt_0915 : NULL
+cnt_0930 : NULL
+cnt_0945 : NULL
+cnt_1000 : NULL
+cnt_1015 : NULL
+cnt_1030 : NULL
+cnt_1045 : NULL
+cnt_1100 : NULL
+cnt_1115 : NULL
+cnt_1130 : NULL
+cnt_1145 : NULL
+Skater counts:
+cnt_0900 : NULL
+cnt_0915 : NULL
+cnt_0930 : NULL
+cnt_0945 : NULL
+cnt_1000 : NULL
+cnt_1015 : NULL
+cnt_1030 : NULL
+cnt_1045 : NULL
+cnt_1100 : NULL
+cnt_1115 : NULL
+cnt_1130 : NULL
+cnt_1145 : NULL
+Wheelchair counts:
+cnt_0900 : NULL
+cnt_0915 : NULL
+cnt_0930 : NULL
+cnt_0945 : NULL
+cnt_1000 : NULL
+cnt_1015 : NULL
+cnt_1030 : NULL
+cnt_1045 : NULL
+cnt_1100 : NULL
+cnt_1115 : NULL
+cnt_1130 : NULL
+cnt_1145 : NULL
+Other counts:
+cnt_0900 : 1000
+cnt_0915 : 1000
+cnt_0930 : 1000
+cnt_0945 : 1000
+cnt_1000 : 1000
+cnt_1015 : 1000
+cnt_1030 : 1000
+cnt_1045 : 1000
+cnt_1100 : 1000
+cnt_1115 : 1000
+cnt_1130 : 1000
+cnt_1145 : 1000
+Bike counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Ped counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Child counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Jogger counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Skater counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Wheelchair counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Other counts:
+cnt_1200 : NULL
+cnt_1215 : NULL
+cnt_1230 : NULL
+cnt_1245 : NULL
+cnt_1300 : NULL
+cnt_1315 : NULL
+cnt_1330 : NULL
+cnt_1345 : NULL
+cnt_1400 : NULL
+cnt_1415 : NULL
+cnt_1430 : NULL
+cnt_1445 : NULL
+Bike counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Ped counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Child counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Jogger counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Skater counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Wheelchair counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Other counts:
+cnt_1500 : 200
+cnt_1515 : 200
+cnt_1530 : 200
+cnt_1545 : 200
+cnt_1600 : 200
+cnt_1615 : 200
+cnt_1630 : 200
+cnt_1645 : 200
+cnt_1700 : 200
+cnt_1715 : 200
+cnt_1730 : 200
+cnt_1745 : 200
+Bike counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Ped counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Child counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Jogger counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Skater counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Wheelchair counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Other counts:
+cnt_1800 : 200
+cnt_1815 : 200
+cnt_1830 : 200
+cnt_1845 : 200
+cnt_1900 : 200
+cnt_1915 : 200
+cnt_1930 : 200
+cnt_1945 : 200
+cnt_2000 : 200
+cnt_2015 : 200
+cnt_2030 : 200
+cnt_2045 : 200
+Bike counts:
+cnt_2100 : 2
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Ped counts:
+cnt_2100 : NULL
+cnt_2115 : 3
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : 5
+Child counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : 4
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : 6
+cnt_2345 : NULL
+Jogger counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : 5
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : 7
+cnt_2330 : NULL
+cnt_2345 : NULL
+Skater counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : 6
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : 8
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Wheelchair counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : 7
+cnt_2230 : NULL
+cnt_2245 : 9
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Other counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : 8
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Bike counts:
+cnt_0000 : 10
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : 10
+Ped counts:
+cnt_0000 : NULL
+cnt_0015 : 20
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : 20
+cnt_0245 : NULL
+Child counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : 30
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : 30
+cnt_0230 : NULL
+cnt_0245 : NULL
+Jogger counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : 40
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : 40
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Skater counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : 50
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : 50
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Wheelchair counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : 60
+cnt_0115 : NULL
+cnt_0130 : 60
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Other counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : 70
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Bike counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Ped counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Child counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Jogger counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Skater counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Wheelchair counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+Other counts:
+cnt_0300 : 1
+cnt_0315 : 1
+cnt_0330 : 1
+cnt_0345 : 1
+cnt_0400 : 1
+cnt_0415 : 1
+cnt_0430 : 1
+cnt_0445 : 1
+cnt_0500 : 1
+cnt_0515 : 1
+cnt_0530 : 1
+cnt_0545 : 1
+DB cursor created.
+Query string for mode bike:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0000, cnt_0245, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2100, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'B', 'All', 'All', 1, 'This is test input spreadsheet #2.', 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 3, 4, 6, 7, 8, 9, 10, 11, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 2, 5408 );
+Insert query committed.
+Query string for mode ped:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0015, cnt_0230, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2115, cnt_2345, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'P', 'All', 'All', 1, 'This is test input spreadsheet #2.', 20, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 19, 2, 3, 4, 5, 7, 8, 9, 10, 11, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 3, 5, 5454 );
+Insert query committed.
+Query string for mode child:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0030, cnt_0215, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2130, cnt_2330, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'C', 'All', 'All', 1, 'This is test input spreadsheet #2.', 30, 30, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 4, 6, 4941 );
+Insert query committed.
+Query string for mode jogger:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0045, cnt_0200, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0800, cnt_0815, cnt_0830, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2145, cnt_2315, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'J', 'All', 'All', 1, 'This is test input spreadsheet #2.', 40, 40, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 5, 7, 4962 );
+Insert query committed.
+Query string for mode skater:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0045, cnt_0145, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0815, cnt_0830, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2200, cnt_2300, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'S', 'All', 'All', 1, 'This is test input spreadsheet #2.', 50, 50, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 6, 8, 4983 );
+Insert query committed.
+Query string for mode wheelchair:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0100, cnt_0130, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2215, cnt_2245, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'W', 'All', 'All', 1, 'This is test input spreadsheet #2.', 60, 60, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 7, 9, 4936 );
+Insert query committed.
+Query string for mode other:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_dir, to_st_dir, sky, description,  cnt_0115, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1500, cnt_1515, cnt_1530, cnt_1545, cnt_1600, cnt_1615, cnt_1630, cnt_1645, cnt_1700, cnt_1715, cnt_1730, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2230, cnt_total ) VALUES ( 23456, '98765-2023-11-07-v1', '2023-11-07', 'Tue', 'O', 'All', 'All', 1, 'This is test input spreadsheet #2.', 70, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 8, 16952 );
+Insert query committed.
+Processing K:\projects\process-bp-count-spreadsheets\xlsx_test\test-spreadsheet3.xlsx
+bp_loc_id = 12345
+count_id = 98765-2023-10-30-v1
+date	 = 2023-11-08
+dow = Wed
+location description = Inman Square - Prospect Street at Hampshire Street
+location type = Street Intersection
+municipality = Cambridge
+facility name =  Other (please type in cell to the right)
+from street name = Prospect Street
+from street direction = All
+to street name = Hampshire Street
+to street direction = All
+side = 
+temperature = -99
+sky = 1
+description = This is test input spreadsheet #3.
+Bike counts:
+cnt_0600 : 1
+cnt_0615 : 1
+cnt_0630 : 1
+cnt_0645 : 1
+cnt_0700 : 1
+cnt_0715 : NULL
+cnt_0730 : 1
+cnt_0745 : 1
+cnt_0800 : 1
+cnt_0815 : 1
+cnt_0830 : 1
+cnt_0845 : 1
+Ped counts:
+cnt_0600 : 2
+cnt_0615 : 2
+cnt_0630 : 2
+cnt_0645 : 2
+cnt_0700 : 2
+cnt_0715 : 2
+cnt_0730 : 2
+cnt_0745 : 2
+cnt_0800 : 2
+cnt_0815 : 2
+cnt_0830 : 2
+cnt_0845 : 2
+Child counts:
+cnt_0600 : 3
+cnt_0615 : 3
+cnt_0630 : 3
+cnt_0645 : 3
+cnt_0700 : 3
+cnt_0715 : 3
+cnt_0730 : 3
+cnt_0745 : 3
+cnt_0800 : 3
+cnt_0815 : 3
+cnt_0830 : 3
+cnt_0845 : NULL
+Jogger counts:
+cnt_0600 : 4
+cnt_0615 : 4
+cnt_0630 : 4
+cnt_0645 : 4
+cnt_0700 : 4
+cnt_0715 : 4
+cnt_0730 : 4
+cnt_0745 : 4
+cnt_0800 : 4
+cnt_0815 : 4
+cnt_0830 : NULL
+cnt_0845 : NULL
+Skater counts:
+cnt_0600 : 5
+cnt_0615 : 5
+cnt_0630 : 5
+cnt_0645 : 5
+cnt_0700 : 5
+cnt_0715 : 5
+cnt_0730 : 5
+cnt_0745 : 5
+cnt_0800 : 5
+cnt_0815 : NULL
+cnt_0830 : NULL
+cnt_0845 : NULL
+Wheelchair counts:
+cnt_0600 : 6
+cnt_0615 : 6
+cnt_0630 : 6
+cnt_0645 : 6
+cnt_0700 : 6
+cnt_0715 : 6
+cnt_0730 : 6
+cnt_0745 : 6
+cnt_0800 : NULL
+cnt_0815 : NULL
+cnt_0830 : NULL
+cnt_0845 : NULL
+Other counts:
+cnt_0600 : 7
+cnt_0615 : 7
+cnt_0630 : 7
+cnt_0645 : 7
+cnt_0700 : 7
+cnt_0715 : 7
+cnt_0730 : 7
+cnt_0745 : NULL
+cnt_0800 : NULL
+cnt_0815 : NULL
+cnt_0830 : NULL
+cnt_0845 : NULL
+Bike counts:
+cnt_0900 : 8
+cnt_0915 : 8
+cnt_0930 : 8
+cnt_0945 : 8
+cnt_1000 : 8
+cnt_1015 : 8
+cnt_1030 : 8
+cnt_1045 : 8
+cnt_1100 : 8
+cnt_1115 : 8
+cnt_1130 : 8
+cnt_1145 : 8
+Ped counts:
+cnt_0900 : 9
+cnt_0915 : 9
+cnt_0930 : 9
+cnt_0945 : 9
+cnt_1000 : 9
+cnt_1015 : 9
+cnt_1030 : 9
+cnt_1045 : 9
+cnt_1100 : 9
+cnt_1115 : 9
+cnt_1130 : 9
+cnt_1145 : 9
+Child counts:
+cnt_0900 : 1
+cnt_0915 : 1
+cnt_0930 : 1
+cnt_0945 : 1
+cnt_1000 : 1
+cnt_1015 : 1
+cnt_1030 : 1
+cnt_1045 : 1
+cnt_1100 : 1
+cnt_1115 : 1
+cnt_1130 : 1
+cnt_1145 : 1
+Jogger counts:
+cnt_0900 : 2
+cnt_0915 : 2
+cnt_0930 : 2
+cnt_0945 : 2
+cnt_1000 : 2
+cnt_1015 : 2
+cnt_1030 : 2
+cnt_1045 : 2
+cnt_1100 : 2
+cnt_1115 : 2
+cnt_1130 : 2
+cnt_1145 : 2
+Skater counts:
+cnt_0900 : 3
+cnt_0915 : 3
+cnt_0930 : 3
+cnt_0945 : 3
+cnt_1000 : 3
+cnt_1015 : 3
+cnt_1030 : 3
+cnt_1045 : 3
+cnt_1100 : 3
+cnt_1115 : 3
+cnt_1130 : 3
+cnt_1145 : 3
+Wheelchair counts:
+cnt_0900 : 4
+cnt_0915 : 4
+cnt_0930 : 4
+cnt_0945 : 4
+cnt_1000 : 4
+cnt_1015 : 4
+cnt_1030 : 4
+cnt_1045 : 4
+cnt_1100 : 4
+cnt_1115 : 4
+cnt_1130 : 4
+cnt_1145 : 4
+Other counts:
+cnt_0900 : 5
+cnt_0915 : 5
+cnt_0930 : 5
+cnt_0945 : 5
+cnt_1000 : 5
+cnt_1015 : 5
+cnt_1030 : 5
+cnt_1045 : 5
+cnt_1100 : 5
+cnt_1115 : 5
+cnt_1130 : 5
+cnt_1145 : 5
+Bike counts:
+cnt_1200 : 6
+cnt_1215 : 6
+cnt_1230 : 6
+cnt_1245 : 6
+cnt_1300 : 6
+cnt_1315 : 6
+cnt_1330 : 6
+cnt_1345 : 6
+cnt_1400 : 6
+cnt_1415 : 6
+cnt_1430 : 6
+cnt_1445 : 6
+Ped counts:
+cnt_1200 : 7
+cnt_1215 : NULL
+cnt_1230 : 7
+cnt_1245 : 7
+cnt_1300 : 7
+cnt_1315 : 7
+cnt_1330 : 7
+cnt_1345 : 7
+cnt_1400 : 7
+cnt_1415 : 7
+cnt_1430 : 7
+cnt_1445 : NULL
+Child counts:
+cnt_1200 : 8
+cnt_1215 : 8
+cnt_1230 : NULL
+cnt_1245 : 8
+cnt_1300 : 8
+cnt_1315 : 8
+cnt_1330 : 8
+cnt_1345 : 8
+cnt_1400 : 8
+cnt_1415 : 8
+cnt_1430 : NULL
+cnt_1445 : 8
+Jogger counts:
+cnt_1200 : 9
+cnt_1215 : 9
+cnt_1230 : 9
+cnt_1245 : NULL
+cnt_1300 : 9
+cnt_1315 : 9
+cnt_1330 : 9
+cnt_1345 : 9
+cnt_1400 : 9
+cnt_1415 : NULL
+cnt_1430 : 9
+cnt_1445 : 9
+Skater counts:
+cnt_1200 : 1
+cnt_1215 : 1
+cnt_1230 : 1
+cnt_1245 : 1
+cnt_1300 : NULL
+cnt_1315 : 1
+cnt_1330 : 1
+cnt_1345 : 1
+cnt_1400 : NULL
+cnt_1415 : 1
+cnt_1430 : 1
+cnt_1445 : 1
+Wheelchair counts:
+cnt_1200 : 2
+cnt_1215 : 2
+cnt_1230 : 2
+cnt_1245 : 2
+cnt_1300 : 2
+cnt_1315 : NULL
+cnt_1330 : 2
+cnt_1345 : NULL
+cnt_1400 : 2
+cnt_1415 : 2
+cnt_1430 : 2
+cnt_1445 : 2
+Other counts:
+cnt_1200 : 3
+cnt_1215 : 3
+cnt_1230 : 3
+cnt_1245 : 3
+cnt_1300 : 3
+cnt_1315 : 3
+cnt_1330 : NULL
+cnt_1345 : 3
+cnt_1400 : 3
+cnt_1415 : 3
+cnt_1430 : 3
+cnt_1445 : 3
+Bike counts:
+cnt_1500 : 4
+cnt_1515 : NULL
+cnt_1530 : 4
+cnt_1545 : NULL
+cnt_1600 : 4
+cnt_1615 : NULL
+cnt_1630 : 4
+cnt_1645 : NULL
+cnt_1700 : 4
+cnt_1715 : NULL
+cnt_1730 : 4
+cnt_1745 : NULL
+Ped counts:
+cnt_1500 : NULL
+cnt_1515 : 4
+cnt_1530 : NULL
+cnt_1545 : 4
+cnt_1600 : NULL
+cnt_1615 : 4
+cnt_1630 : NULL
+cnt_1645 : 4
+cnt_1700 : NULL
+cnt_1715 : 4
+cnt_1730 : NULL
+cnt_1745 : 4
+Child counts:
+cnt_1500 : 4
+cnt_1515 : NULL
+cnt_1530 : 4
+cnt_1545 : NULL
+cnt_1600 : 4
+cnt_1615 : NULL
+cnt_1630 : 4
+cnt_1645 : NULL
+cnt_1700 : 4
+cnt_1715 : NULL
+cnt_1730 : 4
+cnt_1745 : NULL
+Jogger counts:
+cnt_1500 : NULL
+cnt_1515 : 4
+cnt_1530 : NULL
+cnt_1545 : 4
+cnt_1600 : NULL
+cnt_1615 : 4
+cnt_1630 : NULL
+cnt_1645 : 4
+cnt_1700 : NULL
+cnt_1715 : 4
+cnt_1730 : NULL
+cnt_1745 : 4
+Skater counts:
+cnt_1500 : 4
+cnt_1515 : NULL
+cnt_1530 : 4
+cnt_1545 : NULL
+cnt_1600 : 4
+cnt_1615 : NULL
+cnt_1630 : 4
+cnt_1645 : NULL
+cnt_1700 : 4
+cnt_1715 : NULL
+cnt_1730 : 4
+cnt_1745 : NULL
+Wheelchair counts:
+cnt_1500 : NULL
+cnt_1515 : 4
+cnt_1530 : NULL
+cnt_1545 : 4
+cnt_1600 : NULL
+cnt_1615 : 4
+cnt_1630 : NULL
+cnt_1645 : 4
+cnt_1700 : NULL
+cnt_1715 : 4
+cnt_1730 : NULL
+cnt_1745 : 4
+Other counts:
+cnt_1500 : 4
+cnt_1515 : NULL
+cnt_1530 : 4
+cnt_1545 : NULL
+cnt_1600 : 4
+cnt_1615 : NULL
+cnt_1630 : 4
+cnt_1645 : NULL
+cnt_1700 : 4
+cnt_1715 : NULL
+cnt_1730 : 4
+cnt_1745 : NULL
+Bike counts:
+cnt_1800 : 5
+cnt_1815 : 5
+cnt_1830 : 5
+cnt_1845 : 5
+cnt_1900 : 5
+cnt_1915 : 5
+cnt_1930 : 5
+cnt_1945 : 5
+cnt_2000 : 5
+cnt_2015 : 5
+cnt_2030 : 5
+cnt_2045 : 5
+Ped counts:
+cnt_1800 : 5
+cnt_1815 : 5
+cnt_1830 : 5
+cnt_1845 : 5
+cnt_1900 : 5
+cnt_1915 : 5
+cnt_1930 : 5
+cnt_1945 : NULL
+cnt_2000 : 5
+cnt_2015 : 5
+cnt_2030 : 5
+cnt_2045 : 5
+Child counts:
+cnt_1800 : 5
+cnt_1815 : 5
+cnt_1830 : 5
+cnt_1845 : 5
+cnt_1900 : 5
+cnt_1915 : 5
+cnt_1930 : 5
+cnt_1945 : 5
+cnt_2000 : NULL
+cnt_2015 : 5
+cnt_2030 : 5
+cnt_2045 : 5
+Jogger counts:
+cnt_1800 : 5
+cnt_1815 : 5
+cnt_1830 : 5
+cnt_1845 : 5
+cnt_1900 : 5
+cnt_1915 : 5
+cnt_1930 : 5
+cnt_1945 : 5
+cnt_2000 : 5
+cnt_2015 : NULL
+cnt_2030 : 5
+cnt_2045 : 5
+Skater counts:
+cnt_1800 : 6
+cnt_1815 : 6
+cnt_1830 : 6
+cnt_1845 : 6
+cnt_1900 : 6
+cnt_1915 : 6
+cnt_1930 : 6
+cnt_1945 : 6
+cnt_2000 : 6
+cnt_2015 : 6
+cnt_2030 : NULL
+cnt_2045 : 6
+Wheelchair counts:
+cnt_1800 : 7
+cnt_1815 : 7
+cnt_1830 : 7
+cnt_1845 : 7
+cnt_1900 : 7
+cnt_1915 : 7
+cnt_1930 : 7
+cnt_1945 : 7
+cnt_2000 : 7
+cnt_2015 : 7
+cnt_2030 : 7
+cnt_2045 : NULL
+Other counts:
+cnt_1800 : 8
+cnt_1815 : 8
+cnt_1830 : 8
+cnt_1845 : 8
+cnt_1900 : 8
+cnt_1915 : 8
+cnt_1930 : 8
+cnt_1945 : 8
+cnt_2000 : 8
+cnt_2015 : 8
+cnt_2030 : 8
+cnt_2045 : 8
+Bike counts:
+cnt_2100 : 9
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Ped counts:
+cnt_2100 : NULL
+cnt_2115 : 9
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : 9
+Child counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : 9
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : 9
+cnt_2345 : NULL
+Jogger counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : 9
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : 9
+cnt_2330 : NULL
+cnt_2345 : NULL
+Skater counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : 9
+cnt_2215 : NULL
+cnt_2230 : NULL
+cnt_2245 : NULL
+cnt_2300 : 9
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Wheelchair counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : 9
+cnt_2230 : NULL
+cnt_2245 : 9
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Other counts:
+cnt_2100 : NULL
+cnt_2115 : NULL
+cnt_2130 : NULL
+cnt_2145 : NULL
+cnt_2200 : NULL
+cnt_2215 : NULL
+cnt_2230 : 9
+cnt_2245 : NULL
+cnt_2300 : NULL
+cnt_2315 : NULL
+cnt_2330 : NULL
+cnt_2345 : NULL
+Bike counts:
+cnt_0000 : 1
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : 1
+Ped counts:
+cnt_0000 : NULL
+cnt_0015 : 1
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : 1
+cnt_0245 : NULL
+Child counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : 1
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : 1
+cnt_0230 : NULL
+cnt_0245 : NULL
+Jogger counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : 1
+cnt_0100 : NULL
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : 1
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Skater counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : 1
+cnt_0115 : NULL
+cnt_0130 : NULL
+cnt_0145 : 1
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Wheelchair counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : 1
+cnt_0130 : 1
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Other counts:
+cnt_0000 : NULL
+cnt_0015 : NULL
+cnt_0030 : NULL
+cnt_0045 : NULL
+cnt_0100 : NULL
+cnt_0115 : 1
+cnt_0130 : NULL
+cnt_0145 : NULL
+cnt_0200 : NULL
+cnt_0215 : NULL
+cnt_0230 : NULL
+cnt_0245 : NULL
+Bike counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Ped counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Child counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Jogger counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Skater counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Wheelchair counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+Other counts:
+cnt_0300 : 2
+cnt_0315 : 2
+cnt_0330 : 2
+cnt_0345 : 2
+cnt_0400 : 2
+cnt_0415 : 2
+cnt_0430 : 2
+cnt_0445 : 2
+cnt_0500 : 2
+cnt_0515 : 2
+cnt_0530 : 2
+cnt_0545 : 2
+DB cursor created.
+Query string for mode bike:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0000, cnt_0245, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1530, cnt_1600, cnt_1630, cnt_1700, cnt_1730, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2100, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'B', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 298 );
+Insert query committed.
+Query string for mode ped:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0015, cnt_0230, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0845, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1515, cnt_1545, cnt_1615, cnt_1645, cnt_1715, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2115, cnt_2345, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'P', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 9, 325 );
+Insert query committed.
+Query string for mode child:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0030, cnt_0215, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0830, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1245, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1415, cnt_1445, cnt_1500, cnt_1530, cnt_1600, cnt_1630, cnt_1700, cnt_1730, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2015, cnt_2030, cnt_2045, cnt_2130, cnt_2330, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'C', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 9, 248 );
+Insert query committed.
+Query string for mode jogger:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0045, cnt_0200, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0815, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1300, cnt_1315, cnt_1330, cnt_1345, cnt_1400, cnt_1430, cnt_1445, cnt_1515, cnt_1545, cnt_1615, cnt_1645, cnt_1715, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2030, cnt_2045, cnt_2145, cnt_2315, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'J', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 9, 277 );
+Insert query committed.
+Query string for mode skater:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0100, cnt_0145, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0745, cnt_0800, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1315, cnt_1330, cnt_1345, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1530, cnt_1600, cnt_1630, cnt_1700, cnt_1730, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2045, cnt_2200, cnt_2300, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'S', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 9, 9, 225 );
+Insert query committed.
+Query string for mode wheelchair:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0115, cnt_0130, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1330, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1515, cnt_1545, cnt_1615, cnt_1645, cnt_1715, cnt_1745, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2215, cnt_2245, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'W', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 9, 9, 189 );
+Insert query committed.
+Query string for mode other:
+INSERT INTO ctps_bp_counts_staging (bp_loc_id, count_id, count_date, count_dow, count_type, from_st_name, from_st_dir, to_st_name, to_st_dir, sky, description,  cnt_0115, cnt_0300, cnt_0315, cnt_0330, cnt_0345, cnt_0400, cnt_0415, cnt_0430, cnt_0445, cnt_0500, cnt_0515, cnt_0530, cnt_0545, cnt_0600, cnt_0615, cnt_0630, cnt_0645, cnt_0700, cnt_0715, cnt_0730, cnt_0900, cnt_0915, cnt_0930, cnt_0945, cnt_1000, cnt_1015, cnt_1030, cnt_1045, cnt_1100, cnt_1115, cnt_1130, cnt_1145, cnt_1200, cnt_1215, cnt_1230, cnt_1245, cnt_1300, cnt_1315, cnt_1345, cnt_1400, cnt_1415, cnt_1430, cnt_1445, cnt_1500, cnt_1530, cnt_1600, cnt_1630, cnt_1700, cnt_1730, cnt_1800, cnt_1815, cnt_1830, cnt_1845, cnt_1900, cnt_1915, cnt_1930, cnt_1945, cnt_2000, cnt_2015, cnt_2030, cnt_2045, cnt_2230, cnt_total ) VALUES ( 12345, '98765-2023-10-30-v1', '2023-11-08', 'Wed', 'O', 'Prospect Street', 'All', 'Hampshire Street', 'All', 1, 'This is test input spreadsheet #3.', 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 7, 7, 7, 7, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 296 );
+Insert query committed.
+Returned from call to 'process_folder'.
