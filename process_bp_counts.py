@@ -264,7 +264,7 @@ def read_overview_sheet():
 		print('from street direction = ' + from_st_dir)
 		print('to street name = ' + to_st_name)
 		print('to street direction = ' + to_st_dir)
-		print('side = ' side)
+		print('side = ' + side)
 		print('temperature = ' + str(temperature))
 		print('sky = ' + str(sky))
 		print('description = '	 + description)
