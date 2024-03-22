@@ -25,3 +25,8 @@ This tool currently supports two graphical user interfaces \(GUIs\):
 GUI \#1 is a bit minimalist, and can be run on installations on which only the Python standard library is available.  
 GUI \#2 is intended to look 'platform native', but requires the __wxPython__ library to have been installed.  
 Both GUI \#1 and GUI \#2 call the programmatic API exposed by __process\_bp\_counts__.
+
+## Colophon
+Author: Ben Krepp (bkrepp@ctps.org)
+Last revision: 13 December 2023
+Location: Cyberspace
